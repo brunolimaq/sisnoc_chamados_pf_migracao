@@ -19,6 +19,7 @@ public class Chamados {
 	private String atualizacao;
 	private String diasAtualizacao;
 	private String chamado_Pai;
+	private String data_retorno;
 
 	
 
@@ -175,6 +176,16 @@ public class Chamados {
 
 	public void setChamado_Pai(String chamado_Pai) {
 		this.chamado_Pai = chamado_Pai;
+	}
+
+
+	public String getData_retorno() {
+		return data_retorno;
+	}
+
+
+	public void setData_retorno(String data_retorno) {
+		this.data_retorno = data_retorno;
 	}
 
 

@@ -315,7 +315,8 @@ public class JdbcChamadosDao {
 					+"req.id as ID, "
 					+"datediff(dd,DATEADD(hh,-3,DATEADD(SS,req.last_mod_dt,'19700101')), getdate()) as diasatualizacao, "
 					+"(DATEADD(HOUR, -3, DATEADD(SS,req.last_mod_dt,'19700101'))) as atualizacao, "
-					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio, "
+					+"COALESCE(DATEADD(HOUR, -3, DATEADD(SS,call_back_date,'19700101')),0) as data_retorno "
 					+"from "
 					+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
 					+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
@@ -324,6 +325,7 @@ public class JdbcChamadosDao {
 					+"where ctg.sym like 'INFRA.Ordem de Servico' "
 					+"and stat.code in ('WIP','PRBAPP') "
 					+"and log.type='INIT' "
+				//	+"and call_back_date is not null "
 					+"order by 1";
 			
 								
@@ -838,7 +840,35 @@ public class JdbcChamadosDao {
 						+"req.id as ID, "
 						+"datediff(dd,DATEADD(hh,-3,DATEADD(SS,req.last_mod_dt,'19700101')), getdate()) as diasatualizacao, "
 						+"(DATEADD(HOUR, -3, DATEADD(SS,req.last_mod_dt,'19700101'))) as atualizacao, "
-						+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+						+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio, "
+						+"COALESCE(DATEADD(HOUR, -3, DATEADD(SS,call_back_date,'19700101')),0) as data_retorno "
+						+"from "
+						+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
+						+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
+						+"join prob_ctg ctg WITH (NOLOCK)  on ctg.persid = req.category "
+						+"join act_log log WITH (NOLOCK)  on log.call_req_id = req.persid "
+						+"where ctg.sym like 'INFRA.Ordem de Servico' "
+						+"and stat.code in ('RSCH', 'OP', 'PF', 'AEUR' , 'AWTVNDR', 'FIP', 'PNDCHG' , 'PO', 'PRBANCOMP', 'ACK') "
+						+"and log.type='INIT' "
+						+"order by 1";
+				/*		
+						"select "
+						+"usu.first_name as name, "
+						+"req.ref_num as chamado, "
+						+"req.summary as descricao, "
+						+"stat.sym as Status, "
+						+"req.category, "
+						+"ctg.sym as categoria, "
+						+"CASE req.type "
+						+    "when 'R' then 'Solicitação' "  
+						+    "when 'I' then 'Incidente' "
+						+"end as tipo, "
+						+"req.time_spent_sum, "
+						+"req.id as ID, "
+						+"datediff(dd,DATEADD(hh,-3,DATEADD(SS,req.last_mod_dt,'19700101')), getdate()) as diasatualizacao, "
+						+"(DATEADD(HOUR, -3, DATEADD(SS,req.last_mod_dt,'19700101'))) as atualizacao, "
+						+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio, "
+						+"(DATEADD(HOUR, -3, DATEADD(SS,call_back_date,'19700101'))) as data_retorno "
 						+"from "
 						+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK)  on req.status = stat.code " 
 						+"left join ca_contact usu WITH (NOLOCK) on usu.contact_uuid = req.assignee " 
@@ -847,8 +877,9 @@ public class JdbcChamadosDao {
 						+"where ctg.sym like 'INFRA.Ordem de Servico' "
 						+"and stat.code in ('RSCH', 'OP', 'PF', 'AEUR' , 'AWTVNDR', 'FIP', 'PNDCHG' , 'PO', 'PRBANCOMP', 'ACK') "
 						+"and log.type='INIT' "
+						+"and call_back_date is not null "
 						+"order by 1"; 
-						
+						*/
 					
 			
 				PreparedStatement stmt = connection
@@ -1141,6 +1172,10 @@ public class JdbcChamadosDao {
 			 Date dataincial = rs.getDate("data_inicio");
 			 DateFormat formataData = DateFormat.getDateInstance();
 			 chamado.setDataInicio(formataData.format(dataincial));
+			
+			 Date data_retorno = rs.getDate("data_retorno");
+			 DateFormat formataDataRetorno = DateFormat.getDateInstance();
+			 chamado.setData_retorno(formataDataRetorno.format(data_retorno));
 			 
 			 return  chamado;
 		}
@@ -1562,6 +1597,10 @@ public class JdbcChamadosDao {
 		 DateFormat formataData = DateFormat.getDateInstance();
 		 chamado.setDataInicio(formataData.format(dataincial));
 		 
+	//	chamado.setData_retorno(rs.getString("data_retorno"));
+		 Date data_retorno = rs.getDate("data_retorno");
+		 DateFormat formataDataRetorno = DateFormat.getDateInstance();
+		 chamado.setData_retorno(formataDataRetorno.format(data_retorno));
 	
 		 return  chamado;
 	}
@@ -1618,9 +1657,9 @@ public class JdbcChamadosDao {
 		 
 		 
 		 //Formatando a Data
-		// Date dataincial = rs.getDate("data_inicio");
-		 //DateFormat formataData = DateFormat.getDateInstance();
-		 //relatorio.setDataInicio(formataData.format(dataincial));
+	//	 Date dataincial = rs.getDate("data_inicio");
+	//	 DateFormat formataData = DateFormat.getDateInstance();
+	//	 relatorio.setDataInicio(formataData.format(dataincial));
 		 
 
 	

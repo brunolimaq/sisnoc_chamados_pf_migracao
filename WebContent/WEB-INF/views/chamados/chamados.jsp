@@ -494,8 +494,10 @@ font-size: 13px;
                                 <td><center><strong>Chamado</strong></center></td>
                                 <td><center><strong>Descrição</strong></center></td>
                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Atualização</strong></center></td>
                                 <td><center><strong>Aberto</strong></center></td>
+                                <td><center><strong>Atualização</strong></center></td>
+                                <td><center><strong>Previsão</strong></center></td>
+
                             </tr>
                           </thead>
                            <tbody  id="od_padrao">
@@ -511,8 +513,9 @@ font-size: 13px;
 											</td>
 											<td>${chamadosPainelOrdemServico.descricao}</td>
 											<td>${chamadosPainelOrdemServico.status}</td>
+											<td>${chamadosPainelOrdemServico.dataInicio}</td>
 											<td>${chamadosPainelOrdemServico.atualizacao}</td>
-											<td>${chamadosPainelOrdemServico.dataInicio}</td>											
+											<td>${chamadosPainelOrdemServico.data_retorno}</td>											
   										</tr>
   										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
   											<c:if test="${chamadosFilhos.chamado_Pai == chamadosPainelOrdemServico.chamado }">	
@@ -1618,8 +1621,11 @@ font-size: 13px;
                                 <td><center><strong>Chamado</strong></center></td>
                                 <td><center><strong>Descrição</strong></center></td>
                                 <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Atualização</strong></center></td>
                                 <td><center><strong>Aberto</strong></center></td>
+								<td><center><strong>Atualização</strong></center></td>
+								<td><center><strong>Previsão</strong></center></td>
+								
+                                
                             </tr>
                           </thead>
                            <tbody id="od_padrao" >
@@ -1635,8 +1641,10 @@ font-size: 13px;
 											</td>
 											<td>${chamadosOs.descricao}</td>
 											<td>${chamadosOs.status}</td>
-											<td>${chamadosOs.atualizacao}</td>
 											<td>${chamadosOs.dataInicio}</td>
+											<td>${chamadosOs.atualizacao}</td>
+											<td>${chamadosOs.data_retorno}</td>
+											
   										</tr>
   										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
   											<c:if test="${chamadosFilhos.chamado_Pai == chamadosOs.chamado }">	
