@@ -117,6 +117,62 @@ font-size: 13px;
   			color: #FFFFFF;
   		}	
   		
+  		
+  		#slaid_10 {
+  			color: #FFFFFF;
+  			background-color: #517f49
+  		}
+  		#slaid_10 a {
+  			color: #FFFFFF;
+  		}
+  		
+  		#slaid_20{
+  			color: #000000;
+  			background-color: #fff900;
+  			
+  		}
+  		#slaid_20 a {
+  			color: #000000
+  		}
+  		
+  		#slaid_30 {
+  			color: #FFFFFF; 
+  			background-color: #ff7800;
+  		}
+  		
+  		#slaid_30 a {
+  			color: #FFFFFF;
+  		}
+  		
+  		#slaid_40 {
+  			color: #FFFFFF; 
+  			background-color: #ff7800;
+  		}
+  		
+  		#slaid_40 a {
+  			color: #FFFFFF;
+  		}  		
+  		
+  		#slaid_50 {
+  			color: #FFFFFF; 
+  			background-color: #ff0000;
+  		}
+  		
+  		#slaid_50 a {
+  			color: #FFFFFF;
+  		}
+  		
+  		#slaid_60 {
+  			color: #FFFFFF; 
+  			background-color: #000000;
+  		}
+  		
+  		#slaid_60 a {
+  			color: #FFFFFF;
+  		}
+  		
+  		
+  		
   		#od_padrao {
   			color: #337ab7;
 			background-color: #E5E5E5 !important;
@@ -253,7 +309,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelMon}" var="chamadosPainelMon">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelMon.sla2}" id="slaid_${chamadosPainelMon.sla2}">
 											<td>${chamadosPainelMon.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelMon.id}" target="_blank" >${chamadosPainelMon.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelMon.id}" target="_blank" >${chamadosPainelMon.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelMon.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -271,7 +327,7 @@ font-size: 13px;
 														<div>
 															
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.status}</td>
@@ -310,7 +366,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelSol}" var="chamadosPainelSol">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelSol.sla2}" id="slaid_${chamadosPainelSol.sla2}">
 											<td>${chamadosPainelSol.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelSol.id}" target="_blank" >${chamadosPainelSol.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelSol.id}" target="_blank" >${chamadosPainelSol.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelSol.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -327,7 +383,7 @@ font-size: 13px;
 														<div>
 															
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.status}</td>
 															<td >${chamadosFilhos.sla}</td>
@@ -364,7 +420,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelInc}" var="chamadosPainelInc">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelInc.sla2}" id="slaid_${chamadosPainelInc.sla2}">
 											<td>${chamadosPainelInc.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelInc.id}" target="_blank" >${chamadosPainelInc.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelInc.id}" target="_blank" >${chamadosPainelInc.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelInc.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -381,7 +437,7 @@ font-size: 13px;
 														<div>
 															
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.status}</td>
 															<td >${chamadosFilhos.sla}</td>
@@ -450,7 +506,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosSac}" var="chamadosSac">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosSac.sla2}" id="slaid_${chamadosSac.sla2}">
 											<td>${chamadosSac.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosSac.id}" target="_blank" >${chamadosSac.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosSac.id}" target="_blank" >${chamadosSac.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosSac.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -469,7 +525,7 @@ font-size: 13px;
 														<div>
 															
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.categoria}</td>
 															<td >${chamadosFilhos.status}</td>

@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sun.corba.se.spi.orb.ParserData;
+
 import br.com.sisnoc.chamados.modelo.Chamados;
 import br.com.sisnoc.chamados.modelo.Relatorios;
 
@@ -45,6 +47,8 @@ public class JdbcChamadosDao {
 	private Integer count_PainelInc;
 	private Integer count_PainelOrdemServico;
 	private Integer Count_PainelRdm;
+	private Integer Count_PainelTarefasInternas;
+	private Integer Count_PainelRdmPem;
 	
 	//SAC
 	
@@ -71,19 +75,20 @@ public class JdbcChamadosDao {
 					String sql_mon = "select "
 							+"chg_ref_num, "
 			     			+"summary, "
-							+"dateadd(hh,-3,dateadd(SS,sched_start_date,'19700101')) agendamento, "
+							+"dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')) agendamento, "
 							+"(SELECT [dbo].[ALG_calcula_tempo] (sched_duration)) duracao, "
 							+"chgstat.sym status, "
 							+"ca_contact.first_name nome, "
-							+"replace(vwg.last_name,'Analistas ','') as grupo "
+							+"replace(vwg.last_name,'Analistas ','') as grupo, "
+							+"chg.id as ID "
 							+"from chg WITH (NOLOCK) "
 							+"join chgstat WITH (NOLOCK) on chg.status = chgstat.code "
 							+"join ca_contact WITH (NOLOCK)  on ca_contact.contact_uuid = chg.assignee "
 							+"join View_Group vwg WITH (NOLOCK)  on chg.group_id = vwg.contact_uuid "
-							+"where datepart(YYYY,dateadd(hh,-3,dateadd(SS,sched_start_date,'19700101'))) = datepart(YYYY,getdate()) "
-							+"and datepart(MM,dateadd(hh,-3,dateadd(SS,sched_start_date,'19700101'))) = datepart(MM,getdate()) "
-							+"and datepart(DD,dateadd(hh,-3,dateadd(SS,sched_start_date,'19700101'))) = datepart(DD,getdate()) "
-							+"order by 1";
+							+"where convert(DATE,dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')),103) <= convert(DATE,dateadd (DD,7,GETDATE()),103) "
+							+"and convert(DATE,dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')),103) >= convert(DATE,dateadd (DD,-3,GETDATE()),103) "
+							+"and chgstat.code in ('IMPL', 'APR') "
+							+"order by 5,3";
 					
 						//"where (ctg.sym like 'INFRA%'  or ctg.sym like 'SEGURAN�A%') "				
 					PreparedStatement stmt = connection
@@ -113,6 +118,59 @@ public class JdbcChamadosDao {
 				}
 			}
 	
+			
+			//Query / Lista RDM Pendente
+			public List<Chamados> listaPainelRdmPen() throws ParseException {
+				try {
+					List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+					String sql_rdmpen = "select "
+							+"chg_ref_num, "
+			     			+"summary, "
+							+"dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')) agendamento, "
+							+"(SELECT [dbo].[ALG_calcula_tempo] (sched_duration)) duracao, "
+							+"chgstat.sym status, "
+							+"ca_contact.first_name nome, "
+							+"replace(vwg.last_name,'Analistas ','') as grupo, "
+							+"chg.id as ID "
+							+"from chg WITH (NOLOCK) "
+							+"join chgstat WITH (NOLOCK) on chg.status = chgstat.code "
+							+"join ca_contact WITH (NOLOCK)  on ca_contact.contact_uuid = chg.assignee "
+							+"join View_Group vwg WITH (NOLOCK)  on chg.group_id = vwg.contact_uuid "
+							+"where convert(DATE,dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')),103) <= convert(DATE,dateadd (DD,7,GETDATE()),103) "
+							+"and convert(DATE,dateadd(hh,DATEPART(tz,SYSDATETIMEOFFSET())/60,dateadd(SS,sched_start_date,'19700101')),103) >= convert(DATE,dateadd (DD,-3,GETDATE()),103) "
+							+"and chgstat.code not in ('IMPL', 'APR') "
+							+"order by 5,3";
+					
+						//"where (ctg.sym like 'INFRA%'  or ctg.sym like 'SEGURAN�A%') "				
+					PreparedStatement stmt = connection
+							.prepareStatement(sql_rdmpen);
+					ResultSet rs = stmt.executeQuery();
+
+				
+					Integer count = 0;
+
+					while (rs.next()){
+						count++;
+						// adiciona um chamado na lista
+						ListaChamados.add(populaChamadoPainelRdmPen(rs));
+
+						 
+					}
+					
+					setCount_PainelRdmPem(count);
+					
+					rs.close();
+					stmt.close();
+
+					return ListaChamados;
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+			
+			
 	//Query / Lista Monitoração
 	public List<Chamados> listaPainelMon() throws ParseException {
 		try {
@@ -142,6 +200,7 @@ public class JdbcChamadosDao {
 					+"where ctg.sym like 'INFRA%' "
 					+"and ctg.sym not like 'INFRA.Solicitacao.Seguranca.Firewall.Outros' "  
 					+"and ctg.sym not like 'INFRA.Solicitacao.Atividades.Tarefas Internas' "
+					+"and ctg.sym not like 'Infra.Tarefas Internas' "
 					+"and req.type in ('R', 'I', 'P') and stat.code in ('OP', 'ACK') "
 					+"and log.type='INIT' "
 					+"order by 10";
@@ -204,6 +263,7 @@ public class JdbcChamadosDao {
 					+"and ctg.sym not like 'INFRA.Ordem de Servico' "  
 					+"and ctg.sym not like 'INFRA.Solicitacao.Atividades.Documentacao' "
 					+"and ctg.sym not like 'INFRA.Solicitacao.Atividades.Tarefas Internas' "
+					+"and ctg.sym not like 'Infra.Tarefas Internas' "
 					+"and req.type in ('R') and stat.code in ('WIP','PRBAPP') "
 					+"and log.type='INIT' "
 					+"order by 10";
@@ -325,7 +385,6 @@ public class JdbcChamadosDao {
 					+"where ctg.sym like 'INFRA.Ordem de Servico' "
 					+"and stat.code in ('WIP','PRBAPP') "
 					+"and log.type='INIT' "
-				//	+"and call_back_date is not null "
 					+"order by 1";
 			
 								
@@ -354,6 +413,68 @@ public class JdbcChamadosDao {
 		}
 	}
 
+	
+	//Query Painel Tarefas Internas
+	
+	public List<Chamados> listaPainelTarefasInternas() throws ParseException {
+		try {
+			List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+
+			String sql_TarefasInternas = "select "
+					+"usu.first_name as name, "
+					+"req.ref_num as chamado, "
+					+"req.summary as descricao, "
+					+"stat.sym as Status, "
+					+"req.category, "
+					+"ctg.sym as categoria, "
+					+"CASE req.type "
+					+    "when 'R' then 'Solicitação' "  
+					+    "when 'I' then 'Incidente' "
+					+"end as tipo, "
+					+"req.time_spent_sum, "
+					+"req.id as ID, "
+					+"datediff(dd,DATEADD(hh,-3,DATEADD(SS,req.last_mod_dt,'19700101')), getdate()) as diasatualizacao, "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,req.last_mod_dt,'19700101'))) as atualizacao, "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio, "
+					+"COALESCE(DATEADD(HOUR, -3, DATEADD(SS,call_back_date,'19700101')),0) as data_retorno "
+					+"from "
+					+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
+					+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
+					+"join prob_ctg ctg WITH (NOLOCK)  on ctg.persid = req.category "
+					+"join act_log log WITH (NOLOCK)  on log.call_req_id = req.persid "
+					+"where ctg.sym like 'Infra.Tarefas Internas' "
+					+"and req.type in ('R', 'I') and stat.code in ('WIP', 'PRBAPP', 'OP', 'ACK') "
+					+"and log.type='INIT' "
+					+"order by 1";
+			
+
+								
+			PreparedStatement stmt = connection
+					.prepareStatement(sql_TarefasInternas);
+			ResultSet rs = stmt.executeQuery();
+
+		
+			
+			Integer count=0;
+			while (rs.next()){
+				count++;
+				// adiciona um chamado na lista
+				ListaChamados.add(populaChamadoPainelTarefasInternas(rs));
+				 
+			}
+			
+			rs.close();
+			stmt.close();
+			
+			setCount_PainelTarefasInternas(count);
+			
+			return ListaChamados;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	//Query / Lista Aplicação
 	public List<Chamados> listaApp() throws ParseException {
 		try {
@@ -361,11 +482,15 @@ public class JdbcChamadosDao {
 
 
 			String sql_app = "select * from painel_chamados_pend where grupo = 'Analistas Aplicações' order by 2";
+			
+			
 			//String sql_app = "select * from painel_chamados_pend_filho where chamado_pai  in (select chamado from painel_chamados_pend_pai)";
 								
 			PreparedStatement stmt = connection
 					.prepareStatement(sql_app);
 			ResultSet rs = stmt.executeQuery();
+			
+			
 
 		
 			
@@ -610,36 +735,7 @@ public class JdbcChamadosDao {
 			}
 		}
 		
-		//Query / Lista  seguranca
-				public List<Chamados> listaSeg() throws ParseException {
-					try {
-						List<Chamados> ListaChamados = new ArrayList<Chamados>();
-
-
-						String sql_ger = "select * from painel_chamados_pend where grupo = 'Analistas Segurança' order by 2";
-						
-						
-					
-						PreparedStatement stmt = connection
-								.prepareStatement(sql_ger);
-						ResultSet rs = stmt.executeQuery();
-
-						Integer count = 0;
-						while (rs.next()) {
-							count++;
-							// adiciona um chamado na lista
-							ListaChamados.add(populaChamadoSeg(rs));
-														
-						}
-						setCount_Seg(count);
-						rs.close();
-						stmt.close();
-
-						return ListaChamados;
-					} catch (SQLException e) {
-						throw new RuntimeException(e);
-					}
-				}
+	
 				//Query / Lista  servicor corporativos
 				public List<Chamados> listaCorp() throws ParseException {
 					try {
@@ -958,17 +1054,13 @@ public class JdbcChamadosDao {
 
 			
 				
-				Integer count = 0;
 
 				while (rs.next()){
-					count++;
-
 					// adiciona um chamado na lista
 					ListaChamados.add(populaChamadosFilhosCarinha(rs));
 
 					 
 				}
-				setCount_app(count);
 				
 				rs.close();
 				stmt.close();
@@ -985,7 +1077,6 @@ public class JdbcChamadosDao {
 
 					
 					 // popula o objeto chamado
-					 			
 					 chamado.setChamado(rs.getString("chamado"));
 					 return  chamado;
 				}
@@ -1007,10 +1098,10 @@ public class JdbcChamadosDao {
 			 //chamado.setAbertura(rs.getString("Inicio"));
 //			 chamado.setSla(rs.getString("SLA"));
 //			 chamado.setSla2(rs.getInt("SLA2"));
-			 String [] a = rs.getString("SLA").split("XXX");
+//			 String [] a = rs.getString("SLA").split("XXX");
 
-			 chamado.setSla(a[0]);
-			 chamado.setSla2(Integer.parseInt(a[1]));
+	//		 chamado.setSla(a[0]);
+		//	 chamado.setSla2(Integer.parseInt(a[1]));
 
 			 chamado.setId(rs.getString("ID"));
 		//	 chamado.setDiasAtualizacao(rs.getString("diasatualizacao"));
@@ -1042,7 +1133,32 @@ public class JdbcChamadosDao {
 			 chamado.setStatus(rs.getString("status"));
 			 chamado.setDataAgendamento(rs.getString("agendamento"));
 			 //chamado.setAbertura(rs.getString("Inicio"));
-			 //chamado.setId(rs.getString("ID"));
+			 chamado.setId(rs.getString("ID"));
+			 //Formatando a Data
+			 //Date dataagendamento = rs.getDate("agendamento");
+			 //DateFormat formataData = DateFormat.getDateInstance();
+			 //chamado.setDataAgendamento(formataData.format(dataagendamento));
+			 
+
+		
+			 return  chamado;
+		}
+		
+		private Chamados populaChamadoPainelRdmPen(ResultSet rs) throws SQLException, ParseException {
+			
+			Chamados chamado = new Chamados();
+
+			
+			 // popula o objeto chamado
+			 			
+			 chamado.setNome(rs.getString("nome"));
+			 chamado.setDescricao(rs.getString("summary"));
+			 chamado.setChamado(rs.getString("chg_ref_num"));
+			 chamado.setCategoria(rs.getString("grupo"));
+			 chamado.setStatus(rs.getString("status"));
+			 chamado.setDataAgendamento(rs.getString("agendamento"));
+			 //chamado.setAbertura(rs.getString("Inicio"));
+			 chamado.setId(rs.getString("ID"));
 			 //Formatando a Data
 			 //Date dataagendamento = rs.getDate("agendamento");
 			 //DateFormat formataData = DateFormat.getDateInstance();
@@ -1054,6 +1170,32 @@ public class JdbcChamadosDao {
 		}
 		
 		
+		//Popula Tarefas Internas
+		
+		private Chamados populaChamadoPainelTarefasInternas(ResultSet rs) throws SQLException, ParseException {
+			
+			Chamados chamado = new Chamados();
+
+			
+			 // popula o objeto chamado
+			 			
+			 chamado.setNome(rs.getString("name"));
+			 chamado.setDescricao(rs.getString("descricao"));
+			 chamado.setChamado(rs.getString("chamado"));
+			 chamado.setTipo(rs.getString("tipo"));
+			 chamado.setCategoria(rs.getString("categoria"));
+			 chamado.setStatus(rs.getString("Status"));
+
+
+			 chamado.setId(rs.getString("ID"));
+			 //Formatando a Data
+			 Date dataincial = rs.getDate("data_inicio");
+			 DateFormat formataData = DateFormat.getDateInstance();
+			 chamado.setDataInicio(formataData.format(dataincial));
+			 
+			 return  chamado;
+		}
+
 		private Chamados populaChamadoPainelMon(ResultSet rs) throws SQLException, ParseException {
 			
 			Chamados chamado = new Chamados();
@@ -1146,6 +1288,8 @@ public class JdbcChamadosDao {
 			 return  chamado;
 		}
 		
+		
+		
 		// Popula Lista Painel Ordem Serviço
 		
 		private Chamados populaChamadoPainelOrdemServico(ResultSet rs) throws SQLException, ParseException {
@@ -1173,9 +1317,14 @@ public class JdbcChamadosDao {
 			 DateFormat formataData = DateFormat.getDateInstance();
 			 chamado.setDataInicio(formataData.format(dataincial));
 			
-			 Date data_retorno = rs.getDate("data_retorno");
-			 DateFormat formataDataRetorno = DateFormat.getDateInstance();
-			 chamado.setData_retorno(formataDataRetorno.format(data_retorno));
+			 String validacao_retorno = rs.getString("data_retorno");
+
+				 Date data_retorno = rs.getDate("data_retorno");
+				 DateFormat formataDataRetorno = DateFormat.getDateInstance();
+				 chamado.setData_retorno(formataDataRetorno.format(data_retorno));
+			
+			 
+
 			 
 			 return  chamado;
 		}
@@ -1385,34 +1534,6 @@ public class JdbcChamadosDao {
 	
 	//Gerência 
 	private Chamados populaChamadoGer(ResultSet rs) throws SQLException, ParseException {
-		 Chamados chamado = new Chamados();
-
-		
-		 // popula o objeto chamado
-		 			
-		 chamado.setNome(rs.getString("name"));
-		 chamado.setDescricao(rs.getString("descricao"));
-		 chamado.setChamado(rs.getString("chamado"));
-		 chamado.setTipo(rs.getString("tipo"));
-		 chamado.setCategoria(rs.getString("categoria"));
-		 chamado.setStatus(rs.getString("Status"));
-		 //chamado.setAbertura(rs.getString("Inicio"));
-		 String [] a = rs.getString("SLA").split("XXX");
-
-		 chamado.setSla(a[0]);
-		 chamado.setSla2(Integer.parseInt(a[1]));
-		 chamado.setId(rs.getString("ID"));
-		 //Formatando a Data
-		 Date dataincial = rs.getDate("data_inicio");
-		 DateFormat formataData = DateFormat.getDateInstance();
-		 chamado.setDataInicio(formataData.format(dataincial));
-		 
-	
-		 return  chamado;
-	}
-	
-	//seguranca
-	private Chamados populaChamadoSeg(ResultSet rs) throws SQLException, ParseException {
 		 Chamados chamado = new Chamados();
 
 		
@@ -1698,7 +1819,7 @@ public class JdbcChamadosDao {
 					+"end as tipo, "
 					+"req.time_spent_sum, "
 					+"req.id as ID, "
-					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual_sac](req.ref_num)) AS SLA, "
 					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
 					+"from "
 					+"call_req req WITH (NOLOCK) join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
@@ -1741,7 +1862,13 @@ public class JdbcChamadosDao {
 			List<Chamados> ListaChamados = new ArrayList<Chamados>();
 
 
-			String sql_sol = "select "
+			String sql_sol ="with filho as ("
+					+"	select "
+					+"       call.status, "
+					+"	  call.parent "
+					+"from call_req call  WITH (NOLOCK) "
+					+")  "
+					+"select "
 					+"usu.first_name as name, "
 					+"req.ref_num as chamado, "
 					+"req.summary as descricao, "
@@ -1749,22 +1876,51 @@ public class JdbcChamadosDao {
 					+"req.category, "
 					+"ctg.sym as categoria, "
 					+"CASE req.type "
-					+    "when 'R' then 'Solicitação' "  
-					+    "when 'I' then 'Incidente' "
+					+"       when 'R' then 'Solicitação' "
+					+"       when 'I' then 'Incidente' "
 					+"end as tipo, "
 					+"req.time_spent_sum, "
 					+"req.id as ID, "
-					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual_sac](req.ref_num)) AS SLA, "
 					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
 					+"from "
-					+"call_req req WITH (NOLOCK) join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
-					+"left join ca_contact usu WITH (NOLOCK) on usu.contact_uuid = req.assignee " 
+					+"call_req req WITH (NOLOCK) join cr_stat stat WITH (NOLOCK) on req.status = stat.code  "
+					+"left join ca_contact usu WITH (NOLOCK) on usu.contact_uuid = req.assignee "
 					+"join prob_ctg ctg WITH (NOLOCK) on ctg.persid = req.category "
 					+"join act_log log WITH (NOLOCK) on log.call_req_id = req.persid "
-					+"where ctg.sym like 'SAC%'"
-					+"and req.type in ('R') and stat.code in ('WIP','PRBAPP','AEUR') "
+					+"left join filho WITH (NOLOCK) on filho.parent = req.persid "
+					+"where ctg.sym like 'SAC%' "
+					+"and req.type in ('R') and  "
+					+"(stat.code in ('WIP','PRBAPP') or(stat.code = 'FIP' and filho.status in ('AEUR', 'CL', 'RE'))) "
 					+"and log.type='INIT' "
 					+"order by 10";
+					
+					
+					
+//					"select "
+//					+"usu.first_name as name, "
+//					+"req.ref_num as chamado, "
+//					+"req.summary as descricao, "
+//					+"stat.sym as Status, "
+//					+"req.category, "
+//					+"ctg.sym as categoria, "
+//					+"CASE req.type "
+//					+    "when 'R' then 'Solicitação' "  
+//					+    "when 'I' then 'Incidente' "
+//					+"end as tipo, "
+//					+"req.time_spent_sum, "
+//					+"req.id as ID, "
+//					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+//					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+//					+"from "
+//					+"call_req req WITH (NOLOCK) join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
+//					+"left join ca_contact usu WITH (NOLOCK) on usu.contact_uuid = req.assignee " 
+//					+"join prob_ctg ctg WITH (NOLOCK) on ctg.persid = req.category "
+//					+"join act_log log WITH (NOLOCK) on log.call_req_id = req.persid "
+//					+"where ctg.sym like 'SAC%'"
+//					+"and req.type in ('R') and stat.code in ('WIP','PRBAPP','AEUR') "
+//					+"and log.type='INIT' "
+//					+"order by 10";
 			
 								
 			PreparedStatement stmt = connection
@@ -1807,7 +1963,7 @@ public class JdbcChamadosDao {
 					+"end as tipo, "
 					+"req.time_spent_sum, "
 					+"req.id as ID, "
-					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual_sac](req.ref_num)) AS SLA, "
 					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
 					+"from "
 					+"call_req req WITH (NOLOCK) join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
@@ -2036,6 +2192,325 @@ public class JdbcChamadosDao {
 	///#################################################################################################
 	///#################################################################################################
 
+	
+	//Segurança
+	
+	
+	
+	
+	//Query / Lista Monitoração
+	public List<Chamados> listaPainelMonSeg() throws ParseException {
+		try {
+			List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+			String sql_mon = "select "
+					+"usu.first_name as name, "
+					+"req.ref_num as chamado, "
+					+"req.summary as descricao, "
+					+"stat.sym as Status, "
+					+"req.category, "
+					+"ctg.sym as categoria, "
+					+"CASE req.type "
+					+    "when 'R' then 'Solicitação' "  
+					+    "when 'I' then 'Incidente' "
+					+"end as tipo, "
+					+"req.time_spent_sum, "
+					+"req.id as ID, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+					+"from "
+					+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
+					+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
+					+"join prob_ctg ctg WITH (NOLOCK)  on ctg.persid = req.category "
+					+"join act_log log WITH (NOLOCK)  on log.call_req_id = req.persid "
+					+"where ctg.sym like 'SEGURAN%' "
+					+"and req.type in ('R', 'I', 'P') and stat.code in ('OP', 'ACK') "
+					+"and log.type='INIT' "
+					+"order by 10";
+			
+			PreparedStatement stmt = connection
+					.prepareStatement(sql_mon);
+			ResultSet rs = stmt.executeQuery();
+
+		
+			
+
+			while (rs.next()){
+				ListaChamados.add(populaChamadoPainelMonSeg(rs));
+			}
+			
+			rs.close();
+			stmt.close();
+
+			return ListaChamados;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	//Query / Lista Solicitação
+	public List<Chamados> listaPainelSolSeg() throws ParseException {
+		try {
+			List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+			String sql_sol = "select "
+					+"usu.first_name as name, "
+					+"req.ref_num as chamado, "
+					+"req.summary as descricao, "
+					+"stat.sym as Status, "
+					+"req.category, "
+					+"ctg.sym as categoria, "
+					+"CASE req.type "
+					+    "when 'R' then 'Solicitação' "  
+					+    "when 'I' then 'Incidente' "
+					+"end as tipo, "
+					+"req.time_spent_sum, "
+					+"req.id as ID, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+					+"from "
+					+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK) on req.status = stat.code " 
+					+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
+					+"join prob_ctg ctg WITH (NOLOCK)  on ctg.persid = req.category "
+					+"join act_log log WITH (NOLOCK)  on log.call_req_id = req.persid "
+					+"where ctg.sym like 'SEGURAN%' "
+					+"and req.type in ('R') and stat.code in ('WIP','PRBAPP') "
+					+"and log.type='INIT' "
+					+"order by 10";
+			
+								
+			PreparedStatement stmt = connection
+					.prepareStatement(sql_sol);
+			ResultSet rs = stmt.executeQuery();
+
+		
+			while (rs.next()){
+				ListaChamados.add(populaChamadoPainelSolSeg(rs));
+			}
+			
+			rs.close();
+			stmt.close();
+
+			return ListaChamados;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	//Query / Lista Incidentes
+	public List<Chamados> listaPainelIncSeg() throws ParseException {
+		try {
+			List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+			String sql_inc = "select "
+					+"usu.first_name as name, "
+					+"req.ref_num as chamado, "
+					+"req.summary as descricao, "
+					+"stat.sym as Status, "
+					+"req.category, "
+					+"ctg.sym as categoria, "
+					+"CASE req.type "
+					+    "when 'R' then 'Solicitação' "  
+					+    "when 'I' then 'Incidente' "
+					+"end as tipo, "
+					+"req.time_spent_sum, "
+					+"req.id as ID, "
+					+"(SELECT [mdb].[dbo].[ALG_calcula_sla_atual](req.ref_num)) AS SLA, "
+					+"(DATEADD(HOUR, -3, DATEADD(SS,log.time_stamp,'19700101'))) as data_inicio "
+					+"from "
+					+"call_req req WITH (NOLOCK)  join cr_stat stat WITH (NOLOCK)  on req.status = stat.code " 
+					+"left join ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee " 
+					+"join prob_ctg ctg WITH (NOLOCK)  on ctg.persid = req.category "
+					+"join act_log log WITH (NOLOCK)  on log.call_req_id = req.persid "
+					+"where ctg.sym like 'SEGURAN%' "
+					+"and req.type in ('I') and stat.code in ('WIP','PRBAPP') "
+					+"and log.type='INIT' "
+					+"order by 10";
+			
+								
+			PreparedStatement stmt = connection
+					.prepareStatement(sql_inc);
+			ResultSet rs = stmt.executeQuery();
+
+		
+			
+			while (rs.next()){
+				ListaChamados.add(populaChamadoPainelIncSeg(rs));
+				 
+			}
+			
+			rs.close();
+			stmt.close();
+			
+			return ListaChamados;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
+	//Query / Lista Aplicação
+	public List<Chamados> listaSeg() throws ParseException {
+		try {
+			List<Chamados> ListaChamados = new ArrayList<Chamados>();
+
+
+			String sql_seg = "select * from painel_chamados_pend where grupo = 'Analistas Segurança' order by 2";
+								
+			PreparedStatement stmt = connection
+					.prepareStatement(sql_seg);
+			ResultSet rs = stmt.executeQuery();
+
+		
+			
+
+			while (rs.next()){
+
+				// adiciona um chamado na lista
+				ListaChamados.add(populaChamadoSeg(rs));
+
+				 
+			}
+			
+			rs.close();
+			stmt.close();
+
+			return ListaChamados;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private Chamados populaChamadoSeg(ResultSet rs) throws SQLException, ParseException {
+		 Chamados chamado = new Chamados();
+
+		
+		 // popula o objeto chamado
+		 			
+		 chamado.setNome(rs.getString("name"));
+		 chamado.setDescricao(rs.getString("descricao"));
+		 chamado.setChamado(rs.getString("chamado"));
+		 chamado.setTipo(rs.getString("tipo"));
+		 chamado.setCategoria(rs.getString("categoria"));
+		 chamado.setStatus(rs.getString("Status"));
+		 //chamado.setAbertura(rs.getString("Inicio"));
+		 String [] a = rs.getString("SLA").split("XXX");
+
+		 chamado.setSla(a[0]);
+		 chamado.setSla2(Integer.parseInt(a[1]));
+
+		 chamado.setId(rs.getString("ID"));
+		 //Formatando a Data
+		 Date dataincial = rs.getDate("data_inicio");
+		 DateFormat formataData = DateFormat.getDateInstance();
+		 chamado.setDataInicio(formataData.format(dataincial));
+		 
+
+	
+		 return  chamado;
+	}
+	
+	//Popula Segurança
+	
+	
+	private Chamados populaChamadoPainelMonSeg(ResultSet rs) throws SQLException, ParseException {
+		
+		Chamados chamado = new Chamados();
+
+		
+		 // popula o objeto chamado
+		 			
+		 chamado.setNome(rs.getString("name"));
+		 chamado.setDescricao(rs.getString("descricao"));
+		 chamado.setChamado(rs.getString("chamado"));
+		 chamado.setTipo(rs.getString("tipo"));
+		 chamado.setCategoria(rs.getString("categoria"));
+		 chamado.setStatus(rs.getString("Status"));
+		 //chamado.setAbertura(rs.getString("Inicio"));
+		 String [] a = rs.getString("SLA").split("XXX");
+
+		 chamado.setSla(a[0]);
+		 chamado.setSla2(Integer.parseInt(a[1]));
+
+		 chamado.setId(rs.getString("ID"));
+		 //Formatando a Data
+		 Date dataincial = rs.getDate("data_inicio");
+		 DateFormat formataData = DateFormat.getDateInstance();
+		 chamado.setDataInicio(formataData.format(dataincial));
+		 
+
+	
+		 return  chamado;
+	}
+	
+	
+	private Chamados populaChamadoPainelSolSeg(ResultSet rs) throws SQLException, ParseException {
+		 Chamados chamado = new Chamados();
+
+		
+		 // popula o objeto chamado
+		 			
+		 chamado.setNome(rs.getString("name"));
+		 chamado.setDescricao(rs.getString("descricao"));
+		 chamado.setChamado(rs.getString("chamado"));
+		 chamado.setTipo(rs.getString("tipo"));
+		 chamado.setCategoria(rs.getString("categoria"));
+		 chamado.setStatus(rs.getString("Status"));
+		 //chamado.setAbertura(rs.getString("Inicio"));
+
+		 String [] a = rs.getString("SLA").split("XXX");
+
+		 chamado.setSla(a[0]);
+		 chamado.setSla2(Integer.parseInt(a[1]));
+		 
+		 
+		 chamado.setId(rs.getString("ID"));
+		 //Formatando a Data
+		 Date dataincial = rs.getDate("data_inicio");
+		 DateFormat formataData = DateFormat.getDateInstance();
+		 chamado.setDataInicio(formataData.format(dataincial));
+		 
+
+	
+		 return  chamado;
+	}
+	
+	
+	private Chamados populaChamadoPainelIncSeg(ResultSet rs) throws SQLException, ParseException {
+		 Chamados chamado = new Chamados();
+
+		
+		 // popula o objeto chamado
+		 			
+		 chamado.setNome(rs.getString("name"));
+		 chamado.setDescricao(rs.getString("descricao"));
+		 chamado.setChamado(rs.getString("chamado"));
+		 chamado.setTipo(rs.getString("tipo"));
+		 chamado.setCategoria(rs.getString("categoria"));
+		 chamado.setStatus(rs.getString("Status"));
+		 //chamado.setAbertura(rs.getString("Inicio"));
+		 String [] a = rs.getString("SLA").split("XXX");
+
+		 chamado.setSla(a[0]);
+		 chamado.setSla2(Integer.parseInt(a[1]));
+
+		 chamado.setId(rs.getString("ID"));
+		 //Formatando a Data
+		 Date dataincial = rs.getDate("data_inicio");
+		 DateFormat formataData = DateFormat.getDateInstance();
+		 chamado.setDataInicio(formataData.format(dataincial));
+		 
+
+	
+		 return  chamado;
+	}
+	
+	
+	
+	
 	public Integer getCount_sac() {
 		return count_sac;
 	}
@@ -2208,6 +2683,22 @@ public class JdbcChamadosDao {
 
 	public void setCount_PainelRdm(Integer count_PainelRdm) {
 		Count_PainelRdm = count_PainelRdm;
+	}
+
+	public Integer getCount_PainelTarefasInternas() {
+		return Count_PainelTarefasInternas;
+	}
+
+	public void setCount_PainelTarefasInternas(Integer count_PainelTarefasInternas) {
+		Count_PainelTarefasInternas = count_PainelTarefasInternas;
+	}
+
+	public Integer getCount_PainelRdmPem() {
+		return Count_PainelRdmPem;
+	}
+
+	public void setCount_PainelRdmPem(Integer count_PainelRdmPem) {
+		Count_PainelRdmPem = count_PainelRdmPem;
 	}
 	
 }

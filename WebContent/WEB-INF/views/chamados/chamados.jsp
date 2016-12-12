@@ -3,6 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+    
+
+  
+
 <jsp:useBean id="chamadosteste" class="br.com.sisnoc.chamados.modelo.Chamados"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -215,6 +219,13 @@ font-size: 13px;
     position: relative;
 	}
 	
+	#ok {
+	
+	width: 400px;
+	height: 300px;
+	
+	}
+	
 	#texto {
 	text-align: right;
 	}
@@ -254,6 +265,7 @@ font-size: 13px;
         </li>
         <li><a href="#problemas">Problemas <span class="badge">${countPro}</span></a></li>
         <li><a href="#os">Ordem de Serviço <span class="badge">${countOs}</span></a></li>
+        <li><a href="#tarefainterna">Tarefas Internas <span class="badge">${countPainelTarefasInternas}</span></a></li>
         <li><a href="#">RDM</a></li>
         <li><a href="relatorios">Relatórios</a></li>
 
@@ -278,22 +290,28 @@ font-size: 13px;
    <center><strong>Monitoração</strong></center> 
   </a>
                    
+	<c:if test="${countPainelMon == 0 }">
+		
+		<center>	<img src="resources/images/ok.png" id="ok" /></center>
+  		
+  		</c:if>	                   
+  
+
+		<c:if test="${countPainelMon != 0 }">	                   
+                     
                  <table class="table table-bordered table-hover">
                               <thead>
                             <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
                                 <td><center><strong>Chamado</strong></center></td>
                                 <td><center><strong>Descrição</strong></center></td>
                                 <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
                                 <td><center><strong>SLA</strong></center></td>
                             </tr>
                           </thead>
                            <tbody>
 		                		<c:forEach items="${chamadosPainelMon}" var="chamadosPainelMon">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelMon.sla2}" id="slaid_${chamadosPainelMon.sla2}">
-											<td>${chamadosPainelMon.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelMon.id}" target="_blank" >${chamadosPainelMon.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelMon.id}" target="_blank" >${chamadosPainelMon.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelMon.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -302,7 +320,6 @@ font-size: 13px;
 											</td>
 											<td>${chamadosPainelMon.descricao}</td>
 											<td >${chamadosPainelMon.tipo}</td>
-											<td>${chamadosPainelMon.status}</td>
 											<td>${chamadosPainelMon.sla}</td>
   										</tr>
   										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
@@ -310,11 +327,11 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.sla}</td>
+
 															</div>
 														</tr>
 											</c:if>
@@ -322,7 +339,7 @@ font-size: 13px;
 								</c:forEach>
                         </tbody>    
                     </table>
-                   
+                   </c:if>
                    
                     </div>
                 </div>
@@ -334,6 +351,15 @@ font-size: 13px;
                         <a href="#chamados" class="list-group-item list-group-item-success ">
 <center><strong>Solicitações</strong></center>  
   </a>
+  		<c:if test="${countPainelSol == 0 }">
+		
+		<center>	<img src="resources/images/ok.png" id="ok" /></center>
+  		
+  		</c:if>	                   
+  
+
+		<c:if test="${countPainelSol != 0 }">	                   
+  
                    
     <table  id="chamados" class="table table-bordered table-hover">
                               <thead>
@@ -349,7 +375,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelSol}" var="chamadosPainelSol">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelSol.sla2}" id="slaid_${chamadosPainelSol.sla2}">
 											<td>${chamadosPainelSol.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelSol.id}" target="_blank" >${chamadosPainelSol.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelSol.id}" target="_blank" >${chamadosPainelSol.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelSol.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -365,7 +391,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.status}</td>
 															<td >${chamadosFilhos.sla}</td>
@@ -376,7 +402,7 @@ font-size: 13px;
 								</c:forEach>
                         </tbody>                            
                     </table>
-                   
+                   </c:if>
                    
                     </div>
                 </div>
@@ -387,14 +413,20 @@ font-size: 13px;
                         <a href="#chamados" class="list-group-item list-group-item-success ">
 <center><strong>Incidentes</strong></center>  
   </a>
-                   
+  		<c:if test="${countPainelInc == 0 }">
+		
+		<center>	<img src="resources/images/ok.png" id="ok" /></center>
+  		
+  		</c:if>	                   
+  
+
+		<c:if test="${countPainelInc != 0 }">	                   
     <table class="table table-bordered table-hover">
                               <thead>
                             <tr class="app_linux">
                                 <td><center><strong>Nome</strong></center></td>
                                 <td><center><strong>Chamado</strong></center></td>
                                 <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
                                 <td><center><strong>SLA</strong></center></td>
                             </tr>
                           </thead>
@@ -402,7 +434,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelInc}" var="chamadosPainelInc">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelInc.sla2}" id="slaid_${chamadosPainelInc.sla2}">
 											<td>${chamadosPainelInc.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelInc.id}" target="_blank" >${chamadosPainelInc.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelInc.id}" target="_blank" >${chamadosPainelInc.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelInc.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -410,7 +442,6 @@ font-size: 13px;
 												</c:forEach>
 											</td>
 											<td>${chamadosPainelInc.descricao}</td>
-											<td>${chamadosPainelInc.status}</td>
 											<td>${chamadosPainelInc.sla}</td>
   										</tr>
   										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
@@ -418,7 +449,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.status}</td>
 															<td >${chamadosFilhos.sla}</td>
@@ -429,6 +460,7 @@ font-size: 13px;
 								</c:forEach>
                         </tbody>                            
                     </table>
+                    </c:if>
                     </div>
                     
                     
@@ -446,8 +478,8 @@ font-size: 13px;
                               <div class="col-md-6">
                     <div class="list-group">
                         <a href="#chamados" class="list-group-item list-group-item-success ">
-<center><strong>Requisição de Mudança</strong></center>  
-  </a>
+						<center><strong>Requisições de Mudança Aprovadas/Em Execução</strong></center>  
+  					</a>
                    
                    
                         <table class="table table-bordered table-hover">
@@ -465,7 +497,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelRdm}" var="chamadosPainelRdm">	
 										<tr>
 											<td>${chamadosPainelRdm.nome}</td>
-											<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=" target="_blank" >${chamadosPainelRdm.chamado}</a></td>
+											<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=chg+SKIPLIST=1+QBE.EQ.id=${chamadosPainelRdm.id}" target="_blank" >${chamadosPainelRdm.chamado}</a>
 											<td>${chamadosPainelRdm.descricao}</td>
 											<td>${chamadosPainelRdm.status}</td>
 											<td>${chamadosPainelRdm.dataAgendamento}</td>
@@ -478,6 +510,56 @@ font-size: 13px;
                     
                     
                 </div>  
+                
+                
+                
+                
+                
+
+                              <div class="col-md-6">
+                    <div class="list-group">
+                        <a href="#chamados" class="list-group-item list-group-item-success ">
+						<center><strong>Requisições de Mudança Executadas/Outras</strong></center>  
+  					</a>
+                   
+                   
+                        <table class="table table-bordered table-hover">
+                              <thead>
+                            <tr class="app_linux">
+                                <td><center><strong>Nome</strong></center></td>
+                                <td><center><strong>Chamado</strong></center></td>
+                                <td><center><strong>Descrição</strong></center></td>
+                               <td><center><strong>Status</strong></center></td>
+                                <td><center><strong>Agendamento</strong></center></td>
+                            </tr>
+                          </thead>
+                          
+                           <tbody>
+		                		<c:forEach items="${chamadosPainelRdmPem}" var="chamadosPainelRdmPem">	
+										<tr>
+											<td>${chamadosPainelRdmPem.nome}</td>
+											<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=chg+SKIPLIST=1+QBE.EQ.id=${chamadosPainelRdmPem.id}" target="_blank" >${chamadosPainelRdmPem.chamado}</a>
+											<td>${chamadosPainelRdmPem.descricao}</td>
+											<td>${chamadosPainelRdmPem.status}</td>
+											<td>${chamadosPainelRdmPem.dataAgendamento}</td>
+										</tr>
+								</c:forEach>
+                        </tbody>
+                    </table>
+
+                    </div>
+                    
+                    
+                </div>  
+
+                
+                
+                </div>
+                
+                         <div class="row">
+                
+                
+                
                 
           
                                   <div class="col-md-6">
@@ -504,7 +586,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPainelOrdemServico}" var="chamadosPainelOrdemServico">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="Status da Ordem de Serviço foi atualizado a mais de 10 dias, ATENÇÃO!!" class="${chamadosPainelOrdemServico.diasAtualizacao}" id="sladias_${chamadosPainelOrdemServico.diasAtualizacao}">
 											<td>${chamadosPainelOrdemServico.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelOrdemServico.id}" target="_blank" >${chamadosPainelOrdemServico.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelOrdemServico.id}" target="_blank" >${chamadosPainelOrdemServico.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelOrdemServico.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -522,7 +604,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td>${chamadosFilhos.descricao}</td>
 															<td>${chamadosFilhos.status}</td>
 															<td>${chamadosFilhos.atualizacao}</td>
@@ -538,6 +620,58 @@ font-size: 13px;
 
                     </div>
                 </div>  
+                
+                
+                
+                
+                     <div class="col-md-6">
+                    <div class="list-group">
+                        <a href="#chamados" class="list-group-item list-group-item-success ">
+					<center><strong id="tarefainterna">Tarefas Internas</strong></center>  
+					
+  					</a>
+                   
+                   
+                        <table  id="chamados" class="table table-bordered table-hover">
+                              <thead>
+                            <tr class="app_linux">
+                                <td><center><strong>Nome</strong></center></td>
+                                <td><center><strong>Chamado</strong></center></td>
+                                <td><center><strong>Descrição</strong></center></td>
+                               <td><center><strong>Status</strong></center></td>
+                                <td><center><strong>Aberto</strong></center></td>
+                                <td><center><strong>Atualização</strong></center></td>
+                                <td><center><strong>Previsão</strong></center></td>
+
+                            </tr>
+                          </thead>
+                           <tbody>
+		                		<c:forEach items="${chamadosPainelTarefasInternas}" var="chamadosPainelTarefasInternas">	
+										<tr>
+											<td>${chamadosPainelTarefasInternas.nome}</td>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelTarefasInternas.id}" target="_blank" >${chamadosPainelTarefasInternas.chamado}</a>
+											</td>
+											<td>${chamadosPainelTarefasInternas.descricao}</td>
+											<td>${chamadosPainelTarefasInternas.status}</td>
+											<td>${chamadosPainelTarefasInternas.dataInicio}</td>
+											<td>${chamadosPainelTarefasInternas.atualizacao}</td>
+											<td>${chamadosPainelTarefasInternas.data_retorno}</td>											
+  										</tr>
+ 										
+								</c:forEach>
+                        </tbody>                            
+
+                    </table>
+
+                    </div>
+                </div>  
+                
+                
+                
+                
+                
+                
+<!--                 Panel RQ ORdem -->
           </div>  
         </div>
     </div>
@@ -549,9 +683,12 @@ font-size: 13px;
  
      <!-- Inicio Equipe APP Linux -->
      
+     
         <div class="row">
+
+	<c:if test="${countApp != 0 }">	
                      
-   <div class="panel panel-primary">
+	   <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="aplicacao"><center><strong>Equipe de Aplicação</strong></center></h3></div>
         <div class="panel-body">
         
@@ -583,7 +720,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosApp}" var="chamadosApp">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosApp.sla2}" id="slaid_${chamadosApp.sla2}">
 											<td>${chamadosApp.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosApp.id}" target="_blank" >${chamadosApp.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosApp.id}" target="_blank" >${chamadosApp.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosApp.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -602,7 +739,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -625,11 +762,14 @@ font-size: 13px;
        </div>
     </div>
     
+    </c:if>
+    
        <!-- FIM Equipe APP Linux -->
        
        <!-- Inicio Equipe Banco de Dados -->
      
-                     
+	<c:if test="${countBd != 0 }">	
+	                     
    <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="banco"><center><strong>Equipe de Banco de Dados</strong></center></h3></div>
         <div class="panel-body">
@@ -662,7 +802,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosBd}" var="chamadosBd">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosBd.sla2}" id="slaid_${chamadosBd.sla2}">
 											<td>${chamadosBd.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBd.id}" target="_blank" >${chamadosBd.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBd.id}" target="_blank" >${chamadosBd.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosBd.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -681,7 +821,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -705,12 +845,14 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Banco de Dados --> 
        
            <!-- Inicio Equipe Backup -->
      
-                     
+         	<c:if test="${countBkp != 0 }">	
+         
    <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="bkp"><center><strong>Equipe de Backup</strong></center></h3></div>
         <div class="panel-body">
@@ -743,7 +885,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosBkp}" var="chamadosBkp">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosBkp.sla2}" id="slaid_${chamadosBkp.sla2}">
 											<td>${chamadosBkp.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBkp.id}" target="_blank" >${chamadosBkp.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBkp.id}" target="_blank" >${chamadosBkp.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosBkp.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -762,7 +904,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -786,12 +928,13 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Backup -->
        
                 <!-- Inicio Equipe VmWare / Storage -->
      
-                     
+     	<c:if test="${countVm != 0 }">	                
    <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="vmware"><center><strong>Equipe de VMWare</strong></center></h3></div>
         <div class="panel-body">
@@ -824,7 +967,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosVm}" var="chamadosVm">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosVm.sla2}" id="slaid_${chamadosVm.sla2}">
 											<td>${chamadosVm.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosVm.id}" target="_blank" >${chamadosVm.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosVm.id}" target="_blank" >${chamadosVm.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosVm.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -843,7 +986,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -867,13 +1010,15 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe VMWare / Storage -->
        
         <!-- Inicio Equipe Windows -->
      
+ 	<c:if test="${countSo != 0 }">	
                      
-   <div class="panel panel-primary">
+ 	  <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="So"><center><strong>Equipe de Sistemas Operacionais</strong></center></h3></div>
         <div class="panel-body">
         
@@ -905,7 +1050,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosSo}" var="chamadosSo">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosSo.sla2}" id="slaid_${chamadosSo.sla2}">
 											<td>${chamadosSo.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosSo.id}" target="_blank" >${chamadosSo.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosSo.id}" target="_blank" >${chamadosSo.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosSo.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -924,7 +1069,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -948,13 +1093,14 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Windows -->    
        
           
         <!-- Inicio Equipe Rede -->
      
-                     
+	<c:if test="${countRede != 0 }">	     
    <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="rede"><center><strong>Equipe de Rede</strong></center></h3></div>
         <div class="panel-body">
@@ -987,7 +1133,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosRede}" var="chamadosRede">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosRede.sla2}" id="slaid_${chamadosRede.sla2}">
 											<td>${chamadosRede.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosRede.id}" target="_blank" >${chamadosRede.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosRede.id}" target="_blank" >${chamadosRede.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosRede.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1006,7 +1152,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1030,6 +1176,7 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Rede --> 
     
@@ -1039,8 +1186,8 @@ font-size: 13px;
        
        <!-- Inicio Equipe analista de monitoracao -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countZa != 0 }">	             
+  	 <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="zabbix"><center><strong>Equipe Zabbix</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1072,7 +1219,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosMonit}" var="chamadosMonit">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosMonit.sla2}" id="slaid_${chamadosMonit.sla2}">
 											<td>${chamadosMonit.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMonit.id}" target="_blank" >${chamadosMonit.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMonit.id}" target="_blank" >${chamadosMonit.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosMonit.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1091,7 +1238,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1115,13 +1262,14 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe analista de monitoracao --> 
     
     
     <!-- Inicio Equipe storage -->
      
-                     
+	<c:if test="${countSto != 0 }">	                     
    <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="storage"><center><strong>Equipe Storage</strong></center></h3></div>
         <div class="panel-body">
@@ -1154,7 +1302,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosStor}" var="chamadosStor">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosStor.sla2}" id="slaid_${chamadosStor.sla2}">
 											<td>${chamadosStor.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosStor.id}" target="_blank" >${chamadosStor.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosStor.id}" target="_blank" >${chamadosStor.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosStor.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1173,7 +1321,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1197,6 +1345,7 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe storage --> 
     
@@ -1204,8 +1353,9 @@ font-size: 13px;
     
     <!-- Inicio Equipe documentadores -->
      
+ 	<c:if test="${countDoc != 0 }">	
                      
-   <div class="panel panel-primary">
+   	<div class="panel panel-primary">
        <div class="panel-heading"><h3 id="document"><center><strong>Equipe Documentadores</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1237,7 +1387,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosDocu}" var="chamadosDocu">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosDocu.sla2}" id="slaid_${chamadosDocu.sla2}">
 											<td>${chamadosDocu.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosDocu.id}" target="_blank" >${chamadosDocu.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosDocu.id}" target="_blank" >${chamadosDocu.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosDocu.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1256,7 +1406,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1280,14 +1430,14 @@ font-size: 13px;
         
        </div>
     </div>
-    
+    </c:if>
        <!-- FIM Equipe Equipe documentadores --> 
     
     
      <!-- Inicio Equipe serv corporativos -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countCorp != 0 }">	                     
+   	<div class="panel panel-primary">
        <div class="panel-heading"><h3 id="corp"><center><strong>Equipe Serv. Corporativos</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1319,7 +1469,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosCorp}" var="chamadosCorp">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosCorp.sla2}" id="slaid_${chamadosCorp.sla2}">
 											<td>${chamadosCorp.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosCorp.id}" target="_blank" >${chamadosCorp.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosCorp.id}" target="_blank" >${chamadosCorp.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosCorp.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1338,7 +1488,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1362,13 +1512,15 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe serv corporativos --> 
     
           <!-- Inicio Equipe Monitoração -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countMon != 0 }">	
+                   
+   	<div class="panel panel-primary">
        <div class="panel-heading"><h3 id="monitoracao"><center><strong>Equipe de Monitoradores</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1400,7 +1552,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosMon}" var="chamadosMon">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosMon.sla2}" id="slaid_${chamadosMon.sla2}">
 											<td>${chamadosMon.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMon.id}" target="_blank" >${chamadosMon.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMon.id}" target="_blank" >${chamadosMon.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosMon.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1419,7 +1571,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1443,14 +1595,15 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Monitoração --> 
        
        
           <!-- Inicio Equipe Gerencia -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countGer != 0 }">	                     
+   	<div class="panel panel-primary">
        <div class="panel-heading"><h3 id="gerencial"><center><strong>Supervisor</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1482,7 +1635,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosGer}" var="chamadosGer">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosGer.sla2}" id="slaid_${chamadosGer.sla2}">
 											<td>${chamadosGer.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosGer.id}" target="_blank" >${chamadosGer.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosGer.id}" target="_blank" >${chamadosGer.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosGer.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1501,7 +1654,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.tipo}</td>
 															<td >${chamadosFilhos.categoria}</td>
@@ -1525,6 +1678,7 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Equipe Equipe Gerencia --> 
        
@@ -1537,8 +1691,8 @@ font-size: 13px;
        
                <!-- Inicio Problemas -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countPro != 0 }">	
+  	 <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="problemas"><center><strong>Problemas</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1568,7 +1722,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosPro}" var="chamadosPro">	
 										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPro.sla2}" id="slaid_${chamadosPro.sla2}">
 											<td>${chamadosPro.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPro.id}" target="_blank" >${chamadosPro.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPro.id}" target="_blank" >${chamadosPro.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPro.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1593,13 +1747,13 @@ font-size: 13px;
         
        </div>
     </div>
-    
+    </c:if>
        <!-- FIM Problemas --> 
        
              <!-- Inicio Ordem de Serviço -->
      
-                     
-   <div class="panel panel-primary">
+	<c:if test="${countOs != 0 }">	              
+ 	  <div class="panel panel-primary">
        <div class="panel-heading"><h3 id="os"><center><strong>Ordem de Serviço</strong></center></h3></div>
         <div class="panel-body">
         
@@ -1632,7 +1786,7 @@ font-size: 13px;
 		                		<c:forEach items="${chamadosOs}" var="chamadosOs">	
 										<tr data-toggle="tooltip" data-placement="bottom" title="Status da Ordem de Serviço foi atualizado a mais de 10 dias, ATENÇÃO!!" class="${chamadosOs.diasAtualizacao}" id="sladias_${chamadosOs.diasAtualizacao}">
 											<td>${chamadosOs.nome}</td>
-												<td><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosOs.id}" target="_blank" >${chamadosOs.chamado}</a>
+												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosOs.id}" target="_blank" >${chamadosOs.chamado}</a>
 												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
 														<c:if test="${chamadosFilhosCarinha.chamado == chamadosOs.chamado }">
 																<img src="resources/images/filho.png" id="logo" alt=""/>
@@ -1651,7 +1805,7 @@ font-size: 13px;
 														<tr class="filho">
 														<div>
 															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://bacurau/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
+															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
 															<td >${chamadosFilhos.descricao}</td>
 															<td >${chamadosFilhos.status}</td>
 															<td >${chamadosFilhos.atualizacao}</td>
@@ -1674,6 +1828,7 @@ font-size: 13px;
         
        </div>
     </div>
+    </c:if>
     
        <!-- FIM Ordem de Serviço --> 
        

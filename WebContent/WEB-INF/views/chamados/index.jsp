@@ -34,8 +34,13 @@
 				<li class="red">
 					<a href="#" class="fa fa-tachometer"></a>
 					<ul>
-						<li><a href="../painels/monitor.php"><i class="fa fa-newspaper-o"></i> Painel Zabbix/CA</a></li>
+						<li><a href="http://zabbix/painels/zabbix_externo.php"><i class="fa fa-newspaper-o"></i> Painel Zabbix Externo</a></li>
+						<li><a href="../painels/zabbix.php"><i class="fa fa-newspaper-o"></i> Painel Zabbix</a></li>
 						<li><a href="listaChamados"><i class="fa fa-tasks"></i> Painel Chamados Algar</a></li>
+						<li><a href="listaChamadosSac"><i class="fa fa-tasks"></i> Painel Chamados Sac</a></li>
+						<li><a href="listaChamadosSeg"><i class="fa fa-tasks"></i> Painel Chamados Segurança</a></li>
+						
+						
 				    </ul>
 				</li>
 				<li class="blue">
@@ -63,6 +68,7 @@
 
 
       </div>
+      
 
 </body>
 </html>

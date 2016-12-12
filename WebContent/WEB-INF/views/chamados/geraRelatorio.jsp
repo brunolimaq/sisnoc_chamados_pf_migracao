@@ -11,14 +11,188 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Chamados SAC</title>
 
- 	<script src="resources/js/jquery/jquery.js" type="text/javascript"></script>
-    <script src="resources/js/angular.min.js" type="text/javascript"></script>
-    <script src="resources/js/moment-with-langs.js" type="text/javascript"></script>
     <script src="resources/js/jquery/jquery.js" type="text/javascript"></script>
     <script src="resources/js/bootstrap.js" type="text/javascript"></script>
      
      <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
+     <script type="text/javascript" src="resources/js/jsapi"></script>
+ <script type="text/javascript">
 
+          // carregando bibliotecas do google
+          google.load('visualization', '1', {'packages':['corechart']});
+       
+          google.setOnLoadCallback(desenhaGrafico);
+          google.setOnLoadCallback(desenhaGrafico2);
+
+         function desenhaGrafico() {
+             var data = new google.visualization.DataTable();
+             data.addColumn('string', 'Mês');
+             data.addColumn('number', 'Qtd. Atendidos');
+
+             data.addRows(12);
+
+             // dados de janeiro
+             data.setValue(0, 0, 'Janeiro');
+             data.setValue(0, 1, 20450.0);
+             // dados de fevereiro
+             data.setValue(1, 0, 'Fevereiro');
+             data.setValue(1, 1, 21870.0);
+             // dados de marco
+             data.setValue(2, 0, 'Março');
+             data.setValue(2, 1, 22250.0);
+             // dados de abril
+             data.setValue(3, 0, 'Abril');
+             data.setValue(3, 1, 21769.0);
+             // dados de maio
+             data.setValue(4, 0, 'Maio');
+             data.setValue(4, 1, 23234.0);
+
+             data.setValue(5, 0, 'Junho');
+             data.setValue(5, 1, 1567.0);
+             
+             data.setValue(6, 0, 'Julho');
+             data.setValue(6, 1, 23234.0);
+             
+             data.setValue(7, 0, 'Agosto');
+             data.setValue(7, 1, 1466.0);
+             
+             data.setValue(8, 0, 'Setembro');
+             data.setValue(8, 1, 1399.0);
+             
+             data.setValue(9, 0, 'Outubro');
+             data.setValue(9, 1, 0);
+             
+             data.setValue(10, 0, 'Novembro');
+             data.setValue(10, 1, 0);
+             
+             data.setValue(11, 0, 'Dezembro');
+             data.setValue(11, 1, 0);
+             
+             // cria grafico
+             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+             
+             chart.draw(data, {width: 600, height: 300, 
+            	 title: 'Incidentes - Diário', 
+            	 colors: ['red']          
+             });
+         }
+             function desenhaGrafico2() {
+                 var data = new google.visualization.DataTable();
+                 data.addColumn('string', 'Mês');
+                 data.addColumn('number', 'Qtd. Atendidos');
+
+                 data.addRows(12);
+
+                 // dados de janeiro
+                 data.setValue(0, 0, 'Janeiro');
+                 data.setValue(0, 1, 20450.0);
+                 // dados de fevereiro
+                 data.setValue(1, 0, 'Fevereiro');
+                 data.setValue(1, 1, 21870.0);
+                 // dados de marco
+                 data.setValue(2, 0, 'Março');
+                 data.setValue(2, 1, 22250.0);
+                 // dados de abril
+                 data.setValue(3, 0, 'Abril');
+                 data.setValue(3, 1, 21769.0);
+                 // dados de maio
+                 data.setValue(4, 0, 'Maio');
+                 data.setValue(4, 1, 23234.0);
+
+                 data.setValue(5, 0, 'Junho');
+                 data.setValue(5, 1, 1567.0);
+                 
+                 data.setValue(6, 0, 'Julho');
+                 data.setValue(6, 1, 23234.0);
+                 
+                 data.setValue(7, 0, 'Agosto');
+                 data.setValue(7, 1, 1466.0);
+                 
+                 data.setValue(8, 0, 'Setembro');
+                 data.setValue(8, 1, 1399.0);
+                 
+                 data.setValue(9, 0, 'Outubro');
+                 data.setValue(9, 1, 0);
+                 
+                 data.setValue(10, 0, 'Novembro');
+                 data.setValue(10, 1, 0);
+                 
+                 data.setValue(11, 0, 'Dezembro');
+                 data.setValue(11, 1, 0);
+                 
+                 // cria grafico
+                 var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+                 
+                 chart.draw(data, {width: 600, height: 300, 
+                	 title: 'Incidentes - Mensal', 
+                	 colors: ['red']          
+                 });
+         }
+             
+             
+             
+             
+             
+             google.load("visualization", "1", {packages:["gauge"]});
+             google.setOnLoadCallback(drawChart);
+             
+             function drawChart() {
+
+               var data = google.visualization.arrayToDataTable([
+                 ['Label', 'Value'],
+                 ['2 Horas', 80],
+                 ['4 Horas', 55],
+                 ['8 Horas', 68]
+               ]);
+
+               var options = {
+                 width: 400, height: 120,
+                 redFrom: 90, redTo: 100,
+                 yellowFrom:75, yellowTo: 90,
+                 minorTicks: 5
+               };
+
+               var chart = new google.visualization.Gauge(document.getElementById('chart_gauge'));
+
+               chart.draw(data, options);
+
+               setInterval(function() {
+                 data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+                 chart.draw(data, options);
+               }, 13000);
+               setInterval(function() {
+                 data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+                 chart.draw(data, options);
+               }, 5000);
+               setInterval(function() {
+                 data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+                 chart.draw(data, options);
+               }, 26000);
+             }
+
+             
+             google.load("visualization", "1", {packages:["corechart"]});
+             google.setOnLoadCallback(drawChart2);
+             function drawChart2() {
+               var data = google.visualization.arrayToDataTable([
+                 ['Task', 'Chamados por dia'],
+                 ['Aplicação',     11],
+                 ['Banco de Dados',      2],
+                 ['Rede',  2],
+                 ['Monitoração', 2],
+                 ['Windows',    7]
+               ]);
+
+               var options = {
+                 title: 'Chamados por área',
+                 is3D: true,
+               };
+
+               var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+               chart.draw(data, options);
+             }
+
+    </script>
 
     <style>
 
@@ -128,40 +302,14 @@
 <body data-spy="scroll" data-target="#navbar-example">
 
 
-      <!-- Chamados CA -->
 
-  <div class="bs-example" data-example-id="embedded-scrollspy">
-  
-    <nav id="navbar-example2" class="navbar navbar-default navbar-static" id="meuMenu">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/sisnoc"><img src="resources/images/logo_pequena_algar.png" id="logo" alt=""/></a>
-        </div>
-        <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
-          <ul class="nav navbar-nav">
-            <li ><a href="#aplicacao">Aplicação / Linux <span class="badge">${countApp}</span></a></li>
-            <li><a href="#banco">Banco de Dados <span class="badge">${countBd}</span></a></li>
-            <li><a href="#bkp">Backup <span class="badge">${countBkp}</span></a></li>
-            <li><a href="#vmware">VMWare / Storage <span class="badge">${countVm}</span></a></li>
-            <li><a href="#windows">Windows <span class="badge">${countWin}</span></a></li>
-            <li><a href="#rede">Rede <span class="badge">${countRede}</span></a></li>
-            <li><a href="#monitoracao">Monitoração <span class="badge">${countMon}</span></a></li>
-            <li><a href="#gerencial">Gerencial / Documentadores <span class="badge">${countGer}</span></a></li>
-            <li><a href="#problemas">Problemas <span class="badge">${countPro}</span></a></li>
-            <li><a href="#os">Ordem de Serviço <span class="badge">${countOs}</span></a></li>
-            <li><a href="relatorios">Relatórios</a></li>
-         </ul>
-        </div>
-      </div>
-      
-    </nav>
     
     
       
         <div class="row">
                      
    <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="aplicacao"><center><strong>Relatórios</strong></center></h3></div>
+       <div class="panel-heading"><h3 id="aplicacao"><center><strong>DashBoard</strong></center></h3></div>
         <div class="panel-body">
         
                      <div class="row">
@@ -171,35 +319,16 @@
                
                         <div class="list-group">
                         <a href="#" class="list-group-item list-group-item-success  ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countApp}</span></strong></center>  
+                        	<center><strong>Chamados <span class="badge"></span></strong></center>  
   						</a>
   
-                    <table class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Responsável</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Qtd. Abertos</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${relatorio}" var="relatorio">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${relatorio.result}" id="slaid_${relatorio.result}">
-											<td>${relatorio.responsavel}</td>
-											<td>${relatorio.chamado}</td>
-											<td>${relatorio.resumo}</td>											
-											<td>${relatorio.tipo}</td>
-											<td>${relatorio.categoria}</td>
-											<td>${relatorio.qts_aberto}</td>
-											<td>${relatorio.result}</td>																											
-								</c:forEach>
-                        </tbody>
-                    </table>
+ 				    <div id="chart_div"></div>
+ 				    
+ 				    <div id="chart_div2"></div>
+ 				    
+ 				    <div id="chart_gauge"></div>
                    
+                   <div id="piechart_3d"></div>
                    
                     </div>
                  </div>
@@ -212,30 +341,6 @@
     </div>
     
     
-    
-    
-<script>
-	$("#slaid_0.0").ready(function() {
-		$("#slaid_0.0").attr({title: "SLA dentro do prazo!!!"})
-	});
-	$("#slaid_1.1").ready(function() {
-		$("#slaid_1.1").attr({title: "SLA menor que 4 horas!!!"})
-	});
-	$("#slaid_2.2").ready(function() {
-		$("#slaid_2.2").attr({title: "SlA menor que 2 horas!!!"})
-	});
-	$("#slaid_3.3").ready(function() {
-		$("#slaid_3.3").attr({title: "SLA menor que 1 hora!!!"})
-	});
-	$("#slaid_4.4").ready(function() {
-		$("#slaid_4.4").attr({title: "SLA menor que 30 minutos!!!"})
-	});
-	$("#slaid_5.5").ready(function() {
-		$("#slaid_5.5").attr({title: "SLA menor que 15 minutos!!!"})
-	});
-	$("#slaid_6.6").ready(function() {
-		$("#slaid_6.6").attr({title: "SLA estourado!!!"})
-	});
-</script>
+
 </body>
 </html>

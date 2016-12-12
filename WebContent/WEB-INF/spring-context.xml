@@ -27,22 +27,13 @@
 	
 	<mvc:default-servlet-handler />
 
-<!-- 
-<bean id="datasourceMySql" class="org.apache.commons.dbcp.BasicDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <property name="url" value="jdbc:mysql://localhost/tarefas"/>
-    <property name="username" value="root"/>
-    <property name="password" value="Reimerp010"/>
-</bean>
 
- -->
+
+<!--  -->
  
- 
-<bean id="datasourceSQL" class="org.apache.commons.dbcp.BasicDataSource">
-    <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-    <property name="url" value="jdbc:sqlserver://andorinha:1433;databaseName=mdb"/>
-    <property name="username" value="monitoracao"/>
-    <property name="password" value="Martelo21"/>
+  <bean id="datasourceSQL" class="org.springframework.jndi.JndiObjectFactoryBean">
+      <property name="jndiName" value="java:jboss/datasources/SisnocDS"/>
 </bean>
+ 
 
 </beans>
