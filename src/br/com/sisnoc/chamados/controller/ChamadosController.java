@@ -15,7 +15,7 @@ import br.com.sisnoc.chamados.dao.JdbcChamadosDao;
 public class ChamadosController {
 
 	@Autowired
-	private JdbcChamadosDao dao;
+	public JdbcChamadosDao dao;
 	
 	
 	@RequestMapping("/")

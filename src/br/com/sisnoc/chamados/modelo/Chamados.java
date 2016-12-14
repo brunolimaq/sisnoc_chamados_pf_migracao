@@ -1,5 +1,6 @@
 package br.com.sisnoc.chamados.modelo;
 
+import javax.persistence.Entity;
 
 public class Chamados {
 

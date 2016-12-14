@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sun.corba.se.spi.orb.ParserData;
 
 import br.com.sisnoc.chamados.modelo.Chamados;
 import br.com.sisnoc.chamados.modelo.Relatorios;
@@ -24,7 +25,7 @@ import br.com.sisnoc.chamados.modelo.Relatorios;
 @Repository
 public class JdbcChamadosDao {
 
-	private  final Connection connection;
+	public Connection connection;
 	private Integer count_app;
 	private Integer count_bd;
 	private Integer count_bkp;
@@ -54,7 +55,6 @@ public class JdbcChamadosDao {
 	
 	private Integer count_sac;
 
-	
 	
 	@Autowired
 	public JdbcChamadosDao(DataSource datasource) {
@@ -1096,10 +1096,6 @@ public class JdbcChamadosDao {
 			 chamado.setCategoria(rs.getString("categoria"));
 			 chamado.setStatus(rs.getString("Status"));
 			 //chamado.setAbertura(rs.getString("Inicio"));
-//			 chamado.setSla(rs.getString("SLA"));
-//			 chamado.setSla2(rs.getInt("SLA2"));
-//			 String [] a = rs.getString("SLA").split("XXX");
-
 	//		 chamado.setSla(a[0]);
 		//	 chamado.setSla2(Integer.parseInt(a[1]));
 
@@ -1317,7 +1313,7 @@ public class JdbcChamadosDao {
 			 DateFormat formataData = DateFormat.getDateInstance();
 			 chamado.setDataInicio(formataData.format(dataincial));
 			
-			 String validacao_retorno = rs.getString("data_retorno");
+			// String validacao_retorno = rs.getString("data_retorno");
 
 				 Date data_retorno = rs.getDate("data_retorno");
 				 DateFormat formataDataRetorno = DateFormat.getDateInstance();
