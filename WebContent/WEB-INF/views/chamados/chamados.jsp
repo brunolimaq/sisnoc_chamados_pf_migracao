@@ -7,240 +7,43 @@
 
   
 
-<jsp:useBean id="chamadosteste" class="br.com.sisnoc.chamados.modelo.Chamados"/>
+<jsp:useBean id="chamadosteste" class="br.com.sisnoc.chamados.modelo.Chamado"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Chamados SAC</title>
+<title>SISNOC - Chamados Algar</title>
   
   	 <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css" />
-     <script src="resources/js/jquery-2.1.4.js"></script>
-     <script src="resources/js/bootstrap.min.js"></script>
+  	 <link rel="stylesheet" type="text/css" href="resources/css/sisnoc.css" />
+  	 <script src="resources/js/jquery-2.1.4.js"></script>
+  	 
      
      	
-<script type="text/javascript">
+ <script type="text/javascript"> 
 
 
-        function timedRefresh(timeoutPeriod) {
+         function timedRefresh(timeoutPeriod) {
             setTimeout("location.reload(true);", timeoutPeriod);
         }
-
-        jQuery(document).ready(function () {
-            timedRefresh(15000);
+         jQuery(document).ready(function () {
+             timedRefresh(15000);
         });
        
-    </script>
+ </script>
 
-<style>
-.navbar-default {
-  background-color: #EAE6E6;
-  border-color: #e7e7e7;
-}
 
-body {
-font-size: 13px;
-}
-
- .panel-heading {
-      padding: 1px 0 0 0;
-      border-bottom: 1px solid transparent;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-    }    
-        .app_linux {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-            
-        }
-        
-          .app_zabbix {
-            color: white;
-            background-color: #337AB7;
-            border-color: #337AB7;
-        }
-        
-        .Incidente {
-            background-color:  #fcf8e3 !important; 
-             
-        }
-        
-		
-		#slaid_0 {
-		
-			}
-			
-			
-		#slaid_1 {
-			  color: #732801;
-			}
-			
-		#slaid_1 a {
-			  color: #732801;
-			}
-			
-	    #slaid_2 {
-			  color: #8B3D0D;
-			}
-		#slaid_2 a {
-			  color: #8B3D0D;
-		}
-			
-	    #slaid_3 {
-			  color: #FF3A00;
-			}
-		#slaid_3  a {
-			color: #FF3A00;
-  		}
-			
-	    #slaid_4 {
-			color: #FF0000;
-			border-color:  #FF0000;
-  			}
-  		
-  		#slaid_4  a {
-			color: #FF0000;
-  		}
-  			
-  			
-	    #slaid_5 {
-  			color: #FFFFFF;
-			background-color: #FF0000 !important;		
-  			}
-  		#slaid_5 a {
-  			color: #FFFFFF;
-  		}	
-  		
-  		#slaid_6 {
-			  color: #FFFFFF;
-			  background-color: #000000 !important;
-		  }
-		#slaid_6 a {
-  			color: #FFFFFF;
-  		}	
-  		
-  		#od_padrao {
-  			color: #337ab7;
-			background-color: #E5E5E5 !important;
-  			}
- 
-		#sladias_0 {
- 				color: #333;
-			  background-color: #fff;  		}
-			  
-		#sladias_0 a {
-  			color: #333;
-  		}
-		#sladias_1 {
- 			color: #333;
-			  background-color: #fff;  			}
-			  
-		#sladias_1 a {
-  			color: #333;
-  		}
-  				#sladias_2 {
- 				color: #F08657;
-			  background-color: #fff;  		}
-			  
-		#sladias_2 a {
-  			color: #F08657;
-  		}
-  				#sladias_3 {
- 				color: #F08657;
-			  background-color: #fff;  		}
-			  
-		#sladias_3 a {
-  			color: #F08657;
-  		}
-  				#sladias_4 {
- 				color: #F08657;
-			  background-color: #fff;  		}
-			  
-		#sladias_4 a {
-  			color: #F08657;
-  		}
-  				#sladias_5 {
- 				color: #FF4E00;
-			  background-color: #fff;  		}
-			  
-		#sladias_5 a {
-  			color: #FF4E00;
-  		}
-  				#sladias_6 {
- 				color: #FF4E00;
-			  background-color: #fff;  		}
-			  
-		#sladias_6 a {
-  			color: #FF4E00;
-  		}
-  				#sladias_7 {
- 				color: #F75252;
-			  background-color: #fff;  		}
-			  
-		#sladias_7 a {
-  			color: #F75252;
-  		}
-  				#sladias_8 {
- 				color: #FF0000;
-			  background-color: #fff;  		}
-			  
-		#sladias_8 a {
-  			color: #FF0000;
-  		}
-  				#sladias_9 {
- 				color: #FF0000;
-			  background-color: #fff;  		}
-			  
-		#sladias_9 a {
-  			color: #FF0000;
-  		}  		
-  
-  	.filho { 
-	display: none; 
-	background-color: #FDFBC4;
-    font-size: 11px;
-    }
-     .filho_td div td { 
-     padding: 1px;
-     font-size: 5px;
-    }
-	  #logo { 
-       width: 20px;
-       height: 20px;
-	}
-	
-	 #logo_seta { 
-    width: 20px;
-    height: 20px;
-    left: -33px;
-    top: 14px;
-    position: relative;
-	}
-	
-	#ok {
-	
-	width: 400px;
-	height: 300px;
-	
-	}
-	
-	#texto {
-	text-align: right;
-	}
-
-</style>
 
 </head>
 
 <body>
 <br>
 
-  <nav class="navbar navbar-default  navbar-fixed-top">
+  <nav  class="navbar navbar-inverse  navbar-fixed-top">
 <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Sisnoc</a>
+      <a class="navbar-brand" href="/sisnoc/listaChamados">Sisnoc Algar</a>
     </div>
     <div>
       <ul class="nav navbar-nav">
@@ -248,1674 +51,331 @@ font-size: 13px;
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipes
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          
-          <li ><a href="#aplicacao">Aplicação <span class="badge">${countApp}</span></a></li>
-            <li><a href="#banco">Banco de Dados <span class="badge">${countBd}</span></a></li>
-            <li><a href="#bkp">Backup <span class="badge">${countBkp}</span></a></li>
-            <li><a href="#vmware">VMWare <span class="badge">${countVm}</span></a></li>
-            <li><a href="#So">Sist. Operacionais <span class="badge">${countSo}</span></a></li>
-            <li><a href="#rede">Rede <span class="badge">${countRede}</span></a></li>
-            <li><a href="#zabbix">Zabbix <span class="badge">${countZa}</span></a></li>
-            <li><a href="#storage">Storage <span class="badge">${countSto}</span></a></li>
-            <li><a href="#document">Documentadores <span class="badge">${countDoc}</span></a></li>
-            <li><a href="#corp">Corporativo <span class="badge">${countCorp}</span></a></li>
-            <li><a href="#monitoracao">Monitoração <span class="badge">${countMon}</span></a></li>
-            <li><a href="#gerencial">Supervisor <span class="badge">${countGer}</span></a></li>
+			<li ><a href="/sisnoc/equipe_armazenamento">Analistas Storage <span class="badge"></span></a></li>
+			<li ><a href="/sisnoc/equipe_app">Analistas Aplicações <span class="badge"></span></a></li>
+			<li ><a href="/sisnoc/equipe_Bd">Analistas Banco de Dados<span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_corp">Analistas Serviços Corporativos <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_rede">Analistas Redes <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_monit">Analistas Monitoração <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_bkp">Analistas Backup <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_SO">Analistas Sistemas Operacionais <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_virt">Analistas Virtualização <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/equipe_doc">Documentadores <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/monitoradores">Monitoradores <span class="badge"></span></a></li>
+            <li><a href="/sisnoc/supervisor">Supervisores Datacenter <span class="badge"></span></a></li>
           </ul>
         </li>
-        <li><a href="#problemas">Problemas <span class="badge">${countPro}</span></a></li>
-        <li><a href="#os">Ordem de Serviço <span class="badge">${countOs}</span></a></li>
-        <li><a href="#tarefainterna">Tarefas Internas <span class="badge">${countPainelTarefasInternas}</span></a></li>
-        <li><a href="#">RDM</a></li>
-        <li><a href="relatorios">Relatórios</a></li>
-
- 
+        <li><a href="#">Problemas <span class="badge"></span></a></li>
+        <li><a href="#">GMUD</a></li>
+        <li><a href="#">Relatórios</a></li>
+        <li><a href="/sisnoc/pendencias">Pendências</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
+<br>	
 <br>
-<br>
+
+
+
 <div class="panel panel-primary">
-        <div class="panel-heading"><h3 id="chamados"><center><strong>Chamados Algar</strong></center></h3></div>
-        <div class="panel-body">
-                   
+	<div class="panel-body">
+	
+	<div class="row">
+			  <div class="col-md-6">
+				<div class="list-group ">
+					<a href="#chamados" class="list-group-item active" id="painel_incidente_titulo">
+						<strong>NOC Incidentes</strong>
+					</a>
+					<c:if test="${empty incidentesPainelNoc}">
+						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
 
-         <div class="row">
-
-                <div class="col-md-4">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-   <center><strong>Monitoração</strong></center> 
-  </a>
-                   
-	<c:if test="${countPainelMon == 0 }">
+  					</c:if>
+  					<c:if test="${!empty incidentesPainelNoc}">
 		
-		<center>	<img src="resources/images/ok.png" id="ok" /></center>
-  		
-  		</c:if>	                   
-  
-
-		<c:if test="${countPainelMon != 0 }">	                   
-                     
-                 <table class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelMon}" var="chamadosPainelMon">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelMon.sla2}" id="slaid_${chamadosPainelMon.sla2}">
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelMon.id}" target="_blank" >${chamadosPainelMon.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelMon.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosPainelMon.descricao}</td>
-											<td >${chamadosPainelMon.tipo}</td>
-											<td>${chamadosPainelMon.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosPainelMon.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.status}</td>
-
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>    
-                    </table>
-                   </c:if>
-                   
-                    </div>
-                </div>
-                
-                
-                
-                <div class="col-md-4">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-<center><strong>Solicitações</strong></center>  
-  </a>
-  		<c:if test="${countPainelSol == 0 }">
-		
-		<center>	<img src="resources/images/ok.png" id="ok" /></center>
-  		
-  		</c:if>	                   
-  
-
-		<c:if test="${countPainelSol != 0 }">	                   
-  
-                   
-    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelSol}" var="chamadosPainelSol">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelSol.sla2}" id="slaid_${chamadosPainelSol.sla2}">
-											<td>${chamadosPainelSol.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelSol.id}" target="_blank" >${chamadosPainelSol.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelSol.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosPainelSol.descricao}</td>
-											<td>${chamadosPainelSol.status}</td>
-											<td>${chamadosPainelSol.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosPainelSol.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>                            
-                    </table>
-                   </c:if>
-                   
-                    </div>
-                </div>
-                
-                
-          <div class="col-md-4">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-<center><strong>Incidentes</strong></center>  
-  </a>
-  		<c:if test="${countPainelInc == 0 }">
-		
-		<center>	<img src="resources/images/ok.png" id="ok" /></center>
-  		
-  		</c:if>	                   
-  
-
-		<c:if test="${countPainelInc != 0 }">	                   
-    <table class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelInc}" var="chamadosPainelInc">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPainelInc.sla2}" id="slaid_${chamadosPainelInc.sla2}">
-											<td>${chamadosPainelInc.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelInc.id}" target="_blank" >${chamadosPainelInc.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelInc.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosPainelInc.descricao}</td>
-											<td>${chamadosPainelInc.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosPainelInc.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>                            
-                    </table>
-                    </c:if>
-                    </div>
-                    
-                    
-                </div>
-
-
-                
-                
-                
-            </div>
-
-          <div class="row">
-          
-          
-                              <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-						<center><strong>Requisições de Mudança Aprovadas/Em Execução</strong></center>  
-  					</a>
-                   
-                   
-                        <table class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                               <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Agendamento</strong></center></td>
-                            </tr>
-                          </thead>
-                          
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelRdm}" var="chamadosPainelRdm">	
-										<tr>
-											<td>${chamadosPainelRdm.nome}</td>
-											<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=chg+SKIPLIST=1+QBE.EQ.id=${chamadosPainelRdm.id}" target="_blank" >${chamadosPainelRdm.chamado}</a>
-											<td>${chamadosPainelRdm.descricao}</td>
-											<td>${chamadosPainelRdm.status}</td>
-											<td>${chamadosPainelRdm.dataAgendamento}</td>
-										</tr>
-								</c:forEach>
-                        </tbody>
-                    </table>
-
-                    </div>
-                    
-                    
-                </div>  
-                
-                
-                
-                
-                
-
-                              <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-						<center><strong>Requisições de Mudança Executadas/Outras</strong></center>  
-  					</a>
-                   
-                   
-                        <table class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                               <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Agendamento</strong></center></td>
-                            </tr>
-                          </thead>
-                          
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelRdmPem}" var="chamadosPainelRdmPem">	
-										<tr>
-											<td>${chamadosPainelRdmPem.nome}</td>
-											<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=chg+SKIPLIST=1+QBE.EQ.id=${chamadosPainelRdmPem.id}" target="_blank" >${chamadosPainelRdmPem.chamado}</a>
-											<td>${chamadosPainelRdmPem.descricao}</td>
-											<td>${chamadosPainelRdmPem.status}</td>
-											<td>${chamadosPainelRdmPem.dataAgendamento}</td>
-										</tr>
-								</c:forEach>
-                        </tbody>
-                    </table>
-
-                    </div>
-                    
-                    
-                </div>  
-
-                
-                
-                </div>
-                
-                         <div class="row">
-                
-                
-                
-                
-          
-                                  <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-<center><strong>Ordem de Serviço</strong></center>  
-  </a>
-                   
-                   
-                        <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                               <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>Atualização</strong></center></td>
-                                <td><center><strong>Previsão</strong></center></td>
-
-                            </tr>
-                          </thead>
-                           <tbody  id="od_padrao">
-		                		<c:forEach items="${chamadosPainelOrdemServico}" var="chamadosPainelOrdemServico">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="Status da Ordem de Serviço foi atualizado a mais de 10 dias, ATENÇÃO!!" class="${chamadosPainelOrdemServico.diasAtualizacao}" id="sladias_${chamadosPainelOrdemServico.diasAtualizacao}">
-											<td>${chamadosPainelOrdemServico.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelOrdemServico.id}" target="_blank" >${chamadosPainelOrdemServico.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPainelOrdemServico.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosPainelOrdemServico.descricao}</td>
-											<td>${chamadosPainelOrdemServico.status}</td>
-											<td>${chamadosPainelOrdemServico.dataInicio}</td>
-											<td>${chamadosPainelOrdemServico.atualizacao}</td>
-											<td>${chamadosPainelOrdemServico.data_retorno}</td>											
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosPainelOrdemServico.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td>${chamadosFilhos.descricao}</td>
-															<td>${chamadosFilhos.status}</td>
-															<td>${chamadosFilhos.atualizacao}</td>
-															<td>${chamadosFilhos.dataInicio}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>                            
-
-                    </table>
-
-                    </div>
-                </div>  
-                
-                
-                
-                
-                     <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-					<center><strong id="tarefainterna">Tarefas Internas</strong></center>  
 					
-  					</a>
-                   
-                   
-                        <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                               <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>Atualização</strong></center></td>
-                                <td><center><strong>Previsão</strong></center></td>
-
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosPainelTarefasInternas}" var="chamadosPainelTarefasInternas">	
-										<tr>
-											<td>${chamadosPainelTarefasInternas.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelTarefasInternas.id}" target="_blank" >${chamadosPainelTarefasInternas.chamado}</a>
-											</td>
-											<td>${chamadosPainelTarefasInternas.descricao}</td>
-											<td>${chamadosPainelTarefasInternas.status}</td>
-											<td>${chamadosPainelTarefasInternas.dataInicio}</td>
-											<td>${chamadosPainelTarefasInternas.atualizacao}</td>
-											<td>${chamadosPainelTarefasInternas.data_retorno}</td>											
-  										</tr>
- 										
-								</c:forEach>
-                        </tbody>                            
-
-                    </table>
-
-                    </div>
-                </div>  
-                
-                
-                
-                
-                
-                
-<!--                 Panel RQ ORdem -->
-          </div>  
-        </div>
-    </div>
-    
-
-        <!-- Fim Chamados CA -->
-
-
- 
-     <!-- Inicio Equipe APP Linux -->
-     
-     
-        <div class="row">
-
-	<c:if test="${countApp != 0 }">	
-                     
-	   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="aplicacao"><center><strong>Equipe de Aplicação</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success  ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countApp}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosApp}" var="chamadosApp">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosApp.sla2}" id="slaid_${chamadosApp.sla2}">
-											<td>${chamadosApp.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosApp.id}" target="_blank" >${chamadosApp.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosApp.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosApp.descricao}</td>
-											<td>${chamadosApp.tipo}</td>
-											<td>${chamadosApp.categoria}</td>
-											<td>${chamadosApp.status}</td>
-											<td>${chamadosApp.dataInicio}</td>
-											<td>${chamadosApp.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosApp.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    
-    </c:if>
-    
-       <!-- FIM Equipe APP Linux -->
-       
-       <!-- Inicio Equipe Banco de Dados -->
-     
-	<c:if test="${countBd != 0 }">	
-	                     
-   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="banco"><center><strong>Equipe de Banco de Dados</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countBd}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosBd}" var="chamadosBd">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosBd.sla2}" id="slaid_${chamadosBd.sla2}">
-											<td>${chamadosBd.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBd.id}" target="_blank" >${chamadosBd.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosBd.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosBd.descricao}</td>
-											<td>${chamadosBd.tipo}</td>
-											<td>${chamadosBd.categoria}</td>
-											<td>${chamadosBd.status}</td>
-											<td>${chamadosBd.dataInicio}</td>
-											<td>${chamadosBd.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosBd.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Banco de Dados --> 
-       
-           <!-- Inicio Equipe Backup -->
-     
-         	<c:if test="${countBkp != 0 }">	
-         
-   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="bkp"><center><strong>Equipe de Backup</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countBkp}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosBkp}" var="chamadosBkp">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosBkp.sla2}" id="slaid_${chamadosBkp.sla2}">
-											<td>${chamadosBkp.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosBkp.id}" target="_blank" >${chamadosBkp.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosBkp.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosBkp.descricao}</td>
-											<td>${chamadosBkp.tipo}</td>
-											<td>${chamadosBkp.categoria}</td>
-											<td>${chamadosBkp.status}</td>
-											<td>${chamadosBkp.dataInicio}</td>
-											<td>${chamadosBkp.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosBkp.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Backup -->
-       
-                <!-- Inicio Equipe VmWare / Storage -->
-     
-     	<c:if test="${countVm != 0 }">	                
-   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="vmware"><center><strong>Equipe de VMWare</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countVm}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosVm}" var="chamadosVm">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosVm.sla2}" id="slaid_${chamadosVm.sla2}">
-											<td>${chamadosVm.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosVm.id}" target="_blank" >${chamadosVm.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosVm.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosVm.descricao}</td>
-											<td>${chamadosVm.tipo}</td>
-											<td>${chamadosVm.categoria}</td>
-											<td>${chamadosVm.status}</td>
-											<td>${chamadosVm.dataInicio}</td>
-											<td>${chamadosVm.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosVm.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>                          
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe VMWare / Storage -->
-       
-        <!-- Inicio Equipe Windows -->
-     
- 	<c:if test="${countSo != 0 }">	
-                     
- 	  <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="So"><center><strong>Equipe de Sistemas Operacionais</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countSo}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosSo}" var="chamadosSo">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosSo.sla2}" id="slaid_${chamadosSo.sla2}">
-											<td>${chamadosSo.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosSo.id}" target="_blank" >${chamadosSo.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosSo.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosSo.descricao}</td>
-											<td>${chamadosSo.tipo}</td>
-											<td>${chamadosSo.categoria}</td>
-											<td>${chamadosSo.status}</td>
-											<td>${chamadosSo.dataInicio}</td>
-											<td>${chamadosSo.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosSo.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Windows -->    
-       
-          
-        <!-- Inicio Equipe Rede -->
-     
-	<c:if test="${countRede != 0 }">	     
-   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="rede"><center><strong>Equipe de Rede</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countRede}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosRede}" var="chamadosRede">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosRede.sla2}" id="slaid_${chamadosRede.sla2}">
-											<td>${chamadosRede.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosRede.id}" target="_blank" >${chamadosRede.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosRede.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosRede.descricao}</td>
-											<td>${chamadosRede.tipo}</td>
-											<td>${chamadosRede.categoria}</td>
-											<td>${chamadosRede.status}</td>
-											<td>${chamadosRede.dataInicio}</td>
-											<td>${chamadosRede.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosRede.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Rede --> 
-    
-    
-  
-       
-       
-       <!-- Inicio Equipe analista de monitoracao -->
-     
-	<c:if test="${countZa != 0 }">	             
-  	 <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="zabbix"><center><strong>Equipe Zabbix</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countZa}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosMonit}" var="chamadosMonit">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosMonit.sla2}" id="slaid_${chamadosMonit.sla2}">
-											<td>${chamadosMonit.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMonit.id}" target="_blank" >${chamadosMonit.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosMonit.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosMonit.descricao}</td>
-											<td>${chamadosMonit.tipo}</td>
-											<td>${chamadosMonit.categoria}</td>
-											<td>${chamadosMonit.status}</td>
-											<td>${chamadosMonit.dataInicio}</td>
-											<td>${chamadosMonit.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosMonit.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe analista de monitoracao --> 
-    
-    
-    <!-- Inicio Equipe storage -->
-     
-	<c:if test="${countSto != 0 }">	                     
-   <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="storage"><center><strong>Equipe Storage</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countSto}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosStor}" var="chamadosStor">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosStor.sla2}" id="slaid_${chamadosStor.sla2}">
-											<td>${chamadosStor.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosStor.id}" target="_blank" >${chamadosStor.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosStor.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosStor.descricao}</td>
-											<td>${chamadosStor.tipo}</td>
-											<td>${chamadosStor.categoria}</td>
-											<td>${chamadosStor.status}</td>
-											<td>${chamadosStor.dataInicio}</td>
-											<td>${chamadosStor.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosStor.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe storage --> 
-    
-    
-    
-    <!-- Inicio Equipe documentadores -->
-     
- 	<c:if test="${countDoc != 0 }">	
-                     
-   	<div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="document"><center><strong>Equipe Documentadores</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countDoc}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosDocu}" var="chamadosDocu">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosDocu.sla2}" id="slaid_${chamadosDocu.sla2}">
-											<td>${chamadosDocu.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosDocu.id}" target="_blank" >${chamadosDocu.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosDocu.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosDocu.descricao}</td>
-											<td>${chamadosDocu.tipo}</td>
-											<td>${chamadosDocu.categoria}</td>
-											<td>${chamadosDocu.status}</td>
-											<td>${chamadosDocu.dataInicio}</td>
-											<td>${chamadosDocu.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosDocu.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-       <!-- FIM Equipe Equipe documentadores --> 
-    
-    
-     <!-- Inicio Equipe serv corporativos -->
-     
-	<c:if test="${countCorp != 0 }">	                     
-   	<div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="corp"><center><strong>Equipe Serv. Corporativos</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countCorp}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosCorp}" var="chamadosCorp">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosCorp.sla2}" id="slaid_${chamadosCorp.sla2}">
-											<td>${chamadosCorp.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosCorp.id}" target="_blank" >${chamadosCorp.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosCorp.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosCorp.descricao}</td>
-											<td>${chamadosCorp.tipo}</td>
-											<td>${chamadosCorp.categoria}</td>
-											<td>${chamadosCorp.status}</td>
-											<td>${chamadosCorp.dataInicio}</td>
-											<td>${chamadosCorp.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosCorp.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe serv corporativos --> 
-    
-          <!-- Inicio Equipe Monitoração -->
-     
-	<c:if test="${countMon != 0 }">	
-                   
-   	<div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="monitoracao"><center><strong>Equipe de Monitoradores</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countMon}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosMon}" var="chamadosMon">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosMon.sla2}" id="slaid_${chamadosMon.sla2}">
-											<td>${chamadosMon.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosMon.id}" target="_blank" >${chamadosMon.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosMon.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosMon.descricao}</td>
-											<td>${chamadosMon.tipo}</td>
-											<td>${chamadosMon.categoria}</td>
-											<td>${chamadosMon.status}</td>
-											<td>${chamadosMon.dataInicio}</td>
-											<td>${chamadosMon.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosMon.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Monitoração --> 
-       
-       
-          <!-- Inicio Equipe Gerencia -->
-     
-	<c:if test="${countGer != 0 }">	                     
-   	<div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="gerencial"><center><strong>Supervisor</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countGer}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Tipo</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                                <td><center><strong>SLA</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosGer}" var="chamadosGer">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosGer.sla2}" id="slaid_${chamadosGer.sla2}">
-											<td>${chamadosGer.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosGer.id}" target="_blank" >${chamadosGer.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosGer.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosGer.descricao}</td>
-											<td>${chamadosGer.tipo}</td>
-											<td>${chamadosGer.categoria}</td>
-											<td>${chamadosGer.status}</td>
-											<td>${chamadosGer.dataInicio}</td>
-											<td>${chamadosGer.sla}</td>
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosGer.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.tipo}</td>
-															<td >${chamadosFilhos.categoria}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-															<td >${chamadosFilhos.sla}</td>
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Equipe Equipe Gerencia --> 
-       
-       
-       
-        
-       
-       
-       
-       
-               <!-- Inicio Problemas -->
-     
-	<c:if test="${countPro != 0 }">	
-  	 <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="problemas"><center><strong>Problemas</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Incidentes / Solicitações <span class="badge">${countPro}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Categoria</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-                            </tr>
-                          </thead>
-                           <tbody>
-		                		<c:forEach items="${chamadosPro}" var="chamadosPro">	
-										<tr   data-toggle="tooltip" data-placement="bottom" title="100" class="${chamadosPro.sla2}" id="slaid_${chamadosPro.sla2}">
-											<td>${chamadosPro.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPro.id}" target="_blank" >${chamadosPro.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosPro.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosPro.descricao}</td>
-											<td>${chamadosPro.categoria}</td>
-											<td>${chamadosPro.status}</td>
-											<td>${chamadosPro.dataInicio}</td>
-  										</tr>
-								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-       <!-- FIM Problemas --> 
-       
-             <!-- Inicio Ordem de Serviço -->
-     
-	<c:if test="${countOs != 0 }">	              
- 	  <div class="panel panel-primary">
-       <div class="panel-heading"><h3 id="os"><center><strong>Ordem de Serviço</strong></center></h3></div>
-        <div class="panel-body">
-        
-                     <div class="row">
-                 
-                               <div class="col-md-12">
-
-               
-                        <div class="list-group">
-                        <a href="#chamados" class="list-group-item list-group-item-success ">
-                        	<center><strong>Solicitações <span class="badge">${countOs}</span></strong></center>  
-  						</a>
-  						
-  
-                    <table  id="chamados" class="table table-bordered table-hover">
-                              <thead>
-                            <tr class="app_linux">
-                                <td><center><strong>Nome</strong></center></td>
-                                <td><center><strong>Chamado</strong></center></td>
-                                <td><center><strong>Descrição</strong></center></td>
-                                <td><center><strong>Status</strong></center></td>
-                                <td><center><strong>Aberto</strong></center></td>
-								<td><center><strong>Atualização</strong></center></td>
-								<td><center><strong>Previsão</strong></center></td>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr class="painel_incidente">
+									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Chamado</strong></center></td>
+									<td><center><strong>Descrição</strong></center></td>
+									<td><center><strong>SLA</strong></center></td>
+									<td><center><strong>META</strong></center></td>
+								</tr>
+							</thead>
+							<tbody>
+		  						                   
+							<c:forEach items="${incidentesPainelNoc}" var="incidentesPainelNoc">
 								
-                                
-                            </tr>
-                          </thead>
-                           <tbody id="od_padrao" >
-		                		<c:forEach items="${chamadosOs}" var="chamadosOs">	
-										<tr data-toggle="tooltip" data-placement="bottom" title="Status da Ordem de Serviço foi atualizado a mais de 10 dias, ATENÇÃO!!" class="${chamadosOs.diasAtualizacao}" id="sladias_${chamadosOs.diasAtualizacao}">
-											<td>${chamadosOs.nome}</td>
-												<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosOs.id}" target="_blank" >${chamadosOs.chamado}</a>
-												<c:forEach items="${chamadosFilhosCarinha}" var="chamadosFilhosCarinha" >
-														<c:if test="${chamadosFilhosCarinha.chamado == chamadosOs.chamado }">
-																<img src="resources/images/filho.png" id="logo" alt=""/>
-														</c:if>
-												</c:forEach>
-											</td>
-											<td>${chamadosOs.descricao}</td>
-											<td>${chamadosOs.status}</td>
-											<td>${chamadosOs.dataInicio}</td>
-											<td>${chamadosOs.atualizacao}</td>
-											<td>${chamadosOs.data_retorno}</td>
-											
-  										</tr>
-  										<c:forEach items="${chamadosFilhos}" var="chamadosFilhos">	
-  											<c:if test="${chamadosFilhos.chamado_Pai == chamadosOs.chamado }">	
-														<tr class="filho">
-														<div>
-															<td><img src="resources/images/setabaixo.png" id="logo" alt=""/> ${chamadosFilhos.nome}</td>
-															<td ><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosFilhos.id}" target="_blank" >${chamadosFilhos.chamado}</a></td>
-															<td >${chamadosFilhos.descricao}</td>
-															<td >${chamadosFilhos.status}</td>
-															<td >${chamadosFilhos.atualizacao}</td>
-															<td >${chamadosFilhos.dataInicio}</td>
-														
-															</div>
-														</tr>
-											</c:if>
-										</c:forEach>
+									<tr class="${incidentesPainelNoc.alerta}" >
+										<td>${incidentesPainelNoc.equipe}</td>
+										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidentesPainelNoc.id}" target="_blank" >${incidentesPainelNoc.chamado}</a></td>
+										<td>${incidentesPainelNoc.titulo}</td>
+										<td>${incidentesPainelNoc.sla}</td>
+										<td  width="15%" height="70%" style="padding:3px" >
+										<div class="progress" style="height:30px" align="center">
+										  <div class="progress-bar ${incidentesPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+										    <span >15m</span>
+										  </div>
+										  <div class="progress-bar ${incidentesPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+										    <span>45m</span>
+										  </div>
+										  <div class="progress-bar ${incidentesPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+										    <span>1h</span>
+										  </div>
+										</div>
+										</td>
+									</tr>
+								
+							</c:forEach>
+						</tbody>    
+					</table>
+				</c:if>
+		  		
+				</div>
+				</div>
+               <div class="col-md-6">
+               	<div class="list-group">
+                   	<a href="#chamados" class="list-group-item active " id="painel_incidente_titulo">
+						<strong>Incidentes</strong>
+					 </a>
+					<c:if test="${empty chamadosPainelIncidentes}">
+						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
+
+  					</c:if>
+  					<c:if test="${!empty chamadosPainelIncidentes}">
+					 
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr class="painel_incidente">
+									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Chamado</strong></center></td>
+									<td><center><strong>Descrição</strong></center></td>
+									<td><center><strong>SLA</strong></center></td>
+									<td><center><strong>META</strong></center></td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${chamadosPainelIncidentes}" var="chamadosPainelIncidentes">	
+									<tr class="${chamadosPainelIncidentes.alerta}" data-toggle="tooltip" data-placement="bottom" title="${chamadosPainelIncidentes.alerta}">
+										<td>${chamadosPainelIncidentes.equipe}</td>
+										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelIncidentes.id}" target="_blank" >${chamadosPainelIncidentes.chamado}</a></td>
+										<td>${chamadosPainelIncidentes.titulo}</td>
+										<td>${chamadosPainelIncidentes.sla}</td>
+										<td  width="15%" height="70%" style="padding:3px" >
+										<div class="progress" style="height:30px" align="center">
+										  <div class="progress-bar ${chamadosPainelIncidentes.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+										    <span >15m</span>
+										  </div>
+										  <div class="progress-bar ${chamadosPainelIncidentes.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+										    <span>45m</span>
+										  </div>
+										  <div class="progress-bar ${chamadosPainelIncidentes.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+										    <span>1h</span>
+										  </div>
+										</div>
+										</td>
+									</tr>
 								</c:forEach>
-                        </tbody>
-                    </table>
-                   
-                   
-                    </div>
-                 </div>
-                       
-    </div> <!-- Fim row-->
-        
-        
-       </div>
-    </div>
-    </c:if>
-    
-       <!-- FIM Ordem de Serviço --> 
-       
-
-       
-    
-    </div>  <!--  Fim Row de todos os Paineis -->
-<script src="resources/js/jquery-2.1.4.js"></script>
-<script>
-//Escondendo os tr com classe 'filho'
-$("#chamados").find("tr.filho").hide();
-
-//Exibindo os filhos da tr que foi clicada
-$("#chamados tr:not(.filho)").click(
-	function() {
-		$(this).nextUntil(":not(.filho)").toggle();
-	}
-);
-//SLA
-	$("#slaid_0.0").ready(function() {
-		$("#slaid_0.0").attr({title: "SLA dentro do prazo!!!"})
-	});
-	$("#slaid_1.1").ready(function() {
-		$("#slaid_1.1").attr({title: "SLA menor que 4 horas!!!"})
-	});
-	$("#slaid_2.2").ready(function() {
-		$("#slaid_2.2").attr({title: "SlA menor que 2 horas!!!"})
-	});
-	$("#slaid_3.3").ready(function() {
-		$("#slaid_3.3").attr({title: "SLA menor que 1 hora!!!"})
-	});
-	$("#slaid_4.4").ready(function() {
-		$("#slaid_4.4").attr({title: "SLA menor que 30 minutos!!!"})
-	});
-	$("#slaid_5.5").ready(function() {
-		$("#slaid_5.5").attr({title: "SLA menor que 15 minutos!!!"})
-	});
-	$("#slaid_6.6").ready(function() {
-		$("#slaid_6.6").attr({title: "SLA estourado!!!"})
-	});
-
-	//Title Personalizado 
-	var monitoracao = ${countPainelMon}
-	var solicitacao = ${countPainelSol}
-	var incidente = ${countPainelInc}
+							</tbody>    
+						</table>
+					</c:if>
+                   </div>
+               </div> <!-- fim DIV col-md4 do Incidentes ROW -->
+               
+               </div>
 	
-	 $(document).ready(function() {
-	        document.title = ' (Inc ' + incidente + ')' + '(Sol ' + solicitacao + ')' + '(Mon ' + monitoracao + ')' + ' Chamados Algar';
-	    });
-	 
-	 //Alerta Dias Ordem de Serviço
-	 
-	 $("#sladias_0.0").ready(function() {
-		$("#sladias_0.0").attr({title: "Status da Ordem de Serviço atualizado HOJE!!"})
-	 });
-	 $("#sladias_1.1").ready(function() {
-			$("#sladias_1.1").attr({title: "Status da Ordem de Serviço foi atualizado ONTEM!!"})
-		 });
-	 $("#sladias_2.2").ready(function() {
-			$("#sladias_2.2").attr({title: "Status da Ordem de Serviço foi atualizado a 2 dias!!"})
-		 });
-	 $("#sladias_3.3").ready(function() {
-			$("#sladias_3.3").attr({title: "Status da Ordem de Serviço foi atualizado a 3 dias!!"})
-		 });
-	 $("#sladias_4.4").ready(function() {
-			$("#sladias_4.4").attr({title: "Status da Ordem de Serviço foi atualizado a 4 dias!!"})
-		 });
-	 $("#sladias_5.5").ready(function() {
-			$("#sladias_5.5").attr({title: "Status da Ordem de Serviço foi atualizado a 5 dias!!"})
-		 });
-	 $("#sladias_6.6").ready(function() {
-			$("#sladias_6.6").attr({title: "Status da Ordem de Serviço foi atualizado a 6 dias!!"})
-		 });
-	 $("#sladias_7.7").ready(function() {
-			$("#sladias_7.7").attr({title: "Status da Ordem de Serviço foi atualizado a 7 dias!!"})
-		 });
-	 $("#sladias_8.8").ready(function() {
-			$("#sladias_8.8").attr({title: "Status da Ordem de Serviço foi atualizado a 8 dias!!"})
-		 });
-	 $("#sladias_9.9").ready(function() {
-			$("#sladias_9.9").attr({title: "Status da Ordem de Serviço foi atualizado a 9 dias!!"})
-		 });
-	
+		<div class="row">
+           	<div class="col-md-6 clearfix">
+				<div class="list-group ">
+					<a href="#chamados" class="list-group-item active" id="painel_noc_titulo">
+						<strong>NOC Chamados</strong>
+					</a>
+					<c:if test="${empty chamadosPainelNoc}">
+						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
 
-	 
-	 
-</script>
+  					</c:if>
+  					<c:if test="${!empty chamadosPainelNoc}">
+           	
+						<table class="table table-bordered table-hover col-md-3">
+							<thead>
+								<tr class="painel_noc">
+									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Chamado</strong></center></td>
+									<td><center><strong>Descrição</strong></center></td>
+									<td><center><strong>SLA</strong></center></td>
+									<td><center><strong>Meta</strong></center></td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${chamadosPainelNoc}" var="chamadosPainelNoc">
+									
+										<tr  class="${chamadosPainelNoc.alerta}">
+										<td>${chamadosPainelNoc.equipe}</td>
+										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelNoc.id}" target="_blank" >${chamadosPainelNoc.chamado}</a></td>
+										<td>${chamadosPainelNoc.titulo}</td>
+										<td>${chamadosPainelNoc.sla}
+										</td>
+										
+										<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
+												<td  width="15%" height="70%" style="padding:3px" >
+												<div class="progress" style="height:30px" align="center">
+												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+												    <span >15m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+												    <span>30m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+												    <span>1h</span>
+												  </div>
+												</div>
+												</td>
+											</c:if>
+											<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
+												<td  width="15%" height="70%" style="padding:3px" >
+												<div class="progress" style="height:30px" align="center">
+												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+												    <span >15m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+												    <span>30m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+												    <span>1</span>
+												  </div>
+												</div>
+												</td>
+											</c:if>
+											<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
+												<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
+													<td  width="15%" height="70%" style="padding:3px" >
+													<div class="progress" style="height:30px" align="center">
+													  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+													    <span >2</span>
+													  </div>
+													  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+													    <span>6</span>
+													  </div>
+													  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+													    <span>24</span>
+													  </div>
+													</div>
+													</td>
+												</c:if>
+											</c:if>
+											
+									</tr>
+									
+								</c:forEach>
+							</tbody>    
+						</table>
+					</c:if>
+				</div>
+				<div><br></div>
+				</div> <!-- fim DIV col-md4 do NOC ROW -->
+				
+				<div class="col-md-6">
+               	<div class="list-group ">
+                   	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
+						<strong>Chamados</strong>
+					 </a>
+					<c:if test="${empty chamadosPainelChamados}">
+						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
+
+  					</c:if>
+  					<c:if test="${!empty chamadosPainelChamados}">
+					 
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr class="painel_chamados">
+									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Chamado</strong></center></td>
+									<td><center><strong>Descrição</strong></center></td>
+									<td><center><strong>SLA</strong></center></td>
+									<td><center><strong>Meta</strong></center></td>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${chamadosPainelChamados}" var="chamadosPainelChamados">	
+									<tr  class="${chamadosPainelChamados.alerta}">
+										<td>${chamadosPainelChamados.equipe}</td>
+										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelChamados.id}" target="_blank" >${chamadosPainelChamados.chamado}</a></td>
+										<td>${chamadosPainelChamados.titulo}</td>
+										<td>${chamadosPainelChamados.sla}
+										</td>
+										
+										<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
+												<td  width="15%" height="70%" style="padding:3px" >
+												<div class="progress" style="height:30px" align="center">
+												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+												    <span >15m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+												    <span>30m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+												    <span>1h</span>
+												  </div>
+												</div>
+												</td>
+											</c:if>
+											<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
+												<td  width="15%" height="70%" style="padding:3px" >
+												<div class="progress" style="height:30px" align="center">
+												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+												    <span >45m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+												    <span>1h30m</span>
+												  </div>
+												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+												    <span>2h</span>
+												  </div>
+												</div>
+												</td>
+											</c:if>
+											<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
+												<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
+													<td  width="15%" height="70%" style="padding:3px" >
+													<div class="progress" style="height:30px" align="center">
+													  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
+													    <span >2h</span>
+													  </div>
+													  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
+													    <span>4h</span>
+													  </div>
+													  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
+													    <span>6h</span>
+													  </div>
+													</div>
+													</td>
+												</c:if>
+											</c:if>
+											
+									</tr>
+									
+								</c:forEach>
+							</tbody>    
+						</table>
+					</c:if>						
+                   </div>
+               </div> <!-- fim DIV col-md4 do Chamados ROW -->
+			</div> <!-- Fechamento ROL 01 -->
+			
+			
+			
+               
+               
+               
+               </div><!-- fim DIV dos Paineis NOC, Chamados e Incidentes -->
+           </div> <!-- fim DIV Painel Geral -->
+
+   
+<!-- <script src="resources/js/jquery-2.1.4.js"></script> -->
 
 <!-- smooth scrolling script -->
 <script>
@@ -1933,6 +393,10 @@ $("#chamados tr:not(.filho)").click(
 		});
 </script>
 <!-- end smooth scrolling script -->
+
+<jsp:include page="footer.jsp"></jsp:include>
+
+<script src="resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

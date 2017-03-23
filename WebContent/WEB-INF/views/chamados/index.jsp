@@ -34,33 +34,26 @@
 				<li class="red">
 					<a href="#" class="fa fa-tachometer"></a>
 					<ul>
-						<li><a href="http://zabbix/painels/zabbix_externo.php"><i class="fa fa-newspaper-o"></i> Painel Zabbix Externo</a></li>
-						<li><a href="../painels/zabbix.php"><i class="fa fa-newspaper-o"></i> Painel Zabbix</a></li>
 						<li><a href="listaChamados"><i class="fa fa-tasks"></i> Painel Chamados Algar</a></li>
-						<li><a href="listaChamadosSac"><i class="fa fa-tasks"></i> Painel Chamados Sac</a></li>
-						<li><a href="listaChamadosSeg"><i class="fa fa-tasks"></i> Painel Chamados Segurança</a></li>
-						
-						
 				    </ul>
 				</li>
 				<li class="blue">
 					<a href="#" class="fa fa-connectdevelop"></a>
 					<ul>
-						<li><a href="http://candiru/"><i class="fa fa-stack-overflow"></i> Gestão Projetos</a></li>
+						<li><a href="#"><i class="fa fa-stack-overflow"></i> Gestão Projetos</a></li>
 						<li><a href="#"><i class="fa fa-bar-chart"></i> Relatórios</a></li>
 					</ul>
 				</li>
 				<li class="yellow">
 					<a href="#" class="fa fa-cogs"></a>
 					<ul>
-        				<li><a href="../index_sisnoc.php"><i class="fa fa-wrench"></i> Ferramentas NOC</a></li>
+        				<li><a href="#"><i class="fa fa-wrench"></i> Ferramentas NOC</a></li>
 					</ul>
 				</li>
 				<li class="purple">
 					<a href="#" class="fa fa-bars"></a>
 					<ul>
-						<li><a href="http://wiki/wiki"><i class="fa fa-wordpress"></i> Wiki</a></li>
-						<li><a href="http://algartecnologia.contakt.com.br/"><i class="fa fa-paper-plane-o"></i> SMS Algar</a></li>
+						<li><a href="#"><i class="fa fa-wordpress"></i> Wiki</a></li>
 					</ul>
 				</li>
 			</ul>

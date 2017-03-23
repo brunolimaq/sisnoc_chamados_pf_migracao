@@ -1,0 +1,141 @@
+.navbar-default {
+  background-color: #EAE6E6;
+  border-color: #e7e7e7;
+}
+
+body {
+font-size: 12px;
+}
+
+ .panel-heading {
+      padding: 1px 0 0 0;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+        
+#painel_noc_titulo {
+	color: #FFFFFF	;
+    background-color: #008B8B;
+    border-color: #008B8B;
+}
+
+.painel_noc {
+color: #FFFFFF	;
+background-color: #48D1CC	;
+border-color: #48D1CC	;
+padding: 6.9px;
+
+}
+
+#painel_chamados_titulo {
+color: #FFFFFF;
+background-color: #0288D1;
+border-color: #0288D1;
+}
+
+.painel_chamados {
+color: #FFFFFF;
+background-color: #4FC3F7;
+border-color: #4FC3F7;
+}
+
+
+#painel_incidente_titulo {
+color: #FFFFFF;
+    background-color: #A52A2A	;
+    border-color: #A52A2A	;
+}
+
+.painel_incidente {
+color: #FFFFFF;
+background-color: #E9967A	;
+border-color: #E9967A	;
+}
+
+        
+.app_zabbix {
+color: white;
+background-color: #337AB7;
+border-color: #337AB7;
+}
+        
+.Incidente {
+background-color:  #fcf8e3 !important; 
+}
+
+#logo { 
+width: 20px;
+height: 20px;
+}
+
+#logo_seta { 
+width: 20px;
+height: 20px;
+left: -33px;
+top: 14px;
+position: relative;
+}
+	
+#ok {
+width: 400px;
+height: 300px;
+}
+	
+#texto {
+text-align: right;
+}
+
+.list-group {
+text-align: center;
+}
+#col-md4 {
+padding-right: 0px; 
+}
+	
+.panel-heading{
+text-align: center;
+}
+.progress {
+	margin-bottom: 1px;
+	
+}
+
+#ok {
+width: 400px;
+height: 300px;
+}
+
+/*Customizações dos Alertas*/
+
+.maior24{
+	
+}
+.entre24-12{
+}
+.entre12-6{
+color: #E65100;
+}
+.entre6-2{
+color: #B71C1C;
+}
+.entre2-1"{
+color: #OOOOOO;
+background-color: #FFEE58;
+}
+.entre1-30m{
+color: #FFFFFF;
+background-color: #FF6D00;
+}
+.entre30m-15m{
+color: #FFFFFF;
+background-color: #F44336;
+}
+.menor15m{
+color: #FFFFFF;
+background-color: #F44336;
+}
+.SlaViolado{
+color: #FFFFFF;
+background-color: #000000;
+}
