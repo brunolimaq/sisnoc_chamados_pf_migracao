@@ -1,0 +1,7 @@
+package br.com.sisnoc.chamados.config.init;
+
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+public class SecurityInitializer  extends AbstractSecurityWebApplicationInitializer{
+
+}

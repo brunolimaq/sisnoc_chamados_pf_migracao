@@ -1,4 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 
+ 
   <modelVersion>4.0.0</modelVersion>
   <groupId>chamados</groupId>
   <artifactId>chamados</artifactId>
@@ -32,6 +35,19 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+				<!-- Thymeleaf -->
+		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+		
+				<!-- Thymeleaf - Layout Dialect -->
+		<thymeleaf-layout-dialect.version>2.0.0-SNAPSHOT</thymeleaf-layout-dialect.version>
+		
+				<!-- Spring Security -->
+		<spring-security.version>4.1.1.RELEASE</spring-security.version>
+		
+				<!-- Thymeleaf - Extras Spring Security -->
+		<thymeleaf-extras-springsecurity.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity.version>
+		
+		
 	</properties>
 	
 	
@@ -39,7 +55,7 @@
 	    <dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-webmvc</artifactId>
-	        <version>4.1.0.RELEASE</version>
+	        <version>4.3.0.RELEASE</version>
 	    </dependency>
 	    <dependency>
 	        <groupId>org.apache.tomcat</groupId>
@@ -47,6 +63,15 @@
 	        <version>7.0.30</version>
 	        <scope>provided</scope>
 	    </dependency>
+	    
+	    
+	    <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
+		    <scope>provided</scope>
+		</dependency>
+	    
 	    <dependency>
 	        <groupId>javax.servlet.jsp</groupId>
 	        <artifactId>jsp-api</artifactId>
@@ -99,6 +124,23 @@
 	        <scope>runtime</scope>
 	    </dependency>
 	    
+	    		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>${thymeleaf.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring4</artifactId>
+			<version>${thymeleaf.version}</version>
+			<scope>compile</scope>
+		</dependency>
+	    
+	    
+	    
 	    <!-- Database  -->
 	    <dependency>
 		    <groupId>org.hibernate</groupId>
@@ -132,7 +174,33 @@
 		    <version>4.0</version>
 		    <scope>runtime</scope>
 		</dependency>
-	</dependencies>
 		
+				<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		
+
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>3.1.0.RELEASE</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
+		
+	</dependencies>
+
+
   
 </project>
