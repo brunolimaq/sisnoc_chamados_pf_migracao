@@ -34,37 +34,7 @@
 <body>
 <br>
 
-
-
-  <nav  class="navbar navbar-inverse  navbar-fixed-top">
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/sisnoc/listaChamados">Sisnoc Algar</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-          <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipes
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-			<li ><a href="/sisnoc/equipe_armazenamento">Armazenamento de Dados <span class="badge"></span></a></li>
-			<li ><a href="/sisnoc/equipeBd">Banco de Dados<span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_qualidade">Qualidade Infraestrutura <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_rede">Rede e conectividade <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_seguranca">Segurança da Informação <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_linux">Servidores Linux <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_windows">Servidores Windows <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/noc">NOC <span class="badge"></span></a></li>
-          </ul>
-        </li>
-        <li><a href="#">Problemas <span class="badge"></span></a></li>
-        <li><a href="#">GMUD</a></li>
-        <li><a href="#">Relatórios</a></li>
-        <li><a href="/sisnoc/pendencias">Pendências</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<c:import url="menu.jsp"></c:import>
 
 <br>	
 <br>
@@ -85,14 +55,14 @@
   					</c:if>
   					<c:if test="${!empty chamadosPendentes}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_chamados">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
@@ -100,10 +70,10 @@
 								<c:forEach items="${chamadosPendentes}" var="chamadosPendentes">	
 									<tr  class="${chamadosPendentes.alerta}">
 										<td>${chamadosPendentes.equipe}</td>
-										<td>${chamadosPendentes.chamado}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPendentes.id}" target="_blank" >${chamadosPendentes.chamado}</a></td>
 										<td>${chamadosPendentes.titulo}</td>
 										<td>${chamadosPendentes.sla}
-										<c:if test="${chamadosPendentes.equipe == 'Banco de Dados'}">	
+										<%-- <c:if test="${chamadosPendentes.equipe == 'Banco de Dados'}">	
 												<td  width="15%" height="70%" style="padding:3px" >
 												<div class="progress" style="height:30px" align="center">
 												  <div class="progress-bar ${chamadosPendentes.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
@@ -149,7 +119,7 @@
 													</div>
 													</td>
 												</c:if>
-											</c:if>
+											</c:if> --%>
 										</tr>
 								</c:forEach>
 							</tbody>    
@@ -169,14 +139,14 @@
   					</c:if>
   					<c:if test="${!empty incidentesPendentes}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_incidente">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
@@ -184,11 +154,10 @@
 								<c:forEach items="${incidentesPendentes}" var="incidentesPendentes">	
 									<tr  class="${incidentesPendentes.alerta}">
 										<td>${incidentesPendentes.equipe}</td>
-										<td>${incidentesPendentes.chamado}</td>
-										<td>${incidentesPendentes.titulo}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidentesPendentes.id}" target="_blank" >${incidentesPendentes.chamado}</a></td>										<td>${incidentesPendentes.titulo}</td>
 										<td>${incidentesPendentes.sla}
 										</td>
-										<td  width="15%" height="70%" style="padding:3px" >
+										<%-- <td  width="15%" height="70%" style="padding:3px" >
 										<div class="progress" style="height:30px" align="center">
 										  <div class="progress-bar ${incidentesPendentes.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
 										    <span >15m</span>
@@ -200,7 +169,7 @@
 										    <span>1</span>
 										  </div>
 										</div>
-										</td>
+										</td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>    

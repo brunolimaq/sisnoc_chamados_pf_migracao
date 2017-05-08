@@ -40,39 +40,7 @@
 <body>
 <br>
 
-  <nav  class="navbar navbar-inverse  navbar-fixed-top">
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/sisnoc/listaChamados">Sisnoc Algar</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-          <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipes
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-			<li ><a href="/sisnoc/equipe_armazenamento">Analistas Storage <span class="badge"></span></a></li>
-			<li ><a href="/sisnoc/equipe_app">Analistas Aplicações <span class="badge"></span></a></li>
-			<li ><a href="/sisnoc/equipe_Bd">Analistas Banco de Dados<span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_corp">Analistas Serviços Corporativos <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_rede">Analistas Redes <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_monit">Analistas Monitoração <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_bkp">Analistas Backup <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_SO">Analistas Sistemas Operacionais <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_virt">Analistas Virtualização <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_doc">Documentadores <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/monitoradores">Monitoradores <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/supervisor">Supervisores Datacenter <span class="badge"></span></a></li>
-          </ul>
-        </li>
-        <li><a href="#">Problemas <span class="badge"></span></a></li>
-        <li><a href="#">GMUD</a></li>
-        <li><a href="#">Relatórios</a></li>
-        <li><a href="/sisnoc/pendencias">Pendências</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<c:import url="menu.jsp"></c:import>
 
 <br>	
 <br>
@@ -95,14 +63,14 @@
   					<c:if test="${!empty incidentesPainelNoc}">
 		
 					
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered">
 							<thead>
 								<tr class="painel_incidente">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>META</strong></center></td>
+<%-- 									<td><center><strong>META</strong></center></td> --%>
 								</tr>
 							</thead>
 							<tbody>
@@ -111,22 +79,22 @@
 								
 									<tr class="${incidentesPainelNoc.alerta}" >
 										<td>${incidentesPainelNoc.equipe}</td>
-										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidentesPainelNoc.id}" target="_blank" >${incidentesPainelNoc.chamado}</a></td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidentesPainelNoc.id}" target="_blank" >${incidentesPainelNoc.chamado}</a></td>
 										<td>${incidentesPainelNoc.titulo}</td>
 										<td>${incidentesPainelNoc.sla}</td>
-										<td  width="15%" height="70%" style="padding:3px" >
-										<div class="progress" style="height:30px" align="center">
-										  <div class="progress-bar ${incidentesPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-										    <span >15m</span>
-										  </div>
-										  <div class="progress-bar ${incidentesPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-										    <span>45m</span>
-										  </div>
-										  <div class="progress-bar ${incidentesPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-										    <span>1h</span>
-										  </div>
-										</div>
-										</td>
+<!-- 										<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 										<div class="progress" style="height:30px" align="center"> -->
+<%-- 										  <div class="progress-bar ${incidentesPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 										    <span >15m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidentesPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 										    <span>45m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidentesPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 										    <span>1h</span> -->
+<!-- 										  </div> -->
+<!-- 										</div> -->
+<!-- 										</td> -->
 									</tr>
 								
 							</c:forEach>
@@ -147,36 +115,36 @@
   					</c:if>
   					<c:if test="${!empty chamadosPainelIncidentes}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_incidente">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>META</strong></center></td>
+<%-- 									<td><center><strong>META</strong></center></td> --%>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${chamadosPainelIncidentes}" var="chamadosPainelIncidentes">	
 									<tr class="${chamadosPainelIncidentes.alerta}" data-toggle="tooltip" data-placement="bottom" title="${chamadosPainelIncidentes.alerta}">
 										<td>${chamadosPainelIncidentes.equipe}</td>
-										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelIncidentes.id}" target="_blank" >${chamadosPainelIncidentes.chamado}</a></td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelIncidentes.id}" target="_blank" >${chamadosPainelIncidentes.chamado}</a></td>
 										<td>${chamadosPainelIncidentes.titulo}</td>
 										<td>${chamadosPainelIncidentes.sla}</td>
-										<td  width="15%" height="70%" style="padding:3px" >
-										<div class="progress" style="height:30px" align="center">
-										  <div class="progress-bar ${chamadosPainelIncidentes.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-										    <span >15m</span>
-										  </div>
-										  <div class="progress-bar ${chamadosPainelIncidentes.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-										    <span>45m</span>
-										  </div>
-										  <div class="progress-bar ${chamadosPainelIncidentes.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-										    <span>1h</span>
-										  </div>
-										</div>
-										</td>
+<!-- 										<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 										<div class="progress" style="height:30px" align="center"> -->
+<%-- 										  <div class="progress-bar ${chamadosPainelIncidentes.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 										    <span >15m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${chamadosPainelIncidentes.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 										    <span>45m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${chamadosPainelIncidentes.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 										    <span>1h</span> -->
+<!-- 										  </div> -->
+<!-- 										</div> -->
+<!-- 										</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>    
@@ -199,14 +167,14 @@
   					</c:if>
   					<c:if test="${!empty chamadosPainelNoc}">
            	
-						<table class="table table-bordered table-hover col-md-3">
+						<table class="table table-bordered  col-md-3">
 							<thead>
 								<tr class="painel_noc">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 								</tr>
 							</thead>
 							<tbody>
@@ -214,58 +182,58 @@
 									
 										<tr  class="${chamadosPainelNoc.alerta}">
 										<td>${chamadosPainelNoc.equipe}</td>
-										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelNoc.id}" target="_blank" >${chamadosPainelNoc.chamado}</a></td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelNoc.id}" target="_blank" >${chamadosPainelNoc.chamado}</a></td>
 										<td>${chamadosPainelNoc.titulo}</td>
 										<td>${chamadosPainelNoc.sla}
 										</td>
 										
-										<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-													<td  width="15%" height="70%" style="padding:3px" >
-													<div class="progress" style="height:30px" align="center">
-													  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-													    <span >2</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-													    <span>6</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-													    <span>24</span>
-													  </div>
-													</div>
-													</td>
-												</c:if>
-											</c:if>
+<%-- 										<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1h</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosPainelNoc.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<%-- 												<c:if test="${chamadosPainelNoc.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 													<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 													<div class="progress" style="height:30px" align="center"> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelNoc.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 													    <span >2</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelNoc.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 													    <span>6</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelNoc.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 													    <span>24</span> -->
+<!-- 													  </div> -->
+<!-- 													</div> -->
+<!-- 													</td> -->
+<%-- 												</c:if> --%>
+<%-- 											</c:if> --%>
 											
 									</tr>
 									
@@ -288,14 +256,14 @@
   					</c:if>
   					<c:if test="${!empty chamadosPainelChamados}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_chamados">
 									<td><center><strong>Equipe</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
@@ -303,58 +271,58 @@
 								<c:forEach items="${chamadosPainelChamados}" var="chamadosPainelChamados">	
 									<tr  class="${chamadosPainelChamados.alerta}">
 										<td>${chamadosPainelChamados.equipe}</td>
-										<td><a href="http://sacsti/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelChamados.id}" target="_blank" >${chamadosPainelChamados.chamado}</a></td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelChamados.id}" target="_blank" >${chamadosPainelChamados.chamado}</a></td>
 										<td>${chamadosPainelChamados.titulo}</td>
 										<td>${chamadosPainelChamados.sla}
 										</td>
 										
-										<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >45m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>1h30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>2h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-													<td  width="15%" height="70%" style="padding:3px" >
-													<div class="progress" style="height:30px" align="center">
-													  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-													    <span >2h</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-													    <span>4h</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-													    <span>6h</span>
-													  </div>
-													</div>
-													</td>
-												</c:if>
-											</c:if>
+<%-- 										<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1h</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosPainelChamados.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >45m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>1h30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>2h</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<%-- 												<c:if test="${chamadosPainelChamados.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 													<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 													<div class="progress" style="height:30px" align="center"> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelChamados.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 													    <span >2h</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelChamados.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 													    <span>4h</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosPainelChamados.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 													    <span>6h</span> -->
+<!-- 													  </div> -->
+<!-- 													</div> -->
+<!-- 													</td> -->
+<%-- 												</c:if> --%>
+<%-- 											</c:if> --%>
 											
 									</tr>
 									

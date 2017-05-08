@@ -31,7 +31,7 @@ public class Popula {
 	}
 	
 	public String populaGrupo(ResultSet rs) throws SQLException,  ParseException {
-		return rs.getString("grupo");
+		return rs.getString("grupo").substring(0, 2);
 	}
 
 	public String populaStatus(ResultSet rs) throws SQLException,  ParseException{
@@ -49,4 +49,34 @@ public class Popula {
 		
 		return rs.getInt("epoch");
 	}
+
+	public String populaPrioridade(ResultSet rs) throws SQLException, ParseException {
+		
+		return rs.getString("prioridade");
+	}
+	
+	public String populaTipoLegivel(ResultSet rs) throws SQLException, ParseException {
+		
+		String tipo = rs.getString("tipo");
+		
+		if (tipo.equals("R")){
+			return "Chamado";
+		} else if (tipo.equals("I")){
+			return "Incidente";
+		} else if (tipo.equals("P")){
+			return "Problema";
+		}else {
+			return "Não tratado";
+		}
+		
+	}
+
+	public String populaStatusDescricao(ResultSet rs) throws SQLException, ParseException {
+		return rs.getString("statusDescricao");
+	}
+
+	public String populaTipo(ResultSet rs) throws SQLException, ParseException  {
+		return rs.getString("tipo");
+	}
+
 }

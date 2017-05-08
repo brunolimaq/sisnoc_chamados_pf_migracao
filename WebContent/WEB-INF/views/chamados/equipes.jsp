@@ -34,54 +34,21 @@
 <body>
 <br>
 
-
-
-  <nav  class="navbar navbar-inverse  navbar-fixed-top">
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/sisnoc/listaChamados">Sisnoc Algar</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-          <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipes
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-			<li ><a href="/sisnoc/equipe_armazenamento">Analistas Storage <span class="badge"></span></a></li>
-			<li ><a href="/sisnoc/equipe_app">Analistas Aplicações <span class="badge"></span></a></li>
-			<li ><a href="/sisnoc/equipe_Bd">Analistas Banco de Dados<span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_corp">Analistas Serviços Corporativos <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_rede">Analistas Redes <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_monit">Analistas Monitoração <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_bkp">Analistas Backup <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_SO">Analistas Sistemas Operacionais <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_virt">Analistas Virtualização <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/equipe_doc">Documentadores <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/monitoradores">Monitoradores <span class="badge"></span></a></li>
-            <li><a href="/sisnoc/supervisor">Supervisores Datacenter <span class="badge"></span></a></li>
-          </ul>
-        </li>
-        <li><a href="#">Problemas <span class="badge"></span></a></li>
-        <li><a href="#">GMUD</a></li>
-        <li><a href="#">Relatórios</a></li>
-        <li><a href="/sisnoc/pendencias">Pendências</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<c:import url="menu.jsp"></c:import>
 
 <br>	
 <br>
 
+
 <div class="panel panel-primary">
-        <div class="panel-heading"><h3 id="chamados"><center><strong>Chamados em andamento - ${equipe}</strong></center></h3></div>
+        <div class="panel-heading"><h3 id="chamados"><center><strong>${equipe}</strong></center></h3></div>
 	<div class="panel-body">
 		<div class="row">
 
 				<div class="col-md-6">
                	<div class="list-group ">
                    	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
-						<strong>Chamados </strong>
+						<strong>Chamados em andamento </strong>
 					 </a>
 					<c:if test="${empty chamadosEquipeAndamento}">
 						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
@@ -89,72 +56,72 @@
   					</c:if>
   					<c:if test="${!empty chamadosEquipeAndamento}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_chamados">
-									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Status</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${chamadosEquipeAndamento}" var="chamadosEquipeAndamento">	
 									<tr  class="${chamadosEquipeAndamento.alerta}">
-										<td>${chamadosEquipeAndamento.equipe}</td>
-										<td>${chamadosEquipeAndamento.chamado}</td>
+										<td>${chamadosEquipeAndamento.statusDescricao}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosEquipeAndamento.id}" target="_blank" >${chamadosEquipeAndamento.chamado}</a></td>
 										<td>${chamadosEquipeAndamento.titulo}</td>
 										<td>${chamadosEquipeAndamento.sla}
 										</td>
-											<c:if test="${chamadosEquipeAndamento.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosEquipeAndamento.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosEquipeAndamento.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<c:if test="${chamadosEquipeAndamento.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-													<td  width="15%" height="70%" style="padding:3px" >
-													<div class="progress" style="height:30px" align="center">
-													  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-													    <span >2</span>
-													  </div>
-													  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-													    <span>6</span>
-													  </div>
-													  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-													    <span>24</span>
-													  </div>
-													</div>
-													</td>
-												</c:if>
-											</c:if>						
+<%-- 											<c:if test="${chamadosEquipeAndamento.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1h</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosEquipeAndamento.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosEquipeAndamento.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<%-- 												<c:if test="${chamadosEquipeAndamento.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 													<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 													<div class="progress" style="height:30px" align="center"> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 													    <span >2</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 													    <span>6</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 													    <span>24</span> -->
+<!-- 													  </div> -->
+<!-- 													</div> -->
+<!-- 													</td> -->
+<%-- 												</c:if> --%>
+<%-- 											</c:if>						 --%>
 										</tr>
 								</c:forEach>
 							</tbody>    
@@ -166,7 +133,7 @@
                				<div class="col-md-6">
                	<div class="list-group ">
                    	<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
-						<strong>Incidentes </strong>
+						<strong>Incidentes em andamento </strong>
 					 </a>
 					<c:if test="${empty incidenteEquipeAndamento}">
 						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
@@ -174,38 +141,38 @@
   					</c:if>
   					<c:if test="${!empty incidenteEquipeAndamento}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_incidente">
-									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Status</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${incidenteEquipeAndamento}" var="incidenteEquipeAndamento">	
 									<tr  class="${incidenteEquipeAndamento.alerta}">
-										<td>${incidenteEquipeAndamento.equipe}</td>
-										<td>${incidenteEquipeAndamento.chamado}</td>
+										<td>${incidenteEquipeAndamento.statusDescricao}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidenteEquipeAndamento.id}" target="_blank" >${incidenteEquipeAndamento.chamado}</a></td>
 										<td>${incidenteEquipeAndamento.titulo}</td>
 										<td>${incidenteEquipeAndamento.sla}
 										</td>
-										<td  width="15%" height="70%" style="padding:3px" >
-										<div class="progress" style="height:30px" align="center">
-										  <div class="progress-bar ${incidenteEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-										    <span >15m</span>
-										  </div>
-										  <div class="progress-bar ${incidenteEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-										    <span>45m</span>
-										  </div>
-										  <div class="progress-bar ${incidenteEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-										    <span>1h</span>
-										  </div>
-										</div>
-										</td>
+<!-- 										<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 										<div class="progress" style="height:30px" align="center"> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipeAndamento.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 										    <span >15m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipeAndamento.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 										    <span>45m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipeAndamento.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 										    <span>1h</span> -->
+<!-- 										  </div> -->
+<!-- 										</div> -->
+<!-- 										</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>    
@@ -214,22 +181,14 @@
                    </div>
                </div> <!-- fim DIV col-md4 do Chamados ROW -->
                
-               
-              </div> <!-- row -->
-              </div><!-- painel body -->
-              </div><!-- painel -->
+             </div>  
 
-
-
-<div class="panel panel-primary">
-        <div class="panel-heading"><h3 id="chamados"><center><strong>Chamados Pendêntes - ${equipe}</strong></center></h3></div>
-	<div class="panel-body">
 		<div class="row">
 
 				<div class="col-md-6">
                	<div class="list-group ">
                    	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
-						<strong>Chamados </strong>
+						<strong>Chamados pendentes </strong>
 					 </a>
 					<c:if test="${empty chamadosEquipePendente}">
 						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
@@ -237,74 +196,74 @@
   					</c:if>
   					<c:if test="${!empty chamadosEquipePendente}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_chamados">
-									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Status</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${chamadosEquipePendente}" var="chamadosEquipePendente">	
 									<tr  class="${chamadosEquipePendente.alerta}">
-										<td>${chamadosEquipePendente.equipe}</td>
-										<td>${chamadosEquipePendente.chamado}</td>
+										<td>${chamadosEquipePendente.statusDescricao}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosEquipePendente.id}" target="_blank" >${chamadosEquipePendente.chamado}</a></td>									
 										<td>${chamadosEquipePendente.titulo}</td>
 										<td>${chamadosEquipePendente.sla}
 										</td>
 										
 									
-										<c:if test="${chamadosEquipePendente.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosEquipePendente.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosEquipePendente.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	
-												<c:if test="${chamadosEquipePendente.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	
-													<td  width="15%" height="70%" style="padding:3px" >
-													<div class="progress" style="height:30px" align="center">
-													  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-													    <span >2</span>
-													  </div>
-													  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-													    <span>6</span>
-													  </div>
-													  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-													    <span>24</span>
-													  </div>
-													</div>
-													</td>
-												</c:if>
-											</c:if>	
+<%-- 										<c:if test="${chamadosEquipePendente.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1h</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosEquipePendente.grupo == 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<!-- 												<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 												<div class="progress" style="height:30px" align="center"> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 												    <span >15m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 												    <span>30m</span> -->
+<!-- 												  </div> -->
+<%-- 												  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 												    <span>1</span> -->
+<!-- 												  </div> -->
+<!-- 												</div> -->
+<!-- 												</td> -->
+<%-- 											</c:if> --%>
+<%-- 											<c:if test="${chamadosEquipePendente.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum'}">	 --%>
+<%-- 												<c:if test="${chamadosEquipePendente.grupo != 'INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva'}">	 --%>
+<!-- 													<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 													<div class="progress" style="height:30px" align="center"> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 													    <span >2</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 													    <span>6</span> -->
+<!-- 													  </div> -->
+<%-- 													  <div class="progress-bar ${chamadosEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 													    <span>24</span> -->
+<!-- 													  </div> -->
+<!-- 													</div> -->
+<!-- 													</td> -->
+<%-- 												</c:if> --%>
+<%-- 											</c:if>	 --%>
 											
 										
 									</tr>
@@ -318,7 +277,7 @@
                				<div class="col-md-6">
                	<div class="list-group ">
                    	<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
-						<strong>Incidentes </strong>
+						<strong>Incidentes pendentes </strong>
 					 </a>
 					<c:if test="${empty incidenteEquipePendente}">
 						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
@@ -326,38 +285,38 @@
   					</c:if>
   					<c:if test="${!empty incidenteEquipePendente}">
 					 
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered ">
 							<thead>
 								<tr class="painel_incidente">
-									<td><center><strong>Equipe</strong></center></td>
+									<td><center><strong>Status</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
 									<td><center><strong>Descrição</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
+<%-- 									<td><center><strong>Meta</strong></center></td> --%>
 									
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${incidenteEquipePendente}" var="incidenteEquipePendente">	
 									<tr  class="${incidenteEquipePendente.alerta}">
-										<td>${incidenteEquipePendente.equipe}</td>
-										<td>${incidenteEquipePendente.chamado}</td>
+										<td>${incidenteEquipePendente.statusDescricao}</td>
+										<td><a href="http://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${incidenteEquipePendente.id}" target="_blank" >${incidenteEquipePendente.chamado}</a></td>										
 										<td>${incidenteEquipePendente.titulo}</td>
 										<td>${incidenteEquipePendente.sla}
 										</td>
-										<td  width="15%" height="70%" style="padding:3px" >
-										<div class="progress" style="height:30px" align="center">
-										  <div class="progress-bar ${incidenteEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-										    <span >15m</span>
-										  </div>
-										  <div class="progress-bar ${incidenteEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-										    <span>45m</span>
-										  </div>
-										  <div class="progress-bar ${incidenteEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-										    <span>1h</span>
-										  </div>
-										</div>
-										</td>
+<!-- 										<td  width="15%" height="70%" style="padding:3px" > -->
+<!-- 										<div class="progress" style="height:30px" align="center"> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipePendente.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas"> --%>
+<!-- 										    <span >15m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipePendente.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas"> --%>
+<!-- 										    <span>45m</span> -->
+<!-- 										  </div> -->
+<%-- 										  <div class="progress-bar ${incidenteEquipePendente.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas"> --%>
+<!-- 										    <span>1h</span> -->
+<!-- 										  </div> -->
+<!-- 										</div> -->
+<!-- 										</td> -->
 									</tr>
 								</c:forEach>
 							</tbody>    
@@ -371,175 +330,9 @@
               </div><!-- painel body -->
               </div><!-- painel -->
 
-<div class="panel panel-primary">
-        <div class="panel-heading"><h3 id="chamados"><center><strong>OS e Tarefas Internas em Andamento - ${equipe}</strong></center></h3></div>
-	<div class="panel-body">
-		<div class="row">
 
-				<div class="col-md-6">
-               	<div class="list-group ">
-                   	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
-						<strong>OS </strong>
-					 </a>
-					<c:if test="${empty osEquipeAndamento}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
 
-  					</c:if>
-  					<c:if test="${!empty osEquipeAndamento}">
-					 
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr class="painel_chamados">
-									<td><center><strong>Equipe</strong></center></td>
-									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descrição</strong></center></td>
-									
-									
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${osEquipeAndamento}" var="osEquipeAndamento">	
-									<tr  class="${osEquipeAndamento.alerta}">
-										<td>${osEquipeAndamento.equipe}</td>
-										<td>${osEquipeAndamento.chamado}</td>
-										<td>${osEquipeAndamento.titulo}</td>
-										
-											
-										
-									</tr>
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>
-                   </div>
-               </div> <!-- fim DIV col-md6 do Chamados ROW -->
-               
-               				<div class="col-md-6">
-               	<div class="list-group ">
-                   	<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
-						<strong>Tarefas Internas </strong>
-					 </a>
-					<c:if test="${empty tarefaEquipeAndamento}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
 
-  					</c:if>
-  					<c:if test="${!empty tarefaEquipeAndamento}">
-					 
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr class="painel_incidente">
-									<td><center><strong>Equipe</strong></center></td>
-									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descrição</strong></center></td>
-									
-									
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${tarefaEquipeAndamento}" var="tarefaEquipeAndamento">	
-									<tr  class="${tarefaEquipeAndamento.alerta}">
-										<td>${tarefaEquipeAndamento.equipe}</td>
-										<td>${tarefaEquipeAndamento.chamado}</td>
-										<td>${tarefaEquipeAndamento.titulo}</td>
-										
-										
-									</tr>
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>
-                   </div>
-               </div> <!-- fim DIV col-md4 do Chamados ROW -->
-               
-               
-              </div> <!-- row -->
-              </div><!-- painel body -->
-              </div><!-- painel -->
-
-<div class="panel panel-primary">
-        <div class="panel-heading"><h3 id="chamados"><center><strong>OS e Tarefas Internas Pendêntes - ${equipe}</strong></center></h3></div>
-	<div class="panel-body">
-		<div class="row">
-
-				<div class="col-md-6">
-               	<div class="list-group ">
-                   	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
-						<strong>OS </strong>
-					 </a>
-					<c:if test="${empty osEquipePendente}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
-
-  					</c:if>
-  					<c:if test="${!empty osEquipePendente}">
-					 
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr class="painel_chamados">
-									<td><center><strong>Equipe</strong></center></td>
-									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descrição</strong></center></td>
-									
-									
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${osEquipePendente}" var="osEquipePendente">	
-									<tr  class="${osEquipePendente.alerta}">
-										<td>${osEquipePendente.equipe}</td>
-										<td>${osEquipePendente.chamado}</td>
-										<td>${osEquipePendente.titulo}</td>
-										
-											
-										
-									</tr>
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>
-                   </div>
-               </div> <!-- fim DIV col-md6 do Chamados ROW -->
-               
-               				<div class="col-md-6">
-               	<div class="list-group ">
-                   	<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
-						<strong>Tarefas Internas</strong>
-					 </a>
-					<c:if test="${empty tarefaEquipePendente}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrência nesta fila!</strong></div>
-
-  					</c:if>
-  					<c:if test="${!empty tarefaEquipePendente}">
-					 
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr class="painel_incidente">
-									<td><center><strong>Equipe</strong></center></td>
-									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descrição</strong></center></td>
-									
-									
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${tarefaEquipePendente}" var="tarefaEquipePendente">	
-									<tr  class="${tarefaEquipePendente.alerta}">
-										<td>${tarefaEquipePendente.equipe}</td>
-										<td>${tarefaEquipePendente.chamado}</td>
-										<td>${tarefaEquipePendente.titulo}</td>
-										
-										
-									</tr>
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>
-                   </div>
-               </div> <!-- fim DIV col-md4 do Chamados ROW -->
-               
-               
-              </div> <!-- row -->
-              </div><!-- painel body -->
-              </div><!-- painel -->
                
 <script src="resources/js/jquery-2.1.4.js"></script>
 

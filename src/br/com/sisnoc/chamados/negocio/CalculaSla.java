@@ -46,33 +46,37 @@ public class CalculaSla {
 				logChamado.setStatus("stop");
 			}
 			
-			
-			
-			if(logChamado.getEquipe().equals("Analistas Aplicações")){
-				
-				slaInicial = 800;
-				slaFinal = 2100;
-				
-			}else if(logChamado.getEquipe().equals("Analistas Banco de Dados")){
-				
-				slaInicial = 800;
-				slaFinal = 2100;
-				
-			}else if(logChamado.getEquipe().equals("Analistas Redes")){
-				
-				slaInicial = 1300;
-				slaFinal = 2200;
-				
-			}else if(logChamado.getEquipe().equals("Analistas Backup")){
-				
-				slaInicial = 1300;
-				slaFinal = 2200;
-				
-			}else{
-				
-				slaInicial = 1200;
+			if(logChamado.getGrupo().equals("N2")){
+				slaInicial = 700;
 				slaFinal = 2100;
 			}
+			
+//			
+//			if(logChamado.getEquipe().equals("Analistas Aplicações")){
+//				
+//				slaInicial = 800;
+//				slaFinal = 2100;
+//				
+//			}else if(logChamado.getEquipe().equals("Analistas Banco de Dados")){
+//				
+//				slaInicial = 800;
+//				slaFinal = 2100;
+//				
+//			}else if(logChamado.getEquipe().equals("Analistas Redes")){
+//				
+//				slaInicial = 1300;
+//				slaFinal = 2200;
+//				
+//			}else if(logChamado.getEquipe().equals("Analistas Backup")){
+//				
+//				slaInicial = 1300;
+//				slaFinal = 2200;
+//				
+//			}else{
+//				
+//				slaInicial = 1200;
+//				slaFinal = 2100;
+//			}
 //			System.out.println(logChamado.getChamado()+" - "+logChamado.getEquipe());
 //			System.out.println("inicial: "+slaInicial);
 //			System.out.println("Final: "+slaFinal);
@@ -87,7 +91,7 @@ public class CalculaSla {
 				if(ultimoLog.getStatus().equals("resume")){
 					//int epoch = (int) (System.currentTimeMillis()/1000);
 					
-					tempoAcumulado =  tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long) epoch, 28800, ultimoLog.getTipo());
+					tempoAcumulado =  tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long) epoch, 28800, ultimoLog.getTipo(),ultimoLog.getGrupo());
 					//System.out.println("1");
 					ultimoLog.setSla(""+tempoAcumulado);
 					Chamado validado = new Chamado();
@@ -116,7 +120,7 @@ public class CalculaSla {
 					}
 										
 				} else if(logChamado.getStatus().equals("stop")){
-					tempoAcumulado = tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long)tempoParada, 28800,logChamado.getTipo());
+					tempoAcumulado = tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long)tempoParada, 28800,logChamado.getTipo(),logChamado.getGrupo());
 					//System.out.println("2");
 				}
 			}
@@ -127,7 +131,7 @@ public class CalculaSla {
 		if(ultimoLog.getStatus().equals("resume")){
 			Integer epoch = ultimoLog.getEpoch();
 			//int epoch = (int) (System.currentTimeMillis()/1000);
-			tempoAcumulado = tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long) epoch, 28800, ultimoLog.getTipo());
+			tempoAcumulado = tempoAcumulado + calculaAcumulado(slaInicial, slaFinal, (long)tempoInicial, (long) epoch, 28800, ultimoLog.getTipo(),ultimoLog.getGrupo());
 			//System.out.println("3");
 			ultimoLog.setSla(""+tempoAcumulado);
 			Chamado validado = new Chamado();
@@ -152,12 +156,18 @@ public class CalculaSla {
 		return listaChamados;
 	}
 
-	public static Integer calculaAcumulado(Integer slaIni, Integer slaFim, Long tempoInicial, Long tempoFinal, Integer slaMax, String tipo) {
+	public static Integer calculaAcumulado(Integer slaIni, Integer slaFim, Long tempoInicial, Long tempoFinal, Integer slaMax, String tipo, String grupo) {
+		
 		
 		
 		if (tipo == "Incidente") {
 				return (int) (tempoFinal - tempoInicial);
+		}else if(grupo.equals("N3") || grupo.equals("N1")){
+				
+				return (int) (tempoFinal - tempoInicial);
 		}
+		
+		
 		
 		
 		
@@ -345,23 +355,46 @@ public class CalculaSla {
 		int sla = 0;
 //		System.out.println("##########################################");
 //		System.out.println("tempoAcumulado: "+acumuladoParaHoraLegivel(tempoAcumulado));
-		if(validado.getTipo().equals("I")){
-			
-			sla = 3600 - tempoAcumulado; //1 hora
-			
-		}else if (validado.getGrupo().equals("INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum")){
-			
-			sla = 7200 - tempoAcumulado; //2 horas
-			
-		}else if (validado.getGrupo().equals("INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva")){
-			
-			sla = 3600 - tempoAcumulado; //1 hora
-			
-		}else{
+//		if(validado.getTipo().equals("I")){
+//			
+//			sla = 3600 - tempoAcumulado; //1 hora
+//			
+//		}else if (validado.getGrupo().equals("INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção comum")){
+//			
+//			sla = 7200 - tempoAcumulado; //2 horas
+//			
+//		}else if (validado.getGrupo().equals("INFRA.Solicitação.Aplicação.Deploy de Aplicação.Manutenção corretiva")){
+//			
+//			sla = 3600 - tempoAcumulado; //1 hora
+//			
+//		}else{
+//		
+//			sla = 28800 - tempoAcumulado; //8 horas
+//
+//		} 
 		
+		
+		if(validado.getPrioridade().equals("5")){ //Prioridade 1
+			
+			sla = 3600 - tempoAcumulado; //1 hora
+			
+		}else if(validado.getPrioridade().equals("4")){ //Prioridade 2
+			
+			sla = 7200 - tempoAcumulado; //2 hora
+			
+		}else if(validado.getPrioridade().equals("3")){ //Prioridade 3
+			
+			sla = 14400 - tempoAcumulado; //4 hora
+			
+		}else if(validado.getPrioridade().equals("2")){ //Prioridade 4
+			
 			sla = 28800 - tempoAcumulado; //8 horas
-
-		} 
+			
+		}else if(validado.getPrioridade().equals("1")){ //Prioridade 5
+			
+			sla = 86400 - tempoAcumulado; //24 horas hora
+			
+		}
 		
 		//System.out.println("sla: "+sla);
 		//System.out.println("##########################################");
@@ -564,10 +597,19 @@ public class CalculaSla {
 			
 		}
 		
-		if (sla < 0){
+		
+		
+		if (validado.getEquipe().equals("Implantação")){
+			validado.setSla("N/A");
+			validado.setAlerta("N/A");
+		} else 	if (sla < 0){
 			validado.setSla("Violado");
+			validado.setSla2(tempoAcumulado);
+
 		} else {
 			validado.setSla(acumuladoParaHoraLegivel(sla));
+			validado.setSla2(tempoAcumulado);
+
 		}
 		
 		//System.out.println(validado);

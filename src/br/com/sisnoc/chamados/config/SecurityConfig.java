@@ -38,14 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-		.antMatchers("/resources/**");
+		.antMatchers("/resources/**")
+		.antMatchers("/listaChamados/**")
+		.antMatchers("/equipe_BD/**")
+		.antMatchers("**");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/listaChamados/**").hasRole("ACESSO_LISTA_CHAMADOS")
+//				.antMatchers("/listaChamados/**").hasRole("ACESSO_LISTA_CHAMADOS")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

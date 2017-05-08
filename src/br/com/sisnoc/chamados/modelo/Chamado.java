@@ -45,7 +45,9 @@ public class Chamado {
 	private String titulo;
 	private String status;
 	private String grupo;
-
+	private String prioridade;
+	private String statusDescricao;
+	private String tipoLegivel;
 
 	//Counts
 	private Integer countNocChamados;
@@ -371,6 +373,38 @@ public class Chamado {
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
+
+
+	public String getPrioridade() {
+		return prioridade;
+	}
+
+
+	public void setPrioridade(String prioridade) {
+		this.prioridade = prioridade;
+	}
+
+
+	public String getStatusDescricao() {
+		return statusDescricao;
+	}
+
+
+	public void setStatusDescricao(String statusDescricao) {
+		this.statusDescricao = statusDescricao;
+	}
+
+
+	public String getTipoLegivel() {
+		return tipoLegivel;
+	}
+
+
+	public void setTipoLegivel(String tipoLegivel) {
+		this.tipoLegivel = tipoLegivel;
+	}
+
+
 
 
 	

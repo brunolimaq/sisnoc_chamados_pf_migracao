@@ -25,7 +25,7 @@
 
 <form th:action="@{/login}" method="POST">
 	<div class="aw-simple-panel">
-		<img alt="AlgaWorks" src="resources/images/logo-gray.png"/>
+<!-- 		<img alt="AlgaWorks" src="resources/images/logo-gray.png"/> -->
 		
 		<div class="aw-simple-panel__message">
 			Por favor, faça o login.
