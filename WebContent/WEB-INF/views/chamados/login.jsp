@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>AlgaWorks</title>
+  <title>Sisnoc</title>
 
   	<link rel="stylesheet" type="text/css" href="resources/layout/stylesheets/vendors.min.css"/>
 	<link rel="stylesheet" type="text/css" href="resources/layout/stylesheets/algaworks.min.css"/>

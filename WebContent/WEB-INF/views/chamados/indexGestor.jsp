@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -21,11 +21,18 @@
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/index.css">
 	<link rel="stylesheet" type="text/css" href="resources/css/sisnoc.css" />
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 	
-	<script src="resources/js/jquery-3.1.1.min.js"></script>
-	<script src="resources/js/highcharts.js"></script>
-	<script src="resources/js/highcharts-more.js"></script>
-	<script src="resources/js/solid-gauge.js"></script>
+	
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
+	
+
 	
 	
 
@@ -37,21 +44,17 @@
   <![endif]-->
   
   
-   
  <script type="text/javascript">
- 
- 
- 
- 
+  //Metas de 2 e 4 horas
 
- $( document ).ready(function() {
+  $( document ).ready(function() {
 	  
 
 		var gaugeSLA2 = {
 			
 			    chart: {
 			        type: 'solidgauge',
-                   renderTo: 'gauge-sla2'
+                    renderTo: 'gauge-sla2'
 
 			    },
 			    
@@ -124,7 +127,7 @@ var gaugeSLA4 = {
 		
 	    chart: {
 	        type: 'solidgauge',
-           renderTo: 'gauge-sla4'
+            renderTo: 'gauge-sla4'
 
 	    },
 	    
@@ -305,33 +308,33 @@ var gaugeSLA4 = {
 		      dataLabels: {
 		          format: '<div style="text-align:center"><span style="font-size:18px;color:' +
 		              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-		                 '<span style="font-size:9px;color:silver">% m√™s</span></div>'
+		                 '<span style="font-size:9px;color:silver">% mÍs</span></div>'
 		      }
 		
 			}];
-		    var chart = new Highcharts.Chart(gaugeSLA2);
+ 		    var chart = new Highcharts.Chart(gaugeSLA2);
 
 
-		   gaugeSLA4.series = [{
-			  data: [data.dados.meta4],
-		      dataLabels: {
-		          format: '<div style="text-align:center"><span style="font-size:18px;color:' +
-		              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-		                 '<span style="font-size:9px;color:silver">% m√™s</span></div>'
-		      }
+ 		   gaugeSLA4.series = [{
+ 			  data: [data.dados.meta4],
+ 		      dataLabels: {
+ 		          format: '<div style="text-align:center"><span style="font-size:18px;color:' +
+ 		              ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+ 		                 '<span style="font-size:9px;color:silver">% mÍs</span></div>'
+ 		      }
 
-			}];
-			    var chart = new Highcharts.Chart(gaugeSLA4);
-			    
-			  			   
-	 			    
-		   var violados = data.dados.violados;
-		   $("#violados").text(violados);
-		   var requisicoesMes = data.dados.requisicoesMes;
-		   $("#requisicoesMes").text(requisicoesMes);
-		   var reabertosMes = data.dados.reabertosMes;
+ 			}];
+ 			    var chart = new Highcharts.Chart(gaugeSLA4);
+ 			    
+ 			  			   
+ 	 			    
+ 		   var violados = data.dados.violados;
+ 		   $("#violados").text(violados);
+ 		   var requisicoesMes = data.dados.requisicoesMes;
+ 		   $("#requisicoesMes").text(requisicoesMes);
+ 		   var reabertosMes = data.dados.reabertosMes;
 		   $("#reabertosMes").text(reabertosMes);
-		   var pendencias = data.dados.pendencias;
+ 		   var pendencias = data.dados.pendencias;
 		   $("#pendencias").text(pendencias);
 
 		   
@@ -351,7 +354,7 @@ var gaugeSLA4 = {
 	  				    selected: true
 	  				},
 	  	            {name: 'Incidentes', y: incidentes, color: 'red'},
-	  	            {name: 'Pend√™ncias', y: pendencias, color: 'yellow'},
+	  	            {name: 'PendÍncias', y: pendencias, color: 'yellow'},
 	  	            {name: 'Violados', y: violados, color: 'black'},
 	  	            {name: 'Reabertos', y: reabertos, color: 'green'}
 
@@ -368,7 +371,7 @@ var gaugeSLA4 = {
 	  			   
 	  				
 	  				pendencias_grafico.series = [{
-	  			        name: 'Pend√™ncias',
+	  			        name: 'PendÍncias',
 	  			        data: data.dados.qtd,
 	  			        pointPlacement: 'on'
 	  			    }
@@ -386,13 +389,12 @@ var gaugeSLA4 = {
 	  
 	
 
- });
- 
- 
+  });
+  
+  
 
-  
+
   </script>
-  
   <script type="text/javascript"> 
 
 
@@ -407,22 +409,12 @@ var gaugeSLA4 = {
   
   
 
-<!--   <script>  
-  
-   $( document ).ready(function play() {???
-
-	   audio = document.getElementById('audio'); 	  	 
-	   audio.play();
-
-	  ?});
-  
-  
-  </script> -->
   
   
 </head>
 
 <body>
+
 
 <c:import url="menu.jsp"></c:import>
 	
@@ -455,7 +447,7 @@ var gaugeSLA4 = {
 							<div class="alert alert-danger" role="alert"><strong>Existe uma Ordem de Servico com ${atualizacaoOS} dias sem atualiza??o! <a href="/chamados/ordemServicos">Clique Aqui!</a></strong></div>
 						</c:if>
 						<c:if test="${atualizacaoOS == 0}">
-							<div class="alert alert-success" role="alert"><strong>Nenhuma ocorr√™ncia nesta fila!</strong></div>
+							<div class="alert alert-success" role="alert"><strong>Nenhuma ocorrÍncia nesta fila!</strong></div>
 						</c:if>
   					</c:if>
   					<c:if test="${!empty chamadosPainelPessoal}">
@@ -465,7 +457,7 @@ var gaugeSLA4 = {
 								<tr class="painel_noc${flagStatus}">
 									<td><center><strong>Categoria</strong></center></td>
 									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descri√ß√£o</strong></center></td>
+									<td><center><strong>DescriÁ„o</strong></center></td>
 									<td><center><strong>Status</strong></center></td>
 									<td><center><strong>SLA</strong></center></td>
 									<td><center><strong>META</strong></center></td>
@@ -585,10 +577,10 @@ var gaugeSLA4 = {
 		  		
 				</div>
 				</div>
-                   <div class="col-md-6">
+               <div class="col-md-6">
                	<div class="list-group">
                    	<a href="#chamados" class="list-group-item active "  id="painel_chamados_titulo">
-						<strong>Meus √çndices</strong>
+						<strong>Meus Õndices</strong>
 					 </a>
 						<div class="row">
 						<br/>
@@ -603,13 +595,13 @@ var gaugeSLA4 = {
 								  </div>
 								 </div>
 								<div class="panel panel-default col-md-offset-1 col-md-2">
-								  <div class="panel-heading">Pend√™ncias</div>
+								  <div class="panel-heading">PendÍncias</div>
 								  <div class="panel-body paineis_indices">
 								    <label class="letras" id="pendencias">0</label>
 								  </div>
 								</div>
 								 <div class="panel panel-default col-md-offset-1 col-md-2">
-								  <div class="panel-heading">Tickets M√™s</div>
+								  <div class="panel-heading">Tickets MÍs</div>
 								  <div class="panel-body paineis_indices">
 								    <label class="letras" id="requisicoesMes">0</label>
 								  </div>
@@ -655,152 +647,116 @@ var gaugeSLA4 = {
 					 	
 					 </div>
                    </div>
-            
-               </div>
-		<div class="panel-body">
+               </div> <!-- fim DIV col-md4 do Incidentes ROW -->
+               
 	
 		<div class="row">
-           	<div class="col-md-6 clearfix">
-				<div class="list-group ">
-					<a href="#chamados" class="list-group-item active" id="painel_noc_titulo">
-						<strong>Chamados em andamento do meu(s) grupos</strong>
-					</a>
-					<c:if test="${empty chamadosPainelEquipe}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorr√™ncia nesta fila!</strong></div>
-
-  					</c:if>
-  					<c:if test="${!empty chamadosPainelEquipe}">
-           	
-						<table class="table table-bordered  col-md-3">
-							<thead>
-								<tr class="painel_noc">
-									<td><center><strong>Equipe</strong></center></td>
-									<td><center><strong>Chamado</strong></center></td>
-									<td><center><strong>Descri√ß√£o</strong></center></td>
-									<td><center><strong>Status</strong></center></td>
-									<td><center><strong>SLA</strong></center></td>
-									<td><center><strong>Meta</strong></center></td>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${chamadosPainelEquipe}" var="chamadosPainelEquipe">
-									
-										<tr  class="${chamadosPainelEquipe.alerta}">
-										<td>${chamadosPainelEquipe.equipe}</td>
-										<td><a href="https://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=cr+SKIPLIST=1+QBE.EQ.id=${chamadosPainelEquipe.id}" target="_blank" >${chamadosPainelEquipe.chamado}</a></td>
-										<td>${chamadosPainelEquipe.titulo}</td>
-										<td>${chamadosPainelEquipe.statusDescricao}</td>
-										<td>${chamadosPainelEquipe.sla}
-										</td>
-										
-										<c:if test="${chamadosPainelEquipe.grupo == 'INFRA.Solicita??o.Aplica??o.Deploy de Aplica??o.Manuten??o corretiva'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >15m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>1h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelEquipe.grupo == 'INFRA.Solicita??o.Aplica??o.Deploy de Aplica??o.Manuten??o comum'}">	
-												<td  width="15%" height="70%" style="padding:3px" >
-												<div class="progress" style="height:30px" align="center">
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-												    <span >45m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-												    <span>1h30m</span>
-												  </div>
-												  <div class="progress-bar ${chamadosPainelEquipe.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-												    <span>2h</span>
-												  </div>
-												</div>
-												</td>
-											</c:if>
-											<c:if test="${chamadosPainelEquipe.grupo != 'INFRA.Solicita??o.Aplica??o.Deploy de Aplica??o.Manuten??o comum'}">	
-												<c:if test="${chamadosPainelEquipe.grupo != 'INFRA.Solicita??o.Aplica??o.Deploy de Aplica??o.Manuten??o corretiva'}">	
-													<td  width="15%" height="70%" style="padding:3px" >
-													<div class="progress" style="height:30px" align="center">
-													  <div class="progress-bar ${chamadosPainelEquipe.meta_2}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 2 horas">
-													    <span >2h</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelEquipe.meta_6}" style="width: 33%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 6 horas">
-													    <span>4h</span>
-													  </div>
-													  <div class="progress-bar ${chamadosPainelEquipe.meta_24}" style="width: 34%" class="sr-only" data-toggle="tooltip" data-placement="bottom" title="Meta de 24 horas">
-													    <span>6h</span>
-													  </div>
-													</div>
-													</td>
-												</c:if>
-											</c:if>
-											
-									</tr>
-									
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>
-				</div>
-				<div><br></div>
-				</div> <!-- fim DIV col-md4 do NOC ROW -->
+		
+		
+		
+		<div class="col-md-6">
+						<div class="list-group">
+                   			<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
+								<strong>PendÍncias por equipe</strong>
+					 		</a>
+							<br/><br/><br/>
+						  		<div id="pendencias_grafico" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto "></div>
+						</div>
+           
+          </div> <!-- fim DIV col-md4 do Chamados ROW -->
+    
 				
-				<div class="col-md-6">
-               	<div class="list-group ">
-                   	<a href="#chamados" class="list-group-item active" id="painel_chamados_titulo">
-						<strong>RDM's do meu(s) grupos</strong>
-					 </a>
-					<c:if test="${empty chamadosRDMPessoal}">
-						<div class="alert alert-success" role="alert"><strong>Nenhuma ocorr√™ncia nesta fila!</strong></div>
+			<div class="col-md-3">
 
-  					</c:if>
-  					<c:if test="${!empty chamadosRDMPessoal}">
-					 
-						<table class="table table-bordered ">
-							<thead>
-								<tr class="painel_chamados">
-									<td><center><strong>N√∫mero</strong></center></td>
-									<td><center><strong>Respons√°vel</strong></center></td>
-									<td><center><strong>Descri√ß√£o</strong></center></td>
-									<td><center><strong>Status</strong></center></td>
-									<td><center><strong>Agendamento</strong></center></td>
-								</tr>
-							</thead>
-							
-					
-							
-							<tbody>
-								<c:forEach items="${chamadosRDMPessoal}" var="chamadosRDMPessoal">	
-									<tr>
-										<td><a href="https://suportecgti.dpf.gov.br/CAisd/pdmweb.exe?OP=SEARCH+FACTORY=chg+SKIPLIST=1+QBE.EQ.id=${chamadosRDMPessoal.id}" target="_blank" >${chamadosRDMPessoal.mudanca}</a></td>
-										<td>${chamadosRDMPessoal.responsavel}</td>
-										<td>${chamadosRDMPessoal.resumo}</td>
-										<c:if test="${chamadosRDMPessoal.statusDescricao == 'Em execu??o'}">	
-											<td id="painel_rdm_execucao">${chamadosRDMPessoal.statusDescricao}</td>
-										</c:if>
-										<c:if test="${chamadosRDMPessoal.statusDescricao != 'Em execu??o'}">	
-											<td>${chamadosRDMPessoal.statusDescricao}</td>
-										</c:if>
-										<td>${chamadosRDMPessoal.agendamento}</td>
-									</tr>
-									
-								</c:forEach>
-							</tbody>    
-						</table>
-					</c:if>						
+				
+				    <div class="list-group ">
+                   	<a href="#chamados" class="list-group-item active" " id="painel_rdm_aprovada">
+						<strong>GMUD'S</strong>
+					 </a>
+						<div class="alert alert-warning" role="alert"><strong>Em ConstruÁ„o</strong></div>
+					 		<div class="col-sm-6">
+								 <div class="panel panel-default" >
+								  <div class="panel-heading">Em planjamento</div>
+								  <div class="panel-body paineis_indices" >
+								    <label class="letras" id="violados">0</label>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">Aguardando AprovaÁ„o</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="pendencias">0</label>
+								  </div>
+								</div>
+						 		<div id="gauge-sla2" style="width: 200px; height: 134px;" ></div>
+							</div>
+							<div class="col-sm-6">
+								 <div class="panel panel-default">
+								  <div class="panel-heading">Aprovadas</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="requisicoesMes">0</label>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">Finalizadas</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="reabertosMes">0</label>
+								  </div>
+								</div>
+								<div id="gauge-sla4" style="width: 200px; height: 134px;"></div>
+							</div>
                    </div>
+
+				
+						 	
                </div> <!-- fim DIV col-md4 do Chamados ROW -->
+               
+               <div class="col-md-3">
+               
+               
+							<div class="list-group">
+                   			<a href="#chamados" class="list-group-item active" " id="painel_incidente_titulo">
+								<strong>PendÍncias por tipo</strong>
+					 		</a>
+						<div class="alert alert-warning" role="alert"><strong>Em ConstruÁ„o</strong></div>
+					 		<div class="col-sm-6">
+								 <div class="panel panel-default" >
+								  <div class="panel-heading">Fornecedor</div>
+								  <div class="panel-body paineis_indices" >
+								    <label class="letras" id="violados">0</label>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">InformaÁ„o de Cliente</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="pendencias">0</label>
+								  </div>
+								</div>
+						 		<div id="gauge-sla2" style="width: 200px; height: 134px;" ></div>
+							</div>
+							<div class="col-sm-6">
+								 <div class="panel panel-default">
+								  <div class="panel-heading">Aberto chamado filho</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="requisicoesMes">0</label>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">Problemas</div>
+								  <div class="panel-body paineis_indices">
+								    <label class="letras" id="reabertosMes">0</label>
+								  </div>
+								</div>
+								<div id="gauge-sla4" style="width: 200px; height: 134px;"></div>
+							</div>
+							
+					 
+					</div>
+               
+               </div>
+               
+               
 			</div> <!-- Fechamento ROL 01 -->
 			
-			
-			
-               
                
                
                </div><!-- fim DIV dos Paineis NOC, Chamados e Incidentes -->

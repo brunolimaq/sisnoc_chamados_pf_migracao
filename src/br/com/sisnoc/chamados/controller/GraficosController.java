@@ -21,6 +21,7 @@ public class GraficosController {
 	
 	private final GraficosPessoal metasPessoal;
 	
+	
 	@Autowired
 	public GraficosController(GraficoService graficoService,GraficosPessoal metasPessoal) {
 		super();
@@ -52,12 +53,15 @@ public class GraficosController {
 	public  @ResponseBody Grafico metasIndividual() throws ParseException{
 		
 		
-		System.out.println("chamando metas");
 		metasPessoal.calcMetas();
-		System.out.println(metasPessoal);
+	
 		
 		return graficoService.getGraficoMetaIndividual(metasPessoal);
 	}
+	
+
+	
+	
 	
 	
 }

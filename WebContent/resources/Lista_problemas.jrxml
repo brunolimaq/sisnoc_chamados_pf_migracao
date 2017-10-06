@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-09-28T12:02:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Lista_chamados" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="13d48cdc-44c6-4e84-bf82-1e4d19643b7a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sisnoc.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="lista_problemas" uuid="2ffea5d6-6633-44ed-a2a1-b906c823ea6d">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sisnoc.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="251"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="742"/>
+		<parameter name="ano" class="java.lang.String"/>
+		<parameter name="mes" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[with a as (
+select 
+		req.persid,
+		req.parent,
+		req.problem,
+        req.ref_num as chamado, 
+        vwg.last_name as equipe,
+		usu.userid as usuario,
+		req.summary as descricao,
+		dateadd(s,open_date  + DATEPART(tz,SYSDATETIMEOFFSET())*60,'1970-01-01 00:00:00') as data,
+ case 
+                when upper(cat.sym) = upper('INFRA.Ordem de Servico') then 'Orden de Servico'
+                when upper(cat.sym) = upper('Infra.Tarefas Internas') then 'Tarefa Interna'
+                when  req.type = 'P' then 'Problema'
+                when  req.type = 'R' then 'Chamado'
+                when  req.type = 'I' then 'Incidente'
+                end as tipo
+			
+from 
+        mdb.dbo.call_req req WITH(NOLOCK) 
+        join mdb.dbo.cr_stat stat WITH(NOLOCK) on req.status = stat.code 
+        join mdb.dbo.prob_ctg cat WITH(NOLOCK) on cat.persid = req.category 
+        join mdb.dbo.ca_contact usu WITH (NOLOCK)  on usu.contact_uuid = req.assignee 
+        join mdb.dbo.View_Group vwg  WITH (NOLOCK) on req.group_id = vwg.contact_uuid
+),c as (
+select 
+id,
+persid,
+problem,
+ref_num as chamado,
+summary as descricao,
+dateadd(s,open_date  + DATEPART(tz,SYSDATETIMEOFFSET())*60,'1970-01-01 00:00:00') as data
+from mdb.dbo.call_req req WITH(NOLOCK)
+)
+select   c.chamado as relacionado, a.persid,a.chamado as problema, a.tipo,a.descricao,a.equipe, a.data , c.descricao as descricao_rel, c.data as data_rel
+from a 
+left join c on a.persid = c.problem
+where DATEPART(yyyy,a.data) =    $P{ano} 
+and DATEPART(MONTH,a.data) =  $P{mes} 
+and tipo =  'Problema' 
+order by a.chamado]]>
+		</queryString>
+		<field name="relacionado" class="java.lang.String"/>
+		<field name="persid" class="java.lang.String"/>
+		<field name="problema" class="java.lang.String"/>
+		<field name="tipo" class="java.lang.String"/>
+		<field name="descricao" class="java.lang.String"/>
+		<field name="equipe" class="java.lang.String"/>
+		<field name="data" class="java.sql.Timestamp"/>
+		<field name="descricao_rel" class="java.lang.String"/>
+		<field name="data_rel" class="java.sql.Timestamp"/>
+		<group name="problema">
+			<groupExpression><![CDATA[$F{problema}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="mes" class="java.lang.Integer"/>
+	<parameter name="ano" class="java.lang.Integer"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<parameter name="gerencia" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select  $P{ano}  as ano,  $P{mes} as mes,  $P{tipo}  as tipo]]>
+	</queryString>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="mes" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.String">
+		<property name="Chamado" value="Chamado"/>
+		<property name="Incidente" value="Incidente"/>
+		<property name="Problema" value="Problema"/>
+		<property name="Orden de Servico" value="Orden de Servico"/>
+		<property name="Tarefa Interna" value="Tarefa Interna"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement x="211" y="10" width="544" height="30" forecolor="#0064A2" uuid="773c90d7-b71b-4784-960f-c51dbf05f91c"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Problemas e Tickets Relacionados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="40" width="100" height="30" uuid="b3b96b7c-00b1-4b00-b93b-63ce74886016"/>
+				<text><![CDATA[Gerado as:]]></text>
+			</staticText>
+			<textField pattern="HH:mm">
+				<reportElement x="511" y="40" width="100" height="30" uuid="df5fae1a-d782-4bd1-bc69-d6cb1519d327"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement x="20" y="1" width="183" height="83" uuid="e1e1ae9b-e487-4f4f-835f-124b1fab0e78"/>
+				<imageExpression><![CDATA["http://10.2.96.5:8080/chamados/resources/images/logo_algar.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24">
+			<textField>
+				<reportElement x="231" y="0" width="484" height="20" forecolor="#0064A2" uuid="befd67c2-cb6a-46f4-92f5-5a034e44ae03"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Referentes ao mês "+$P{mes}+" de "+$P{ano}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="258" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="797" height="200" uuid="0109a453-beec-4e4a-830b-0a0b3d2fd1a7">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="lista_problemas" uuid="3bffb612-b14a-4ba0-b421-ee565db7d4ee">
+						<datasetParameter name="ano">
+							<datasetParameterExpression><![CDATA[$P{ano}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="mes">
+							<datasetParameterExpression><![CDATA[$P{mes}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="150" uuid="e1f4bcaf-5319-4184-9c68-9f2dd91a41c0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:groupHeader groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="30" uuid="8dc81dc9-9556-4199-9697-3bbe1da07bb8"/>
+									<textFieldExpression><![CDATA[$F{problema}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="150" height="30" uuid="99ea0a0f-e1b7-44e3-8642-fb985cfd7c98"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Problema]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="98ef5bd4-2977-4368-a017-95fb162f8233"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Problema]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="6345b5b0-b5eb-496e-83db-cabbd8027f4a"/>
+								<text><![CDATA[Ticket Relacionado]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="170" uuid="54b2767b-c839-4205-9278-2bdc13e364cd">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:groupHeader groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="30" uuid="85867c18-3f03-4a95-b033-9d558e62f614"/>
+									<textFieldExpression><![CDATA[$F{equipe}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="170" height="30" uuid="dd303f8c-fbb9-4f37-86a3-0088383e62f6"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Equipe]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="170" height="30" uuid="e0ad36e1-1ea9-4547-9db8-3115c5c8f9fb"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Equipe]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="170" height="30" uuid="be1fd291-451f-4584-a216-068f41015e45"/>
+								<textFieldExpression><![CDATA[$F{relacionado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="330" uuid="ce6043dd-6d1b-4e32-b4dc-9f1216e11007">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:groupHeader groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="240" height="30" uuid="fc7fbe7d-4bf1-43f3-bde4-f595170b1740"/>
+									<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="330" height="30" uuid="2215cb54-8aca-4be4-a3f9-42165495335b"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Descricao]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="330" height="30" uuid="d47df3aa-6c00-4ab1-a0bd-3d736f73f40d"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Descricao]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="330" height="30" uuid="c0a1445f-ef9d-4acf-861d-e9810941162e"/>
+								<textFieldExpression><![CDATA[$F{descricao_rel}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="aa565157-44f3-4d70-ad11-f6d5d9087cbe">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:groupHeader groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="6f04c258-f9ae-4da2-8c43-b242c22c9e6c"/>
+									<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="problema">
+							<jr:cell style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="130" height="30" uuid="b771531c-6e9e-4470-9643-f6bee9d394f4"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Data]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="130" height="30" uuid="678890fb-6c5b-45b5-ad47-1267df008fa3"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Data]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="130" height="30" uuid="bdfdc84c-939d-424e-83bc-f39577c3cfad"/>
+								<textFieldExpression><![CDATA[$F{data_rel}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="516" y="4" width="279" height="13" backcolor="#E6E6E6" uuid="a03cb215-0c87-43b1-8333-a3b293cf45cc"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="1" y="4" width="339" height="13" uuid="73299f80-ce46-4399-a52b-0f9e5d8a2a6e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="4" width="754" height="13" backcolor="#E6E6E6" uuid="44d972a8-5050-4def-85ca-cc2694b584f8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="757" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="e074095b-64ab-4d08-94d0-8cf0927605b5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="150" height="13" uuid="7fec9e5c-4d73-47af-b304-1b6fa866280f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

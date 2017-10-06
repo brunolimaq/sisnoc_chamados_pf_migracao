@@ -1,4 +1,11 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/chamados/equipes.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/gmud.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/chamados/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/pendencias.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/pendenciasGestor.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/problemas.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/projetos.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/chamados/relatorios.jsp=UTF-8
 encoding/<project>=UTF-8
 encoding/src=UTF-8

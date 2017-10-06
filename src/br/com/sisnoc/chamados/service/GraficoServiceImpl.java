@@ -1,11 +1,10 @@
 package br.com.sisnoc.chamados.service;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.stereotype.Service;
 
@@ -43,6 +42,7 @@ public class GraficoServiceImpl implements GraficoService {
 		
 		return null;	}
 
+	
 	@Override
 	public Grafico getGraficoMetaIndividual(GraficosPessoal metasPessoal){
 		
@@ -75,10 +75,17 @@ public class GraficoServiceImpl implements GraficoService {
 
 			List<Integer> listaPendencias = new ArrayList<Integer>();
 			listaPendencias.add(metasPessoal.getPendencias());
-
+			
+//			List<String> listaEquipesPendencia = new ArrayList<String>();
+//			listaEquipesPendencia.add(metasPessoal.ge);
+// 
+//			List<Integer> listaQtdPendencia = new ArrayList<Integer>();
+//			listaQtdPendencia.add(metasPessoal.getQtdPendencias());
 			
 			HashMap<String, List<Integer>> dados = new HashMap<String, List<Integer>>();
 			
+			HashMap<String, List<String>> dados2 = new HashMap<String, List<String>>();
+
 			dados.put("meta2", listaMetaDuasHoras);
 			dados.put("meta4", listaMetaQuatroHoras);
 			dados.put("violados", listaViolados);
@@ -87,51 +94,54 @@ public class GraficoServiceImpl implements GraficoService {
 			dados.put("incidentesMes", listaIncidentes);
 			dados.put("reabertosMes", listaReabertosMes);
 			dados.put("pendencias", listaPendencias);
+
+			ArrayList<String[]> listaPendenteEquipe = metasPessoal.getListaPendenteEquipe();
+			
+			List<String> equipes = new ArrayList<String>();
+			List<String> qtd = new ArrayList<String>();
+
+			List<Integer> qtdconvertido = new ArrayList<Integer>();
+
+
+			for (String[] string : listaPendenteEquipe) {
+				
+				equipes.add(string[0]);
+				
+
+			}
+
+			for (String[] string : listaPendenteEquipe) {
+				
+				
+				//qtd.add(string[1]);
+				
+					qtdconvertido.add(Integer.valueOf(string[1]));
+			
+
+			}
+
+
+			dados2.put("equipe", equipes);
+			dados.put("qtd", qtdconvertido );
+			
+//			dados2.put("equipe", listaEquipesPendencia);
+//			dados.put("qtdPendencias", listaQtdPendencia);
+//			
+			
 			grafico.setDados(dados);
+			grafico.setDados2(dados2);
 			grafico.setNome("Meta 2/hs");
 			
-			System.out.println(listaChamadosMes);
-			System.out.println(listaIncidentes);
-			System.out.println(listaReabertosMes);
+		
 		
 		
 		return grafico;
 	}
+	
 
 	@Override
 	public Grafico getGraficoChamadosPessoa() {
-//		
-//		Grafico grafico = new Grafico();
-//		
-//		List<BigDecimal> listaChamados = new ArrayList<BigDecimal>();
-//		listaChamados.add();
-//		
-//		List<BigDecimal> listaIncidentes = new ArrayList<BigDecimal>();
-//		listaIncidentes.add(30.0);
-//		
-//		List<BigDecimal> listaTarefasInternas = new ArrayList<BigDecimal>();
-//		listaTarefasInternas.add(10.0);
-//		
-//		List<BigDecimal> listaProblemas = new ArrayList<BigDecimal>();
-//		listaProblemas.add(2.0);
-//		
-//		List<BigDecimal> listaRDM = new ArrayList<BigDecimal>();
-//		listaRDM.add(8.0);
-//		
-//		
-//				
-//		
-//		HashMap<String, List<Integer>> dados = new HashMap<String, List<Integer>>();
-//		
-//		
-//		dados.put("chamados", chamados);
-//		dados.put("incidentes", listaIncidentes);
-//		dados.put("tarefasInternas", listaTarefasInternas);
-//		dados.put("problemas", listaProblemas);
-//		dados.put("rdm", listaProblemas);
-//		
-//		grafico.setDados(dados);
-//		grafico.setNome("Quantidade");
+
 
 		
 		

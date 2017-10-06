@@ -38,13 +38,13 @@ public class EquipesController {
 
 		String equipe = "MICROSOFT";
 		String status = "andamento";
-
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		String categoria = "N3%";
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I",categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R", categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -59,13 +59,15 @@ public class EquipesController {
 
 		String equipe = "APLICAÇÕES, SISTEMAS OPERACIONAIS E ORQUESTRAÇÃO";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -80,13 +82,15 @@ public class EquipesController {
 
 		String equipe = "SEGURANÇA DA INFORMAÇÃO";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -101,13 +105,15 @@ public class EquipesController {
 
 		String equipe = "GERENCIAMENTO DE IDENTIDADES";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -122,13 +128,15 @@ public class EquipesController {
 
 		String equipe = "REDES LOCAIS, METROPOLITANA E DE LONGA DISTÂNCIAS";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -144,13 +152,15 @@ public class EquipesController {
 
 		String equipe = "SISTEMAS DE COMUNICAÇÃO E MENSAGEM ELETRÔNICA";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -165,13 +175,14 @@ public class EquipesController {
 
 		String equipe = "BANCO DE DADOS";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -186,13 +197,15 @@ public class EquipesController {
 
 		String equipe = "MONITORAMENTO DE REDES, SERVIÇOS E APLICAÇÕES";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -208,13 +221,15 @@ public class EquipesController {
 
 		String equipe = "GOVERNANÇA DE TI";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -230,13 +245,14 @@ public class EquipesController {
 
 		String equipe = "Implantação";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -252,13 +268,15 @@ public class EquipesController {
 
 		String equipe = "SUPERVISÃO";
 		String status = "andamento";
+		String categoria = "N3%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN3(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -283,13 +301,14 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 2° NIVEL - SETOR POLICIAL";
 		String status = "andamento";
+		String categoria = "N2%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -304,13 +323,15 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 2° NIVEL - SEDE";
 		String status = "andamento";
+		String categoria = "N2%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -326,13 +347,15 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 2° NIVEL - ANP";
 		String status = "andamento";
+		String categoria = "N2%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -347,13 +370,14 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 2° NIVEL - SUDOESTE";
 		String status = "andamento";
+		String categoria = "N2%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -368,13 +392,15 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 2° NIVEL - AEROPORTO";
 		String status = "andamento";
+		String categoria = "N2%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN2(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -395,13 +421,15 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 1° NIVEL";
 		String status = "andamento";
+		String categoria = "N1%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN1(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN1(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN1(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN1(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		
@@ -416,13 +444,15 @@ public class EquipesController {
 
 		String equipe = "SERVICE DESK 1° NIVEL";
 		String status = "andamento";
+		String categoria = "N1%";
 
-		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamadosN1(equipe, status,"R"));
-		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamadosN1(equipe, status,"I"));
+
+		model.addAttribute("chamadosEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipeAndamento", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		status = "pendente";
-		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamadosN1(equipe, status,"R"));
-		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamadosN1(equipe, status,"I"));
+		model.addAttribute("chamadosEquipePendente", daoChamados.listaPainelChamados(equipe, status,"R",categoria));
+		model.addAttribute("incidenteEquipePendente", daoChamados.listaPainelChamados(equipe, status,"I", categoria));
 		
 		
 		

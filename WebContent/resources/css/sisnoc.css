@@ -1,6 +1,83 @@
+/* RDM */
+
+#painel_rdm_planejamento{
+color: #FFFFFF;
+background-color: #0288D1;
+border-color: #0288D1;
+}
+#painel_rdm_validacao{
+color: #FFFFFF;
+background-color: #A52A2A	;
+border-color: #A52A2A	;
+}
+#painel_rdm_aprovada{
+color: #FFFFFF	;
+background-color: #1e803c;
+border-color: #1e803c;
+}
+#painel_rdm_finalizada{
+color: #FFFFFF	;
+background-color: #232323;
+border-color: #232323;
+}
+
+#painel_rdm_execucao{
+color: #FFFFFF	;
+background-color: #ff7d20;
+border-color: #ff7d20;
+}
+
+
+.painel_rdm_planejamento {
+color: #FFFFFF;
+background-color: #4FC3F7;
+border-color: #4FC3F7;
+}
+.painel_rdm_validacao {
+color: #FFFFFF;
+background-color: #d26e6e;
+border-color: #d26e6e;
+}
+
+.painel_rdm_aprovada {
+color: #FFFFFF;
+background-color: #5dad79;
+border-color: #5dad79;
+}
+.painel_rdm_finalizada {
+color: #FFFFFF;
+background-color: #828282;
+border-color: #828282;
+}
+
+.painel_rdm_execucao {
+color: #FFFFFF;
+background-color: #ffab55;
+border-color: #ffab55;
+}
+
+
+/* Gauges */
+
+#gauge-sla2 {
+	padding: 0;
+	margin: 0;
+	
+}
+
+
+.letras {
+	font-size: 2vw;
+}
+.paineis_indices {
+	padding:0;
+	margin: 0;
+	
+}
+
 .navbar-default {
   background-color: #EAE6E6;
-  border-color: #e7e7e7;
+  border-color: #FFF;
 }
 
 body {
@@ -28,6 +105,19 @@ padding: 6.9px;
 
 }
 
+#painel_noc_tituloAndamnento {
+	color: #FFFFFF	;
+    background-color: #008B8B;
+    border-color: #008B8B;
+}
+
+.painel_nocAndamento {
+color: #FFFFFF	;
+background-color: #48D1CC	;
+border-color: #48D1CC	;
+padding: 6.9px;
+
+}
 #painel_chamados_titulo {
 color: #FFFFFF;
 background-color: #0288D1;
@@ -41,6 +131,19 @@ border-color: #4FC3F7;
 }
 
 
+#painel_noc_tituloPendentes {
+	color: #FFFFFF	;
+    background-color: #A52A2A;
+    border-color: #A52A2A;
+}
+
+.painel_nocPendentes {
+color: #FFFFFF	;
+background-color: #E9967A	;
+border-color: #E9967A	;
+padding: 6.9px;
+
+}
 #painel_incidente_titulo {
 color: #FFFFFF;
     background-color: #A52A2A	;
@@ -64,9 +167,12 @@ border-color: #337AB7;
 background-color:  #fcf8e3 !important; 
 }
 
-#logo { 
-width: 20px;
-height: 20px;
+#logo {
+width: 25px;
+height: 25px;
+}
+.icon{
+font-size: 2em	
 }
 
 #logo_seta { 
@@ -106,7 +212,7 @@ width: 400px;
 height: 300px;
 }
 
-/*Customizações dos Alertas*/
+/*Customizaï¿½ï¿½es dos Alertas*/
 
 .maior24{
 	

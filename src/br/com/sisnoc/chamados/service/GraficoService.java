@@ -12,4 +12,5 @@ public interface GraficoService {
 	Grafico getGraficoMetaIndividual(GraficosPessoal metasPessoal);
 	
 	Grafico getGraficoChamadosPessoa();
+
 }

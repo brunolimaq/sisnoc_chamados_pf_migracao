@@ -7,6 +7,7 @@ import java.util.TimeZone;
 
 import br.com.sisnoc.chamados.modelo.Chamado;
 
+
 public class CalculaSla {
 
 	public static String acumuladoParaHoraLegivel(Integer acumulado){
@@ -293,7 +294,7 @@ public class CalculaSla {
 //		System.out.println("inicio" + ti);
 //		System.out.println("Fim" + tf);
 		while(ti <= tf){
-			ti++;
+			ti+=10;
 			varifica++;
 			stgInicio.setTimeInMillis((long) ti*1000);
 			stgTempo = Integer.parseInt(stgInicio.get(Calendar.HOUR_OF_DAY)+""+stgInicio.get(Calendar.MINUTE));
@@ -311,7 +312,7 @@ public class CalculaSla {
 				varifica2++;
 				
 				if(stgDw != 1 && stgDw != 7){
-					acum++;
+					acum+=10;
 					
 					
 						if(stgTempo >= slaMax){ //acumulado mais que 8 horas
@@ -327,6 +328,41 @@ public class CalculaSla {
 		return acum;	
 		}
 
+	
+	public static Chamado CalculaMetaOS(Integer dias, Chamado ordenServico){
+		
+		
+		// Metas
+		if(dias < 1){ //menor que 7
+			ordenServico.setMeta_2("progress-bar-success");
+			ordenServico.setMeta_6("progress-bar-success");
+			ordenServico.setMeta_24("progress-bar-success");
+			
+		}else if(dias < 2){ //menor que 15 
+			
+			ordenServico.setMeta_2("progress-bar-danger");
+			ordenServico.setMeta_6("progress-bar-success");
+			ordenServico.setMeta_24("progress-bar-success");
+			
+		}else if(dias < 3){ // menor que 22 
+			
+			ordenServico.setMeta_2("progress-bar-danger");
+			ordenServico.setMeta_6("progress-bar-danger");
+			ordenServico.setMeta_24("progress-bar-success");
+			
+		}else {
+			
+			ordenServico.setMeta_2("progress-bar-danger");
+			ordenServico.setMeta_6("progress-bar-danger");
+			ordenServico.setMeta_24("progress-bar-danger");
+			
+		}
+		
+		ordenServico.setAlerta("SemAlerta");
+		
+		return ordenServico;
+		  
+	}
 	//diferença de dias entre duas datas
 	
 	public static int countDays(Calendar from, Calendar to) {
@@ -602,6 +638,8 @@ public class CalculaSla {
 		if (validado.getEquipe().equals("Implantação")){
 			validado.setSla("N/A");
 			validado.setAlerta("N/A");
+			validado.setSla2(0);
+
 		} else 	if (sla < 0){
 			validado.setSla("Violado");
 			validado.setSla2(tempoAcumulado);

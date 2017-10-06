@@ -15,10 +15,9 @@ public class Chamado {
 	private String dataInicio;
 	private String dataAgendamento;
 	
-	private String atualizacao;
-	private String diasAtualizacao;
+
 	private String chamado_Pai;
-	private String data_retorno;
+
 	private Integer time;
 	private String meta_2;
 	private String meta_6;
@@ -26,17 +25,23 @@ public class Chamado {
 	private String meta_24;
 	private Integer epoch;
 	
-	public Integer getEpoch() {
-		return epoch;
-	}
+	private Integer countNocChamados;
+	private Integer countNocIncidentes;
+	private Integer countTotalNoc;
+	private Integer countPendencias;
+	
+	private String flagStatus;
+	private Integer flagFilho;
+	private String prazo;
+	
+	//OS
+	private String atualizacao;
+	private String diasAtualizacao;
+	private String data_inicio;
+	private String data_retorno;
 
+	private String prioridade;
 
-	public void setEpoch(Integer epoch) {
-		this.epoch = epoch;
-	}
-
-
-	//MEC
 	private String id;
 	private String wo;
 	private String responsavel;
@@ -45,15 +50,23 @@ public class Chamado {
 	private String titulo;
 	private String status;
 	private String grupo;
-	private String prioridade;
-	private String statusDescricao;
+	private int reaberto;
+	private String statusReal;
 	private String tipoLegivel;
+	private String statusDescricao;
 
-	//Counts
-	private Integer countNocChamados;
-	private Integer countNocIncidentes;
-	private Integer countTotalNoc;
-	
+	public String getStatusReal() {
+		return statusReal;
+	}
+
+
+	public void setStatusReal(String statusReal) {
+		this.statusReal = statusReal;
+	}
+
+
+
+
 	public String getMeta_2() {
 		return meta_2;
 	}
@@ -115,7 +128,15 @@ public class Chamado {
 	}
 
 
-	
+	public Integer getEpoch() {
+		return epoch;
+	}
+
+
+	public void setEpoch(Integer epoch) {
+		this.epoch = epoch;
+	}
+
 
 
 
@@ -375,13 +396,13 @@ public class Chamado {
 	}
 
 
-	public String getPrioridade() {
-		return prioridade;
+	public String getTipoLegivel() {
+		return tipoLegivel;
 	}
 
 
-	public void setPrioridade(String prioridade) {
-		this.prioridade = prioridade;
+	public void setTipoLegivel(String tipoLegivel) {
+		this.tipoLegivel = tipoLegivel;
 	}
 
 
@@ -395,16 +416,84 @@ public class Chamado {
 	}
 
 
-	public String getTipoLegivel() {
-		return tipoLegivel;
+	public String getData_inicio() {
+		return data_inicio;
 	}
 
 
-	public void setTipoLegivel(String tipoLegivel) {
-		this.tipoLegivel = tipoLegivel;
+	public void setData_inicio(String data_inicio) {
+		this.data_inicio = data_inicio;
 	}
 
 
+	public void setCountTotalNoc(Integer countTotalNoc) {
+		this.countTotalNoc = countTotalNoc;
+	}
+
+
+	public Integer getFlagFilho() {
+		return flagFilho;
+	}
+
+
+	public void setFlagFilho(Integer flagFilho) {
+		this.flagFilho = flagFilho;
+	}
+
+
+	public String getPrazo() {
+		return prazo;
+	}
+
+
+	public void setPrazo(String prazo) {
+		this.prazo = prazo;
+	}
+
+
+	public Integer getCountPendencias() {
+		return countPendencias;
+	}
+
+
+	public void setCountPendencias(Integer countPendencias) {
+		this.countPendencias = countPendencias;
+	}
+
+
+	public int getReaberto() {
+		return reaberto;
+	}
+
+
+	public void setReaberto(int reaberto) {
+		this.reaberto = reaberto;
+	}
+
+
+	public String getPrioridade() {
+		return prioridade;
+	}
+
+
+	public void setPrioridade(String prioridade) {
+		this.prioridade = prioridade;
+	}
+
+
+	public String getFlagStatus() {
+		return flagStatus;
+	}
+
+
+	public void setFlagStatus(String flagStatus) {
+		this.flagStatus = flagStatus;
+	}
+
+
+	
+
+	
 
 
 	

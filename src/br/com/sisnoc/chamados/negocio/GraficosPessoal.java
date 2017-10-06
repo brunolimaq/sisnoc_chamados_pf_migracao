@@ -2,14 +2,22 @@ package br.com.sisnoc.chamados.negocio;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import br.com.sisnoc.chamados.dao.PainelPessoalMetasDao;
+
 import br.com.sisnoc.chamados.dao.util.MetasDao;
 import br.com.sisnoc.chamados.modelo.Chamado;
+import br.com.sisnoc.chamados.security.UsuarioSistema;
 import br.com.sisnoc.chamados.service.GraficosPessoalService;
+import br.com.sisnoc.chamados.service.Util;
 
 
 @Service
@@ -27,6 +35,11 @@ public class GraficosPessoal implements GraficosPessoalService {
 	private int reabertosMes;
 	private int metaReabertos;
 	
+	private ArrayList<String[]> listaPendenteEquipe;
+	
+	Util utilitarios = new Util();
+	
+	
 	@Autowired
 	@MetasDao
 	PainelPessoalMetasDao metasDao;
@@ -37,6 +50,8 @@ public class GraficosPessoal implements GraficosPessoalService {
 		super();
 		
 	}
+	
+	
 	
 	
 	@Override
@@ -51,25 +66,61 @@ public class GraficosPessoal implements GraficosPessoalService {
 		int countIncidentes = 0;
 		int countChamados = 0;
 		
+
+		String perfil = "";
+		Object usuarioLogado = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		String gerencia = "";
+		Collection<? extends GrantedAuthority> permissao = null;
+		String user_exclusao = "''";
+		if (usuarioLogado  instanceof UsuarioSistema ) {
+			   
+//				((UsuarioSistema)usuarioLogado).getUsuario().setGerencia("N2");
+			   username = ( (UsuarioSistema)usuarioLogado).getUsuario().getNome();
+			   permissao = ( (UsuarioSistema)usuarioLogado).getUsuario().getAuthority();
+			   gerencia = ( (UsuarioSistema)usuarioLogado).getUsuario().getGerencia()+"%";
+			   
+
+		} else {
+		   username = usuarioLogado.toString();
+		}
+		
+		
+		for (GrantedAuthority autorizacao : permissao) {
+			if (autorizacao.toString().equals("GESTOR")){
+
+				perfil = "GESTOR";
+	
+			} 
+			
+		}
+		
+		
+		
 		
 		ArrayList<Chamado> chamados = new ArrayList<Chamado>();
 		
-		
-			
 			try {
-				chamados = metasDao.listaPainelPessoalMetas();
-				this.setReabertosMes(metasDao.listaPainelPessoalReabertos());
-				this.setPendencias(metasDao.listaPainelPessoalPendentes());
+				
+
+				chamados = metasDao.listaPainelPessoalMetas(perfil);
+				
+				
+				this.setReabertosMes(metasDao.listaPainelPessoalReabertos(perfil));
+				this.setPendencias(metasDao.listaPainelPessoalPendentes(perfil));
+				this.setListaPendenteEquipe(metasDao.listaPainelGestorPendentes());
+				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		
-			System.out.println(chamados);
-
 		
+			
+
 			for (Chamado chamado : chamados) {
-				System.out.println("SLA " + chamado.getSla() + " SLA2 " + chamado.getSla2() + " Tipo " + chamado.getTipo());
+				
+			
 				countTotal++;
 				if(chamado.getSla().equals("Violado")){
 				countViolados++;
@@ -89,10 +140,8 @@ public class GraficosPessoal implements GraficosPessoalService {
 				
 				 
 				} 
-				 
-			System.out.println(countMeta2h);
-			System.out.println(countMeta4h);
-			System.out.println(countTotal);
+
+			
 			
 				this.setMeta2h((countMeta2h*100)/countTotal);
 				this.setMeta4h((countMeta4h*100)/countTotal);
@@ -175,5 +224,18 @@ public class GraficosPessoal implements GraficosPessoalService {
 
 	public void setPendencias(int pendencias) {
 		this.pendencias = pendencias;
+	}
+
+
+	
+	public ArrayList<String[]> getListaPendenteEquipe() {
+		return listaPendenteEquipe;
+	}
+
+
+
+
+	public void setListaPendenteEquipe(ArrayList<String[]> listaPendenteEquipe) {
+		this.listaPendenteEquipe = listaPendenteEquipe;
 	}
 }
